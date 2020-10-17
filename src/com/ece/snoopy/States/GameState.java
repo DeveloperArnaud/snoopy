@@ -1,5 +1,7 @@
 package com.ece.snoopy.States;
 
+import com.ece.snoopy.Controller.GameStateManager;
+
 import java.awt.*;
 
 /**
@@ -13,10 +15,14 @@ import java.awt.*;
 
 public abstract class GameState {
 
+    protected GameStateManager gameStateManager;
     /**
      *
+     * @param gameStateManager
      */
-    public GameState() {}
+    public GameState(GameStateManager gameStateManager) {
+        this.gameStateManager = gameStateManager;
+    }
 
     /**
      * Function to initialize the state

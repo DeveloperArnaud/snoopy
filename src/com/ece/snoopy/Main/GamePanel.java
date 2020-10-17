@@ -5,7 +5,8 @@ package com.ece.snoopy.Main;
 // keeps the game moving forward.
 // This class is also the one that grabs key events.
 
-import com.ece.snoopy.Manager.GameStateManager;
+import com.ece.snoopy.Controller.GameStateManager;
+import com.ece.snoopy.Controller.Inputs;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +17,7 @@ import java.awt.image.BufferedImage;
 public class GamePanel extends JPanel implements Runnable, KeyListener {
 
     //Dimensions of the game
-    public static final int WIDTH = 128;
+    public static final int WIDTH = 160;
     public static final int HEIGHT = 128;
     public static final int HEIGHT2 = HEIGHT + 16;
     public static final int SCALE = 3;
@@ -50,16 +51,54 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-
+        Inputs.keySet(e.getKeyCode(), true);
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
+        Inputs.keySet(e.getKeyCode(), false);
+    }
 
+    public void addNotify() {
+        super.addNotify();
+        if(thread == null) {
+            addKeyListener(this);
+            thread = new Thread(this);
+            thread.start();
+        }
     }
 
     @Override
     public void run() {
 
+        init();
+        while(isRunning) {
+
+            update();
+            draw();
+            drawToScreen();
+        }
+    }
+
+    public void update() {
+        gameStateManager.update();
+        Inputs.update();
+    }
+
+    private void init() {
+        isRunning = true;
+        image = new BufferedImage(WIDTH, HEIGHT2,  1 );
+        graphics2D = (Graphics2D) image.getGraphics();
+        gameStateManager = new GameStateManager();
+    }
+
+    private void draw() {
+        gameStateManager.draw(graphics2D);
+    }
+
+    private void drawToScreen() {
+        Graphics g2 = getGraphics();
+        g2.drawImage(image,0, 0 , WIDTH * SCALE, HEIGHT2 * SCALE, null);
+        g2.dispose();
     }
 }
