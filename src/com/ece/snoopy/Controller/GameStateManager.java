@@ -3,6 +3,7 @@ package com.ece.snoopy.Controller;
 import com.ece.snoopy.SoundFX.SoundFX;
 import com.ece.snoopy.States.GameState;
 import com.ece.snoopy.States.IntroState;
+import com.ece.snoopy.States.Level1State;
 import com.ece.snoopy.States.MenuState;
 
 import java.awt.*;
@@ -14,6 +15,7 @@ public class GameStateManager {
     public static final int NUM_STATES = 4;
     public static final int INTRO = 0;
     public static final int MENU = 1;
+    public static final int LEVEL1 = 2;
 
     private int currentState;
     private int previousState;
@@ -42,6 +44,10 @@ public class GameStateManager {
             gameStates[i].init();
         } else if(i == MENU) {
             gameStates[i] = new MenuState(this);
+            gameStates[i].init();
+        }
+        else if(i == LEVEL1) {
+            gameStates[i] = new Level1State(this);
             gameStates[i].init();
         }
     }

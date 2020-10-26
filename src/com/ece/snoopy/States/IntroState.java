@@ -16,11 +16,11 @@ public class IntroState extends GameState{
     private int ticks;
 
     //Durée du fondu entrant
-    private final int FADE_IN = 2000;
+    private final int FADE_IN = 60;
     // Durée de l'intro
-    private final int LENGTH = 2000;
+    private final int LENGTH = 60;
     // Durée du fondu sortant
-    private final int FADE_OUT = 2000;
+    private final int FADE_OUT = 60;
 
     public IntroState(GameStateManager gameStateManager) {
         super(gameStateManager);
@@ -28,10 +28,10 @@ public class IntroState extends GameState{
 
     @Override
     public void init() {
-
         ticks = 0;
         try {
             background = ImageIO.read(getClass().getResourceAsStream("/Intro/nintendo.jpg"));
+
         } catch (Exception e) {
             e.printStackTrace();
         }

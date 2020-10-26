@@ -5,10 +5,26 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Content {
-
-    public static BufferedImage[][] BACKGROUNDMENU = load("/Intro/snoopymenu.png",160,144);
+    /**
+     *
+     */
+    public static BufferedImage[][] BACKGROUNDMENU = load("/Intro/background.png",128,300 );
+    /**
+     *
+     */
     public static BufferedImage[][] CURSOR = load("/Intro/cursor.png", 16, 16);
+    /**
+     *
+     */
+    public static BufferedImage[][] PLAYER = load("/Sprites/SpriteSnoopy.gif",16,16);
 
+    /**
+     *
+     * @param s
+     * @param width
+     * @param height
+     * @return
+     */
     private static BufferedImage[][] load(String s, int width, int height) {
         BufferedImage[][] image;
 
