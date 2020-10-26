@@ -105,7 +105,6 @@ public class TileMap {
                         tileSize
                 );
                 tiles[1][col] = new Tile(subImage, Tile.BLOCKED);
-                System.out.println();
             }
         } catch (Exception e) {
             e.printStackTrace();
