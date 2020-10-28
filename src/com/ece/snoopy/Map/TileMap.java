@@ -33,6 +33,7 @@ public class TileMap {
     private int width;
     private int height;
 
+    //tiles
     private BufferedImage tileset;
     private int numTilesAcross;
     private Tile[][] tiles;
@@ -43,6 +44,10 @@ public class TileMap {
     private int numRowsToDraw;
     private int numsColsToDraw;
 
+    /**
+     * Constructor
+     * @param tileSize
+     */
     public TileMap(int tileSize) {
         this.tileSize = tileSize;
         numRowsToDraw = GamePanel.HEIGHT / tileSize + 2;
@@ -50,7 +55,12 @@ public class TileMap {
         speed = 4;
     }
 
+    /**
+     * Updating the map
+     */
     public void update() {
+        //Manage the movement of the map
+        // Need to be changed
         if(x < xdest) {
             x += speed;
 
@@ -75,6 +85,9 @@ public class TileMap {
         else moving = false;
     }
 
+    /**
+     *
+     */
     public void fixBounds() {
         if(x < xmin) x = xmin;
         if(y <ymin) y = ymin;
@@ -82,6 +95,10 @@ public class TileMap {
         if(y  > ymax) y = ymax;
     }
 
+    /**
+     * Loading tiles images for map, each tile will generate a piece of sprite
+     * @param s
+     */
     public void loadTiles(String s) {
         try {
             tileset = ImageIO.read(getClass().getResourceAsStream(s));
@@ -112,6 +129,10 @@ public class TileMap {
         }
     }
 
+    /**
+     * Loading the map by file path and parsing it.
+     * @param s
+     */
     public void loadMap(String s) {
         try {
             InputStream in = getClass().getResourceAsStream(s);

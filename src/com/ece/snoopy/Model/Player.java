@@ -18,6 +18,7 @@ public class Player extends Model {
     private final int LEFT = 1;
     private final int RIGHT = 2;
     private long ticks;
+    private int nbBirds;
 
 
     public Player(TileMap tileMap) {
@@ -94,5 +95,16 @@ public class Player extends Model {
         super.draw(g);
     }
 
+    public void collectedBirds() {
+        nbBirds ++;
+    }
 
+    public int getNbBirds() {
+        return nbBirds;
+    }
+
+
+    public long getTicks() {
+        return ticks;
+    }
 }
