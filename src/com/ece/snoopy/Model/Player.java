@@ -103,7 +103,6 @@ public class Player extends Model {
         return nbBirds;
     }
 
-
     public long getTicks() {
         return ticks;
     }

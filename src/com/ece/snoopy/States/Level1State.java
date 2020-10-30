@@ -31,6 +31,7 @@ public class Level1State extends GameState{
     private int eventTick;
     private ArrayList<Rectangle> boxes;
     private boolean eventGo;
+    private boolean eventFinish;
 
     /**
      * @param gameStateManager
@@ -77,6 +78,11 @@ public class Level1State extends GameState{
         handleInput();
 
         if(eventGo) eventGo();
+        if(eventFinish) eventFinish();
+
+        if(player.getNbBirds() == 4) {
+            eventFinish = blockInput = true;
+        }
 
         int ox = xsector;
         int oy = ysector;
@@ -107,7 +113,7 @@ public class Level1State extends GameState{
     }
 
     /**
-     * Managing the start of the game (to manage time, score etc..)
+     * Managing the end of the party, rectangle effect will make appear the start game screen
      */
     private void eventGo() {
         eventTick++;
@@ -132,6 +138,37 @@ public class Level1State extends GameState{
             boxes.clear();
             eventGo = false;
             eventTick = 0;
+        }
+    }
+
+    /**
+     * Managing the end of the party, rectangle effect will make appear the end screen
+     */
+    private void eventFinish() {
+        eventTick++;
+        if(eventTick == 1) {
+            boxes.clear();
+            for(int i = 0; i < 9; i++) {
+                if(i % 2 == 0) boxes.add(new Rectangle(-128, i * 16, GamePanel.WIDTH, 16));
+                else boxes.add(new Rectangle(128, i * 16, GamePanel.WIDTH, 16));
+            }
+
+        }
+        if(eventTick > 1) {
+            for(int i = 0; i < boxes.size(); i++) {
+                Rectangle r = boxes.get(i);
+                if(i % 2 == 0) {
+                    if(r.x < 0) r.x += 4;
+                }
+                else {
+                    if(r.x > 0) r.x -= 4;
+                }
+            }
+        }
+        if(eventTick > 33) {
+                //Data.setTime(player.getTicks());
+            System.out.print(eventTick);
+                gameStateManager.setState(GameStateManager.ENDLEVEL);
         }
     }
 
@@ -171,6 +208,11 @@ public class Level1State extends GameState{
         }
 
         ui.draw(graphics2D);
+
+        graphics2D.setColor(Color.BLACK);
+        for(int i = 0; i < boxes.size(); i++) {
+            graphics2D.fill(boxes.get(i));
+        }
     }
 
     @Override
