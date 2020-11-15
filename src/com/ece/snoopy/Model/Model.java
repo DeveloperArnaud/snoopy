@@ -59,6 +59,7 @@ public abstract class Model {
         xmap = tileMap.getX();
         ymap = tileMap.getY();
     }
+    
 
     public void setLeft() {
         if(moving) return;
@@ -140,6 +141,8 @@ public abstract class Model {
         ydest = y;
     }
 
+
+
     private void getNextPosition() {
 
         if(left && x > xdest) x -= moveSpeed;
@@ -175,4 +178,5 @@ public abstract class Model {
     protected Rectangle getRectangle() {
         return new Rectangle(x,y,cwidth,cheight);
     }
+
 }

@@ -19,6 +19,7 @@ public class Player extends Model {
     private final int RIGHT = 2;
     private long ticks;
     private int nbBirds;
+    private int life = 3;
 
 
     public Player(TileMap tileMap) {
@@ -101,6 +102,13 @@ public class Player extends Model {
 
     public int getNbBirds() {
         return nbBirds;
+    }
+
+    public void losingLife() {
+        life --;
+    }
+    public int getLife(){
+        return life;
     }
 
     public long getTicks() {

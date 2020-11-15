@@ -4,12 +4,14 @@ import com.ece.snoopy.Controller.GameStateManager;
 import com.ece.snoopy.Controller.Inputs;
 import com.ece.snoopy.Main.GamePanel;
 import com.ece.snoopy.Map.TileMap;
+import com.ece.snoopy.Model.Ball;
 import com.ece.snoopy.Model.Bird;
 import com.ece.snoopy.Model.Player;
 import com.ece.snoopy.SoundFX.SoundFX;
 import com.ece.snoopy.UI.UI;
 
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
@@ -20,6 +22,7 @@ public class Level1State extends GameState{
     private Player player;
     private TileMap tileMap;
     private UI ui;
+    private Ball ball;
 
     private ArrayList<Bird> birds;
 
@@ -32,6 +35,7 @@ public class Level1State extends GameState{
     private ArrayList<Rectangle> boxes;
     private boolean eventGo;
     private boolean eventFinish;
+
 
     /**
      * @param gameStateManager
@@ -49,10 +53,12 @@ public class Level1State extends GameState{
         tileMap.loadMap("/Maps/testmap.map");
         player = new Player(tileMap);
         ui = new UI(player, birds);
+        ball = new Ball(tileMap);
 
         generateBirds();
 
         player.setTilePosition(20, 20);
+        ball.setTilePosition(20,20);
 
         sectorSize = GamePanel.WIDTH;
         xsector = player.getX() / sectorSize;
@@ -110,6 +116,10 @@ public class Level1State extends GameState{
             }
         }
 
+        if(player.intersects(ball)){
+            player.losingLife();
+        }
+
     }
 
     /**
@@ -140,6 +150,7 @@ public class Level1State extends GameState{
             eventTick = 0;
         }
     }
+
 
     /**
      * Managing the end of the party, rectangle effect will make appear the end screen
@@ -202,6 +213,10 @@ public class Level1State extends GameState{
     public void draw(Graphics2D graphics2D) {
         tileMap.draw(graphics2D);
         player.draw(graphics2D);
+        ball.draw(graphics2D);
+
+
+
 
         for(Bird bird : birds) {
             bird.draw(graphics2D);

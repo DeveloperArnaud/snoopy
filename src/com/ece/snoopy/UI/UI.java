@@ -25,6 +25,7 @@ public class UI {
 
         graphics2D.drawString( ""+seconds, 64, 10);
         graphics2D.drawString("Score : " + player.getNbBirds(), 80, 10);
+        graphics2D.drawString("Vie : " + player.getLife(), 10, 10);
 
     }
 
