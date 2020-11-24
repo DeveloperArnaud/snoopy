@@ -90,6 +90,18 @@ public class Level1State extends GameState{
             eventFinish = blockInput = true;
         }
 
+        int seconds = 60 - (int) ((player.getTicks() / 30) % 60);
+
+        if(seconds == 1) {
+            eventFinish = blockInput = true;
+            gameStateManager.setState(GameStateManager.LEVEL1);
+        }
+
+        if(player.getLife() == 0) {
+            eventFinish = blockInput = true;
+            gameStateManager.setState(GameStateManager.MENU);
+        }
+
         int ox = xsector;
         int oy = ysector;
         xsector = player.getX() / sectorSize;
