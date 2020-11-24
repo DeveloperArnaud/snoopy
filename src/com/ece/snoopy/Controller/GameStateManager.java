@@ -1,21 +1,24 @@
 package com.ece.snoopy.Controller;
 
 import com.ece.snoopy.SoundFX.SoundFX;
-import com.ece.snoopy.States.GameState;
-import com.ece.snoopy.States.IntroState;
-import com.ece.snoopy.States.Level1State;
-import com.ece.snoopy.States.MenuState;
+import com.ece.snoopy.States.*;
 
 import java.awt.*;
 
 public class GameStateManager {
 
+
     private GameState[] gameStates;
+
+    private boolean paused;
+    private PauseState pauseState;
 
     public static final int NUM_STATES = 4;
     public static final int INTRO = 0;
     public static final int MENU = 1;
     public static final int LEVEL1 = 2;
+    //public static final int LEVEL2 = 4;
+    public static final int ENDLEVEL = 3;
 
     private int currentState;
     private int previousState;
@@ -26,6 +29,8 @@ public class GameStateManager {
     public GameStateManager() {
         // Initialisation du son
         SoundFX.init();
+        paused = false;
+        pauseState = new PauseState(this);
         gameStates = new GameState[NUM_STATES];
         setState(INTRO);
     }
@@ -50,6 +55,11 @@ public class GameStateManager {
             gameStates[i] = new Level1State(this);
             gameStates[i].init();
         }
+
+        else if(i == ENDLEVEL) {
+            gameStates[i] = new EndState(this);
+            gameStates[i].init();
+        }
     }
 
     public void stateToNull(int previousState) {
@@ -60,9 +70,16 @@ public class GameStateManager {
      *
      */
     public void update() {
-        if(gameStates[currentState] != null) {
+        if(paused) {
+            pauseState.update();
+        }
+       else if(gameStates[currentState] != null) {
             gameStates[currentState].update();
         }
+    }
+
+    public void setPaused(boolean b) {
+        paused = b;
     }
 
     /**
@@ -70,9 +87,13 @@ public class GameStateManager {
      * @param g
      */
     public void draw(Graphics2D g) {
-        if(gameStates[currentState] != null) {
+        if(paused) {
+            pauseState.draw(g);
+        }
+        else if(gameStates[currentState] != null) {
             gameStates[currentState].draw(g);
         }
     }
-    
+
+
 }

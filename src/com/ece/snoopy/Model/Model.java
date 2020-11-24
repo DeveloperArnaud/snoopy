@@ -4,9 +4,9 @@ import com.ece.snoopy.Map.Tile;
 import com.ece.snoopy.Map.TileMap;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public abstract class Model {
+
     protected TileMap tileMap;
     protected int tileSize;
     protected  Animation animation;
@@ -30,12 +30,16 @@ public abstract class Model {
     protected int rowTile;
     protected int colTile;
 
-
+    //animation
     protected int moveSpeed;
     protected int currentAnimation;
     protected int xmap;
     protected int ymap;
 
+    /**
+     * Constructor
+     * @param tm
+     */
     public Model(TileMap tm) {
         this.tileMap = tm;
         this.tileSize = tileMap.getTileSize();
@@ -55,6 +59,7 @@ public abstract class Model {
         xmap = tileMap.getX();
         ymap = tileMap.getY();
     }
+    
 
     public void setLeft() {
         if(moving) return;
@@ -79,6 +84,7 @@ public abstract class Model {
     }
 
     private boolean validateNextPosition() {
+
         if(moving) return true;
 
         rowTile = y / tileSize;
@@ -135,6 +141,8 @@ public abstract class Model {
         ydest = y;
     }
 
+
+
     private void getNextPosition() {
 
         if(left && x > xdest) x -= moveSpeed;
@@ -163,4 +171,12 @@ public abstract class Model {
     public int getY() {
         return y;
     }
+
+    public boolean intersects(Model m){
+        return getRectangle().intersects(m.getRectangle());
+    }
+    protected Rectangle getRectangle() {
+        return new Rectangle(x,y,cwidth,cheight);
+    }
+
 }

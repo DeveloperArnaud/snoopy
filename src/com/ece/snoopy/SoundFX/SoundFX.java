@@ -52,4 +52,15 @@ public class SoundFX {
         c.setFramePosition(i);
         while(!c.isRunning()) c.start();
     }
+
+    public static void stop(String s) {
+        if(sounds.get(s) == null) return;
+        if(sounds.get(s).isRunning()) sounds.get(s).stop();
+    }
+
+    public static void resumeLoop(String s) {
+        Clip c = sounds.get(s);
+        if(c == null) return;
+        c.loop(Clip.LOOP_CONTINUOUSLY);
+    }
 }

@@ -1,7 +1,6 @@
 package com.ece.snoopy.Controller;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Content {
@@ -17,6 +16,8 @@ public class Content {
      *
      */
     public static BufferedImage[][] PLAYER = load("/Sprites/SpriteSnoopy.gif",16,16);
+    public static BufferedImage[][] BIRD = load("/Sprites/diamond.gif",16 ,16);
+    public static BufferedImage[][] BALL = load("/Sprites/ball.png",16,16);
 
     /**
      *
