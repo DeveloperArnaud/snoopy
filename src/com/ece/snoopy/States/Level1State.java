@@ -97,7 +97,7 @@ public class Level1State extends GameState{
             gameStateManager.setState(GameStateManager.LEVEL1);
         }
 
-        if(player.getLife() == 0) {
+        if(player.getLife() == -100) {
             eventFinish = blockInput = true;
             gameStateManager.setState(GameStateManager.MENU);
         }
