@@ -10,11 +10,14 @@ public class GameStateManager {
 
     private GameState[] gameStates;
 
+    private boolean paused;
+    private PauseState pauseState;
+
     public static final int NUM_STATES = 4;
     public static final int INTRO = 0;
     public static final int MENU = 1;
     public static final int LEVEL1 = 2;
-    public static final int LEVEL2 = 4;
+    //public static final int LEVEL2 = 4;
     public static final int ENDLEVEL = 3;
 
     private int currentState;
@@ -26,6 +29,8 @@ public class GameStateManager {
     public GameStateManager() {
         // Initialisation du son
         SoundFX.init();
+        paused = false;
+        pauseState = new PauseState(this);
         gameStates = new GameState[NUM_STATES];
         setState(INTRO);
     }
@@ -65,9 +70,16 @@ public class GameStateManager {
      *
      */
     public void update() {
-        if(gameStates[currentState] != null) {
+        if(paused) {
+            pauseState.update();
+        }
+       else if(gameStates[currentState] != null) {
             gameStates[currentState].update();
         }
+    }
+
+    public void setPaused(boolean b) {
+        paused = b;
     }
 
     /**
@@ -75,9 +87,13 @@ public class GameStateManager {
      * @param g
      */
     public void draw(Graphics2D g) {
-        if(gameStates[currentState] != null) {
+        if(paused) {
+            pauseState.draw(g);
+        }
+        else if(gameStates[currentState] != null) {
             gameStates[currentState].draw(g);
         }
     }
-    
+
+
 }

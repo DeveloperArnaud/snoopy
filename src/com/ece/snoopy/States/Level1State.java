@@ -232,7 +232,10 @@ public class Level1State extends GameState{
 
     @Override
     public void handleInput() {
-
+        if(Inputs.isPressed(Inputs.ESCAPE)){
+            SoundFX.stop("snoopyStage1");
+            gameStateManager.setPaused(true);
+        }
         if(blockInput) return;
         if(Inputs.isDown(Inputs.LEFT)) player.setLEFT();
         if(Inputs.isDown(Inputs.RIGHT)) player.setRIGHT();
