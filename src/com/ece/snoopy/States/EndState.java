@@ -11,7 +11,6 @@ import java.awt.*;
 public class EndState extends GameState {
 
     private Color color;
-    private long ticks;
     private Player player;
 
     public EndState(GameStateManager gameStateManager) {
@@ -21,7 +20,7 @@ public class EndState extends GameState {
     @Override
     public void init() {
         color = new Color(164,198,222);
-        ticks = Timer.getTime();
+
 
 
     }
@@ -45,8 +44,9 @@ public class EndState extends GameState {
             player = lv1.getPlayer();
             int seconds = 60 - (int) ((player.getTicks() / 30) % 60);
             graphics2D.drawString( ""+seconds, 95, 36);
+            graphics2D.drawString( "Score niveau : " + seconds * 100, 25, 56);
         }
-        graphics2D.drawString( "Level " + lv + " cleared !", 20, 64);
+        graphics2D.drawString( "Level " + lv + " cleared !", 20, 80);
     }
 
     @Override
