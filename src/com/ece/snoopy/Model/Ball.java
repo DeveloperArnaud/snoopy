@@ -13,7 +13,7 @@ public class Ball extends Model {
 
     Player player;
     BufferedImage[] ballImage;
-    int x = 0, y = 0,  velX = 2, velY = 2;
+    int x = 12, y = 12,  velX = 2, velY = 2;
 
 
     /**
@@ -36,7 +36,8 @@ public class Ball extends Model {
 
     public void draw(Graphics2D graphics2D) {
 
-        super.draw(graphics2D);
+        
+       graphics2D.fillOval(12,12,10,10);
 
 
     }

@@ -114,4 +114,9 @@ public class Player extends Model {
     public long getTicks() {
         return ticks;
     }
+
+    public int getTime() {
+        int seconds = 60 - (int) ((this.getTicks() / 30) % 60);
+        return seconds;
+    }
 }

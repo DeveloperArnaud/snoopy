@@ -2,14 +2,36 @@ package com.ece.snoopy.States;
 
 import com.ece.snoopy.Controller.GameStateManager;
 import com.ece.snoopy.Controller.Inputs;
+import com.ece.snoopy.Controller.SavingState;
+import com.ece.snoopy.Map.Tile;
+import com.ece.snoopy.Map.TileMap;
+import com.ece.snoopy.Model.Bird;
+import com.ece.snoopy.Model.Player;
 import com.ece.snoopy.SoundFX.SoundFX;
 
+import javax.swing.*;
 import java.awt.*;
+import java.io.FileWriter;
+import java.util.ArrayList;
 
-public class PauseState extends GameState{
+import static com.ece.snoopy.Controller.SavingState.saveState;
+
+public class PauseState extends GameState {
+
+    private Player player;
+    private TileMap tileMap;
+    private ArrayList<Bird> birds;
+
 
     public PauseState(GameStateManager gameStateManager) {
         super(gameStateManager);
+    }
+
+    public PauseState(GameStateManager gameStateManager, Player player, TileMap tileMap, ArrayList<Bird> birds) {
+        super(gameStateManager);
+        this.player = player;
+        this.tileMap = tileMap;
+        this.birds = birds;
     }
 
     @Override

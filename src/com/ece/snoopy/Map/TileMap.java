@@ -212,6 +212,7 @@ public class TileMap {
     public void setTile(int row, int col, int index){
         map[row][col] = index;
     }
+
     public void draw(Graphics2D graphics2D) {
         for(int row = rowOffset; row < rowOffset + numRowsToDraw; row ++) {
             if(row >= numRows) break;
