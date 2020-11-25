@@ -16,8 +16,10 @@ public class MenuState extends GameState {
     private int currentOption = 0;
     private String[] options = {
             "Commencer",
+            "Mot de passe",
             "Continuer",
-            "Quitter"
+            "Quitter",
+
     };
 
     public MenuState(GameStateManager gameStateManager) {
@@ -43,25 +45,30 @@ public class MenuState extends GameState {
         graphics2D.drawImage(bg, 0, 0, null);
         Font font = new Font("Century Gothic", Font.PLAIN, 11);
         graphics2D.setFont(font);
-        graphics2D.drawString("La Revanche de Snoopy", 5 , 50);
-        graphics2D.drawString(options[0], 40 , 84);
-        graphics2D.drawString(options[1], 40 , 100);
-        graphics2D.drawString(options[2], 40 , 116);
+        graphics2D.drawString("La Revanche de Snoopy", 5 , 40);
+        graphics2D.drawString(options[0], 40 , 74);
+        graphics2D.drawString(options[1], 40 , 90);
+        graphics2D.drawString(options[2], 40 , 106);
+        graphics2D.drawString(options[3], 40 , 122);
 
         if(currentOption == 0) {
 
-            graphics2D.drawImage(cursor, 25, 72, null);
+            graphics2D.drawImage(cursor, 25, 62, null);
 
         }
 
         else if(currentOption == 1){
 
-            graphics2D.drawImage(cursor, 25, 88, null);
+            graphics2D.drawImage(cursor, 25, 78, null);
         }
 
         else if(currentOption == 2){
 
-            graphics2D.drawImage(cursor, 25, 104, null);
+            graphics2D.drawImage(cursor, 25, 94, null);
+        }
+        else if(currentOption == 3){
+
+            graphics2D.drawImage(cursor, 25, 110, null);
         }
     }
 
@@ -88,10 +95,14 @@ public class MenuState extends GameState {
         }
 
         if(currentOption == 1 ) {
+            gameStateManager.setState(GameStateManager.MDP);
+        }
+
+        if(currentOption == 2 ) {
             gameStateManager.setState(GameStateManager.SAVEDGAME);
         }
 
-        if(currentOption == 2) {
+        if(currentOption == 3) {
             SoundFX.play("collect");
             System.exit(0);
 

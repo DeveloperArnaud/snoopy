@@ -33,7 +33,8 @@ public class EndState extends GameState {
     @Override
     public void draw(Graphics2D graphics2D) {
         graphics2D.setColor(color);
-
+        Font font = new Font("Century Gothic", Font.PLAIN, 11);
+        graphics2D.setFont(font);
         graphics2D.fillRect(0,0, GamePanel.WIDTH, GamePanel.HEIGHT2);
         graphics2D.setColor(new Color(0,0,0));
         graphics2D.drawString("Temps final",25, 36);
@@ -46,13 +47,18 @@ public class EndState extends GameState {
             graphics2D.drawString( ""+seconds, 95, 36);
             graphics2D.drawString( "Score niveau : " + seconds * 100, 25, 56);
         }
-        graphics2D.drawString( "Level " + lv + " cleared !", 20, 80);
+        graphics2D.drawString( "Niveau " + lv + " terminé !", 25, 80);
+        graphics2D.drawString( "ENTRER: CONTINUER", 5, 100);
+        graphics2D.drawString( "ECHAP: MENU PRINCIPAL", 5, 110);
     }
 
     @Override
     public void handleInput() {
-        if(Inputs.isPressed(Inputs.ENTER)) {
+        if(Inputs.isPressed(Inputs.ESCAPE)) {
             gameStateManager.setState(GameStateManager.MENU);
+        }
+        if(Inputs.isPressed(Inputs.ENTER)) {
+            gameStateManager.setState(GameStateManager.LEVEL1);
         }
     }
 }

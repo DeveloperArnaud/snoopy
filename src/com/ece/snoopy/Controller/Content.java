@@ -7,7 +7,7 @@ public class Content {
     /**
      *
      */
-    public static BufferedImage[][] BACKGROUNDMENU = load("/Intro/background.png",128,300 );
+    public static BufferedImage[][] BACKGROUNDMENU = load("/Intro/snoopybg.png",128,128 );
     /**
      *
      */
