@@ -4,7 +4,8 @@ import java.awt.event.KeyEvent;
 
 public class Inputs {
 
-    public static final int NUM_KEYS = 8;
+    public static final int NUM_KEYS = 9;
+
     public static boolean keyState[] = new boolean[NUM_KEYS];
     public static boolean prevKeyState[] = new boolean[NUM_KEYS];
 
@@ -17,6 +18,7 @@ public class Inputs {
     public static int ENTER = 5;
     public static int ESCAPE = 6;
     public static int F1 = 7;
+    public static final int S = 8;
 
     public static void keySet(int i , boolean b) {
             switch(i) {
@@ -34,6 +36,8 @@ public class Inputs {
                 case KeyEvent.VK_ESCAPE: keyState[ESCAPE] = b;
                     break;
                 case KeyEvent.VK_F1: keyState[F1] = b;
+                    break;
+                case KeyEvent.VK_S: keyState[S] = b;
                     break;
             }
     }

@@ -8,17 +8,18 @@ import java.awt.*;
 public class GameStateManager {
 
 
+
     private GameState[] gameStates;
 
     private boolean paused;
     private PauseState pauseState;
 
-    public static final int NUM_STATES = 4;
+    public static final int NUM_STATES = 5;
     public static final int INTRO = 0;
     public static final int MENU = 1;
     public static final int LEVEL1 = 2;
-    //public static final int LEVEL2 = 4;
     public static final int ENDLEVEL = 3;
+    public static final int SAVEDGAME = 4;
 
     private int currentState;
     private int previousState;
@@ -53,6 +54,10 @@ public class GameStateManager {
         }
         else if(i == LEVEL1) {
             gameStates[i] = new Level1State(this);
+            gameStates[i].init();
+        }
+        else if(i == SAVEDGAME) {
+            gameStates[i] = new SavedGameState(this);
             gameStates[i].init();
         }
 

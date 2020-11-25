@@ -11,13 +11,13 @@ import com.ece.snoopy.SoundFX.SoundFX;
 import com.ece.snoopy.UI.UI;
 
 import java.awt.*;
-import java.awt.geom.Ellipse2D;
-import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
+import static com.ece.snoopy.Controller.SavingState.loadMap;
 import static com.ece.snoopy.Controller.SavingState.saveState;
 
-public class Level1State extends GameState{
+public class SavedGameState extends GameState{
+
     /**
      * Player
      */
@@ -43,17 +43,16 @@ public class Level1State extends GameState{
     /**
      * @param gameStateManager
      */
-    public Level1State(GameStateManager gameStateManager) {
+    public SavedGameState(GameStateManager gameStateManager) {
         super(gameStateManager);
     }
 
     @Override
     public void init() {
-
         birds = new ArrayList<>();
-        tileMap = new TileMap(16);
         tileMap.loadTiles("/Tilesets/testtileset.gif");
-        tileMap.loadMap("/Maps/testmap.map");
+        tileMap = loadMap("C:/Users/arnau/testBirds.txt");
+        //tileMap.loadMap("/Maps/testmap.map");
         player = new Player(tileMap);
         ui = new UI(player, birds);
         ball = new Ball(tileMap);
@@ -61,6 +60,7 @@ public class Level1State extends GameState{
         generateBirds();
 
         player.setTilePosition(20, 20);
+        ball.setTilePosition(20,20);
 
         sectorSize = GamePanel.WIDTH;
         xsector = player.getX() / sectorSize;
@@ -69,13 +69,12 @@ public class Level1State extends GameState{
 
         SoundFX.loadSound("/SFX/snoopy-stage1.wav", "snoopyStage1");
         SoundFX.loadSound("/SFX/collect.wav", "collect");
-        //SoundFX.play("snoopyStage1");
+        SoundFX.play("snoopyStage1");
 
 
         boxes = new ArrayList<Rectangle>();
         eventGo = true;
         eventGo();
-
     }
 
     /**
@@ -192,9 +191,9 @@ public class Level1State extends GameState{
             }
         }
         if(eventTick > 33) {
-                //Data.setTime(player.getTicks());
+            //Data.setTime(player.getTicks());
             System.out.print(eventTick);
-                gameStateManager.setState(GameStateManager.ENDLEVEL);
+            gameStateManager.setState(GameStateManager.ENDLEVEL);
         }
     }
 

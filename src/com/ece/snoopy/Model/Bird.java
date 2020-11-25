@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.util.ArrayList;
 
-public class Bird extends Model{
+public class Bird extends Model {
 
     BufferedImage[] bufferedImages;
 

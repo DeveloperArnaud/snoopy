@@ -16,6 +16,7 @@ public class MenuState extends GameState {
     private int currentOption = 0;
     private String[] options = {
             "Commencer",
+            "Continuer",
             "Quitter"
     };
 
@@ -43,17 +44,24 @@ public class MenuState extends GameState {
         Font font = new Font("Century Gothic", Font.PLAIN, 11);
         graphics2D.setFont(font);
         graphics2D.drawString("La Revanche de Snoopy", 5 , 50);
-        graphics2D.drawString(options[0], 40 , 100);
-        graphics2D.drawString(options[1], 40 , 116);
+        graphics2D.drawString(options[0], 40 , 84);
+        graphics2D.drawString(options[1], 40 , 100);
+        graphics2D.drawString(options[2], 40 , 116);
+
         if(currentOption == 0) {
 
-            graphics2D.drawImage(cursor, 25, 87, null);
+            graphics2D.drawImage(cursor, 25, 72, null);
 
         }
 
         else if(currentOption == 1){
 
-            graphics2D.drawImage(cursor, 25, 103, null);
+            graphics2D.drawImage(cursor, 25, 88, null);
+        }
+
+        else if(currentOption == 2){
+
+            graphics2D.drawImage(cursor, 25, 104, null);
         }
     }
 
@@ -80,6 +88,10 @@ public class MenuState extends GameState {
         }
 
         if(currentOption == 1 ) {
+            gameStateManager.setState(GameStateManager.SAVEDGAME);
+        }
+
+        if(currentOption == 2) {
             SoundFX.play("collect");
             System.exit(0);
 
