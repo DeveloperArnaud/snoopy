@@ -230,9 +230,6 @@ public class Level1State extends GameState{
         player.draw(graphics2D);
         ball.draw(graphics2D);
 
-
-
-
         for(Bird bird : birds) {
             bird.draw(graphics2D);
         }
@@ -262,5 +259,9 @@ public class Level1State extends GameState{
         if(Inputs.isDown(Inputs.RIGHT)) player.setRIGHT();
         if(Inputs.isDown(Inputs.UP)) player.setUP();
         if(Inputs.isDown(Inputs.DOWN)) player.setDOWN();
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }

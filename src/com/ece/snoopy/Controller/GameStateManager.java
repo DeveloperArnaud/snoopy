@@ -42,7 +42,7 @@ public class GameStateManager {
      */
     public void setState(int i) {
         previousState = currentState;
-        stateToNull(previousState);
+        //stateToNull(previousState);
         currentState = i;
 
         if(i == INTRO) {
@@ -65,6 +65,10 @@ public class GameStateManager {
             gameStates[i] = new EndState(this);
             gameStates[i].init();
         }
+    }
+
+    public GameState getPreviousState() {
+        return gameStates[previousState];
     }
 
     public void stateToNull(int previousState) {
