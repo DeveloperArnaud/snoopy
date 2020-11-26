@@ -22,7 +22,10 @@ public class PauseState extends GameState {
     private TileMap tileMap;
     private ArrayList<Bird> birds;
 
-
+    /**
+     * Constructor
+     * @param gameStateManager
+     */
     public PauseState(GameStateManager gameStateManager) {
         super(gameStateManager);
     }
@@ -70,6 +73,7 @@ public class PauseState extends GameState {
         if(Inputs.isPressed(Inputs.F1)){
             gameStateManager.setPaused(false);
             gameStateManager.setState(GameStateManager.MENU);
+            SoundFX.stop("snoopyStage1");
         }
     }
 

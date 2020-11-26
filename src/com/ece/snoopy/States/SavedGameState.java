@@ -18,9 +18,6 @@ import static com.ece.snoopy.Controller.SavingState.saveState;
 
 public class SavedGameState extends GameState{
 
-    /**
-     * Player
-     */
     private Player player;
     private TileMap tileMap;
     private UI ui;
@@ -37,7 +34,7 @@ public class SavedGameState extends GameState{
     private ArrayList<Rectangle> boxes;
     private boolean eventGo;
     private boolean eventFinish;
-    private PauseState pause;
+
 
 
     /**
@@ -86,23 +83,21 @@ public class SavedGameState extends GameState{
 
         if(eventGo) eventGo();
         if(eventFinish) eventFinish();
-        pause =  new PauseState(gameStateManager, player, tileMap, birds);
 
         if(player.getNbBirds() == 4) {
             eventFinish = blockInput = true;
         }
 
-        int seconds = 60 - (int) ((player.getTicks() / 30) % 60);
-
-        if(seconds == 1) {
+        if(player.getTime() == 1) {
             eventFinish = blockInput = true;
             gameStateManager.setState(GameStateManager.LEVEL1);
         }
-
+        /**
         if(player.getLife() == -100) {
             eventFinish = blockInput = true;
             gameStateManager.setState(GameStateManager.MENU);
         }
+         */
 
         int ox = xsector;
         int oy = ysector;

@@ -50,7 +50,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     }
 
     /**
-     *
+     * Getting the key pressed through the states
      * @param e
      */
     @Override
@@ -59,7 +59,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     }
 
     /**
-     *
+     *  Avoiding the propagation key through the states
      * @param e
      */
     @Override
@@ -68,7 +68,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     }
 
     /**
-     *
+     *  Managing the game loop (perfomances)
      */
     public void addNotify() {
         super.addNotify();
@@ -80,7 +80,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     }
 
     /**
-     *
+     * Game loop
      */
     @Override
     public void run() {
@@ -129,14 +129,14 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     }
 
     /**
-     *
+     * Draw the states
      */
     private void draw() {
         gameStateManager.draw(graphics2D);
     }
 
     /**
-     *
+     *  Display the game
      */
     private void drawToScreen() {
         Graphics g2 = getGraphics();

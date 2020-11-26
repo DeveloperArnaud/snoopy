@@ -5,6 +5,7 @@ import com.ece.snoopy.Controller.Inputs;
 import com.ece.snoopy.Main.GamePanel;
 import com.ece.snoopy.Model.Player;
 import com.ece.snoopy.Model.Timer;
+import com.ece.snoopy.SoundFX.SoundFX;
 
 import java.awt.*;
 
@@ -56,6 +57,7 @@ public class EndState extends GameState {
     public void handleInput() {
         if(Inputs.isPressed(Inputs.ESCAPE)) {
             gameStateManager.setState(GameStateManager.MENU);
+            SoundFX.stop("snoopyStage1");
         }
         if(Inputs.isPressed(Inputs.ENTER)) {
             gameStateManager.setState(GameStateManager.LEVEL1);

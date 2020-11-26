@@ -22,6 +22,10 @@ public class MenuState extends GameState {
 
     };
 
+    /**
+     *
+     * @param gameStateManager
+     */
     public MenuState(GameStateManager gameStateManager) {
         super(gameStateManager);
     }
@@ -40,6 +44,10 @@ public class MenuState extends GameState {
         handleInput();
     }
 
+    /**
+     *
+     * @param graphics2D
+     */
     @Override
     public void draw(Graphics2D graphics2D) {
         graphics2D.drawImage(bg, 0, 0, null);
@@ -72,6 +80,9 @@ public class MenuState extends GameState {
         }
     }
 
+    /**
+     * Gestion des inputs du state
+     */
     @Override
     public void handleInput() {
         if(Inputs.isPressed(Inputs.DOWN) && currentOption < options.length - 1) {

@@ -69,7 +69,7 @@ public class Level1State extends GameState{
 
         SoundFX.loadSound("/SFX/snoopy-stage1.wav", "snoopyStage1");
         SoundFX.loadSound("/SFX/collect.wav", "collect");
-        //SoundFX.play("snoopyStage1");
+        SoundFX.play("snoopyStage1");
 
 
         boxes = new ArrayList<Rectangle>();
