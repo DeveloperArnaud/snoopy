@@ -14,13 +14,14 @@ public class GameStateManager {
     private boolean paused;
     private PauseState pauseState;
 
-    public static final int NUM_STATES = 6;
+    public static final int NUM_STATES = 7;
     public static final int INTRO = 0;
     public static final int MENU = 1;
     public static final int LEVEL1 = 2;
     public static final int ENDLEVEL = 3;
     public static final int SAVEDGAME = 4;
     public static final int MDP = 5;
+    public static final int LEVEL2 = 6;
 
     private int currentState;
     private int previousState;
@@ -68,6 +69,10 @@ public class GameStateManager {
         }
         else if(i == MDP) {
             gameStates[i] = new MdpState(this);
+            gameStates[i].init();
+        }
+        else if(i == LEVEL2) {
+            gameStates[i] = new Level2State(this);
             gameStates[i].init();
         }
     }

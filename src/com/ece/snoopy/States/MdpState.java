@@ -10,7 +10,6 @@ import java.awt.image.BufferedImage;
 
 public class MdpState extends GameState {
     private BufferedImage bg;
-    private BufferedImage cursor;
 
     private String pwd;
 
@@ -25,7 +24,6 @@ public class MdpState extends GameState {
     @Override
     public void init() {
         bg = Content.BACKGROUNDMENU[0][0];
-        cursor = Content.CURSOR[0][0];
         SoundFX.loadSound("/SFX/menuoption.wav", "menuoption");
         SoundFX.loadSound("/SFX/collect.wav", "collect");
         pwd = "";
@@ -81,6 +79,9 @@ public class MdpState extends GameState {
     private void chooseLevel(String l) {
         if(l.equals("UN")) {
             gameStateManager.setState(GameStateManager.LEVEL1);
+        }
+        if(l.equals("DEUX")) {
+            gameStateManager.setState(GameStateManager.LEVEL2);
         }
         else {
             pwd = "";
