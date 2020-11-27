@@ -18,7 +18,8 @@ public class Content {
     public static BufferedImage[][] PLAYER = load("/Sprites/SpriteSnoopy.gif",16,16);
     public static BufferedImage[][] BIRD = load("/Sprites/diamond.gif",16 ,16);
     public static BufferedImage[][] BALL = load("/Sprites/ball.png",16,16);
-
+    public static BufferedImage[][] ROCK = load("/Sprites/rock.png",16,16);
+    public static BufferedImage[][] SPEED = load("/Sprites/speed.png",16,16);
     /**
      *
      * @param s

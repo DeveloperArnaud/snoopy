@@ -5,6 +5,7 @@ import com.ece.snoopy.Map.TileMap;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Player extends Model {
 
@@ -82,15 +83,108 @@ public class Player extends Model {
     public void setLEFT() {
         super.setLeft();
     }
+    public void setLEFT(ArrayList<Objet> objets) {
+        if (moving)
+            return;
+        for (Objet obj : objets) {
+            rowTile = obj.getY() / tileSize;
+            colTile = obj.getX() / tileSize;
+            if (obj.getType() == Objet.SPEED) {
+                if (colTile == x / tileSize - 1 && y / tileSize == rowTile) {
+                    moveSpeed += 2;
+                    super.setLeft();
+                    objets.remove(obj);
+                    return;
+                }
+            }
+            if (y / tileSize == rowTile) {
+                if (x / tileSize - 1 == colTile) {
+                    if (obj.getType() == Objet.ROCK && !obj.goLeft())
+                        return;
+                }
+            }
+        }
+        super.setLeft();
+    }
     public void setRIGHT() {
+        super.setRight();
+    }
+    public void setRIGHT(ArrayList<Objet> objets) {
+        if (moving)
+            return;
+        for (Objet obj : objets) {
+            rowTile = obj.getY() / tileSize;
+            colTile = obj.getX() / tileSize;
+            if (obj.getType() == Objet.SPEED) {
+                if (colTile == x / tileSize + 1 && y / tileSize == rowTile) {
+                    moveSpeed += 2;
+                    super.setRight();
+                    objets.remove(obj);
+                    return;
+                }
+            }
+            if (y / tileSize == rowTile) {
+                if (x / tileSize + 1 == colTile) {
+                    if (obj.getType() == Objet.ROCK && !obj.goRight())
+                        return;
+                }
+            }
+        }
         super.setRight();
     }
     public void setUP() {
         super.setUp();
     }
+    public void setUP(ArrayList<Objet> objets) {
+        if (moving)
+            return;
+        for (Objet obj : objets) {
+            rowTile = obj.getY() / tileSize;
+            colTile = obj.getX() / tileSize;
+            if (obj.getType() == Objet.SPEED) {
+                if (colTile == x / tileSize && y / tileSize - 1 == rowTile) {
+                    moveSpeed += 2;
+                    super.setUp();
+                    objets.remove(obj);
+                    return;
+                }
+            }
+            if (x / tileSize == colTile) {
+                if (y / tileSize - 1 == rowTile) {
+                    if (obj.getType() == Objet.ROCK && !obj.goUp())
+                        return;
+                }
+            }
+        }
+        super.setUp();
+    }
     public void setDOWN() {
         super.setDown();
     }
+    public void setDOWN(ArrayList<Objet> objets) {
+        if (moving)
+            return;
+        for (Objet obj : objets) {
+            rowTile = obj.getY() / tileSize;
+            colTile = obj.getX() / tileSize;
+            if (obj.getType() == Objet.SPEED) {
+                if (colTile == x / tileSize && y / tileSize + 1 == rowTile) {
+                    moveSpeed += 2;
+                    super.setDown();
+                    objets.remove(obj);
+                    return;
+                }
+            }
+            if (x / tileSize == colTile) {
+                if (y / tileSize + 1 == rowTile) {
+                    if (obj.getType() == Objet.ROCK && !obj.goDown())
+                        return;
+                }
+            }
+        }
+        super.setDown();
+    }
+
 
     public void draw(Graphics2D g) {
         super.draw(g);
