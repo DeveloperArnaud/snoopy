@@ -37,7 +37,6 @@ public class Level1State extends GameState{
     private ArrayList<Rectangle> boxes;
     private boolean eventGo;
     private boolean eventFinish;
-    private PauseState pause;
 
 
     /**
@@ -53,7 +52,7 @@ public class Level1State extends GameState{
         birds = new ArrayList<>();
         tileMap = new TileMap(16);
         tileMap.loadTiles("/Tilesets/testtileset.gif");
-        tileMap.loadMap("/Maps/testmap.map");
+        tileMap.loadMap("/Maps/level1.map");
         player = new Player(tileMap);
         ui = new UI(player, birds);
         ball = new Ball(tileMap);
@@ -65,7 +64,7 @@ public class Level1State extends GameState{
         sectorSize = GamePanel.WIDTH;
         xsector = player.getX() / sectorSize;
         ysector = player.getY() / sectorSize;
-        tileMap.setInitPosition(-xsector * sectorSize, -ysector * sectorSize);
+        tileMap.setInitPosition(-256, -256);
 
         SoundFX.loadSound("/SFX/snoopy-stage1.wav", "snoopyStage1");
         SoundFX.loadSound("/SFX/collect.wav", "collect");
@@ -87,7 +86,6 @@ public class Level1State extends GameState{
 
         if(eventGo) eventGo();
         if(eventFinish) eventFinish();
-        pause =  new PauseState(gameStateManager, player, tileMap, birds);
 
         if(player.getNbBirds() == 4) {
             eventFinish = blockInput = true;
@@ -110,11 +108,8 @@ public class Level1State extends GameState{
         xsector = player.getX() / sectorSize;
         ysector = player.getY() / sectorSize;
 
-        tileMap.setPosition(-xsector * sectorSize, -ysector * sectorSize);
+        tileMap.setPosition(-256, -256);
         tileMap.update();
-
-
-        if(tileMap.isMoving()) return;
 
         player.update();
 
@@ -210,11 +205,11 @@ public class Level1State extends GameState{
         bird = new Bird(tileMap);
         bird.setTilePosition(17,17);
         bird1 = new Bird(tileMap);
-        bird1.setTilePosition(22,17);
+        bird1.setTilePosition(24,17);
         bird2 = new Bird(tileMap);
-        bird2.setTilePosition(17,22);
+        bird2.setTilePosition(17,24);
         bird3 = new Bird(tileMap);
-        bird3.setTilePosition(22,22);
+        bird3.setTilePosition(24,24);
         birds.add(bird);
         birds.add(bird1);
         birds.add(bird2);
@@ -228,7 +223,11 @@ public class Level1State extends GameState{
     public void draw(Graphics2D graphics2D) {
         tileMap.draw(graphics2D);
         player.draw(graphics2D);
-        ball.draw(graphics2D);
+        //ball.draw(graphics2D);
+
+        if(player.getTime() == 59) {
+            graphics2D.drawString("Niveau 1", 54, 54);
+        }
 
         for(Bird bird : birds) {
             bird.draw(graphics2D);
@@ -263,5 +262,9 @@ public class Level1State extends GameState{
 
     public Player getPlayer() {
         return player;
+    }
+
+    public int scoreFinalLv1()  {
+        return player.getTime() * 100;
     }
 }

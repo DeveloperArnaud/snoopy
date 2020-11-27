@@ -14,6 +14,8 @@ import com.ece.snoopy.UI.UI;
 import java.awt.*;
 import java.util.ArrayList;
 
+import static com.ece.snoopy.Controller.SavingState.saveState;
+
 public class Level2State extends GameState{
     /**
      * Player
@@ -52,7 +54,7 @@ public class Level2State extends GameState{
         objets = new ArrayList<>();
         tileMap = new TileMap(16);
         tileMap.loadTiles("/Tilesets/testtileset.gif");
-        tileMap.loadMap("/Maps/testmap.map");
+        tileMap.loadMap("/Maps/level2.map");
         player = new Player(tileMap);
         ui = new UI(player, birds);
         ball = new Ball(tileMap);
@@ -61,12 +63,12 @@ public class Level2State extends GameState{
         generateObjets();
 
         player.setTilePosition(20, 20);
-        ball.setTilePosition(20,20);
+        //ball.setTilePosition(20,20);
 
         sectorSize = GamePanel.WIDTH;
         xsector = player.getX() / sectorSize;
         ysector = player.getY() / sectorSize;
-        tileMap.setInitPosition(-xsector * sectorSize, -ysector * sectorSize);
+        tileMap.setInitPosition(-256, -256);
 
         SoundFX.loadSound("/SFX/snoopy-stage1.wav", "snoopyStage1");
         SoundFX.loadSound("/SFX/collect.wav", "collect");
@@ -98,11 +100,8 @@ public class Level2State extends GameState{
         xsector = player.getX() / sectorSize;
         ysector = player.getY() / sectorSize;
 
-        tileMap.setPosition(-xsector * sectorSize, -ysector * sectorSize);
+        tileMap.setPosition(-256, -256);
         tileMap.update();
-
-
-        if(tileMap.isMoving()) return;
 
         player.update();
 
@@ -198,15 +197,16 @@ public class Level2State extends GameState{
         bird = new Bird(tileMap);
         bird.setTilePosition(17,17);
         bird1 = new Bird(tileMap);
-        bird1.setTilePosition(22,17);
+        bird1.setTilePosition(24,17);
         bird2 = new Bird(tileMap);
-        bird2.setTilePosition(17,22);
+        bird2.setTilePosition(17,24);
         bird3 = new Bird(tileMap);
-        bird3.setTilePosition(22,22);
+        bird3.setTilePosition(24,24);
         birds.add(bird);
         birds.add(bird1);
         birds.add(bird2);
         birds.add(bird3);
+
     }
 
     private void generateObjets() {
@@ -219,13 +219,13 @@ public class Level2State extends GameState{
         speed = new Objet(tileMap, Objet.SPEED);
         speed.setTilePosition(19,20);
         rocher1 = new Objet(tileMap, Objet.ROCK);
-        rocher1.setTilePosition(18,18);
+        rocher1.setTilePosition(18,17);
         rocher2 = new Objet(tileMap, Objet.ROCK);
-        rocher2.setTilePosition(21,18);
+        rocher2.setTilePosition(23,17);
         rocher3 = new Objet(tileMap, Objet.ROCK);
-        rocher3.setTilePosition(18,21);
+        rocher3.setTilePosition(17,23);
         rocher4 = new Objet(tileMap, Objet.ROCK);
-        rocher4.setTilePosition(21,21);
+        rocher4.setTilePosition(24,23);
         objets.add(rocher1);
         objets.add(rocher2);
         objets.add(rocher3);
@@ -235,9 +235,19 @@ public class Level2State extends GameState{
 
     @Override
     public void draw(Graphics2D graphics2D) {
+
+
+
         tileMap.draw(graphics2D);
+
+        if(player.getTime() == 59) {
+            graphics2D.drawString("Niveau 2", 54, 54);
+        }
+
         player.draw(graphics2D);
-        ball.draw(graphics2D);
+        //ball.draw(graphics2D);
+
+
 
         for (Objet rock : objets)
             rock.draw(graphics2D);
@@ -256,6 +266,17 @@ public class Level2State extends GameState{
     @Override
     public void handleInput() {
 
+        if(Inputs.isPressed(Inputs.ESCAPE)){
+            SoundFX.stop("snoopyStage1");
+            gameStateManager.setPaused(true);
+        }
+        if(Inputs.isPressed(Inputs.S)) {
+            SoundFX.stop("snoopyStage1");
+            gameStateManager.setPaused(true);
+            saveState(player, tileMap, birds);
+
+        }
+
         if(blockInput) return;
         if(Inputs.isDown(Inputs.LEFT)) player.setLEFT(objets);
         if(Inputs.isDown(Inputs.RIGHT)) player.setRIGHT(objets);
@@ -266,4 +287,5 @@ public class Level2State extends GameState{
     public Player getPlayer() {
         return player;
     }
+
 }
