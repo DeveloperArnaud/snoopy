@@ -5,6 +5,8 @@ import com.ece.snoopy.Map.TileMap;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class Player extends Model {
 
@@ -82,13 +84,117 @@ public class Player extends Model {
     public void setLEFT() {
         super.setLeft();
     }
+    public void setLEFT(ArrayList<Objet> objets) {
+        if (moving)
+            return;
+        for (Objet obj : objets) {
+            rowTile = obj.getY() / tileSize;
+            colTile = obj.getX() / tileSize;
+            if (obj.getType() == Objet.SPEED) {
+                if (colTile == x / tileSize - 1 && y / tileSize == rowTile) {
+                    moveSpeed += 2;
+                    super.setLeft();
+                    objets.remove(obj);
+                    return;
+                }
+            }
+            if (y / tileSize == rowTile) {
+                if (x / tileSize - 1 == colTile) {
+                    System.out.println("Collision");
+                    if (obj.getType() == Objet.ROCK)
+                        return;
+                    if (!obj.goLeft())
+                        return;
+                }
+            }
+        }
+        super.setLeft();
+    }
     public void setRIGHT() {
+        super.setRight();
+    }
+    public void setRIGHT(ArrayList<Objet> objets) {
+        if (moving)
+            return;
+        for (Objet obj : objets) {
+            rowTile = obj.getY() / tileSize;
+            colTile = obj.getX() / tileSize;
+            if (obj.getType() == Objet.SPEED) {
+                if (colTile == x / tileSize + 1 && y / tileSize == rowTile) {
+                    moveSpeed += 2;
+                    super.setRight();
+                    objets.remove(obj);
+                    return;
+                }
+            }
+            if (y / tileSize == rowTile) {
+                if (x / tileSize + 1 == colTile) {
+                    System.out.println("Collision");
+                    if (obj.getType() == Objet.ROCK)
+                        return;
+                    if (!obj.goRight())
+                        return;
+                }
+            }
+        }
         super.setRight();
     }
     public void setUP() {
         super.setUp();
     }
+    public void setUP(ArrayList<Objet> objets) {
+        if (moving)
+            return;
+        for (Objet obj : objets) {
+            rowTile = obj.getY() / tileSize;
+            colTile = obj.getX() / tileSize;
+            if (obj.getType() == Objet.SPEED) {
+                if (colTile == x / tileSize && y / tileSize - 1 == rowTile) {
+                    moveSpeed += 2;
+                    super.setUp();
+                    objets.remove(obj);
+                    return;
+                }
+            }
+            if (x / tileSize == colTile) {
+                if (y / tileSize - 1 == rowTile) {
+                    System.out.println("Collision");
+                    if (obj.getType() == Objet.ROCK)
+                        return;
+                    if (!obj.goUp())
+                        return;
+                }
+            }
+        }
+        super.setUp();
+    }
     public void setDOWN() {
+        super.setDown();
+    }
+    public void setDOWN(ArrayList<Objet> objets) {
+        if (moving)
+            return;
+        for (Objet obj : objets) {
+            rowTile = obj.getY() / tileSize;
+            colTile = obj.getX() / tileSize;
+            if (obj.getType() == Objet.SPEED) {
+                if (colTile == x / tileSize && y / tileSize + 1 == rowTile) {
+                    moveSpeed += 2;
+                    super.setDown();
+                    objets.remove(obj);
+                    return;
+                }
+            }
+            if (x / tileSize == colTile) {
+                if (y / tileSize + 1 == rowTile) {
+                    System.out.println("Collision");
+                    if (obj.getType() == Objet.ROCK)
+                        return;
+                    if (!obj.goDown())
+                        return;
+                }
+            }
+        }
         super.setDown();
     }
 

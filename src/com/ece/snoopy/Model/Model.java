@@ -83,7 +83,7 @@ public abstract class Model {
         moving = validateNextPosition();
     }
 
-    private boolean validateNextPosition() {
+    protected boolean validateNextPosition() {
 
         if(moving) return true;
 
@@ -91,7 +91,7 @@ public abstract class Model {
         colTile = x / tileSize;
 
         if(left) {
-            if(colTile == 0 || tileMap.getType(rowTile, colTile - 1) == Tile.BLOCKED ) {
+            if(colTile == 0 || tileMap.getType(rowTile, colTile - 1) == Tile.BLOCKED) {
                 return false;
             } else {
                 xdest = x - tileSize;
@@ -179,4 +179,7 @@ public abstract class Model {
         return new Rectangle(x,y,cwidth,cheight);
     }
 
+    public void setMoving(boolean b) {
+        moving = b;
+    }
 }

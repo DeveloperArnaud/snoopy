@@ -25,7 +25,6 @@ public class Mdp extends GameState {
     @Override
     public void init() {
         bg = Content.BACKGROUNDMENU[0][0];
-        cursor = Content.CURSOR[0][0];
         SoundFX.loadSound("/SFX/menuoption.wav", "menuoption");
         SoundFX.loadSound("/SFX/collect.wav", "collect");
         pwd = "";
@@ -81,6 +80,9 @@ public class Mdp extends GameState {
     private void chooseLevel(String l) {
         if(l.equals("UN")) {
             gameStateManager.setState(GameStateManager.LEVEL1);
+        }
+        if(l.equals("DEUX")) {
+            gameStateManager.setState(GameStateManager.LEVEL2);
         }
         else {
             pwd = "";

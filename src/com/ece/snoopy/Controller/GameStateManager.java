@@ -60,6 +60,10 @@ public class GameStateManager {
             gameStates[i] = new Mdp(this);
             gameStates[i].init();
         }
+        else if(i == LEVEL2) {
+            gameStates[i] = new Level2State(this);
+            gameStates[i].init();
+        }
     }
 
     public GameState getPreviousState() {
