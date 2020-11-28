@@ -14,16 +14,16 @@ public class EndState extends GameState {
     private Color color;
     private Player player;
 
+    private GameStateManager gameStateManager;
+
     public EndState(GameStateManager gameStateManager) {
         super(gameStateManager);
+        this.gameStateManager = gameStateManager;
     }
 
     @Override
     public void init() {
         color = new Color(164,198,222);
-
-
-
     }
 
     @Override
@@ -46,7 +46,7 @@ public class EndState extends GameState {
             player = lv1.getPlayer();
             int seconds = player.getTime();
             int scoreFinalLv1 = seconds * 100;
-
+            gameStateManager.setScoreLvl1(scoreFinalLv1);
             graphics2D.drawString( ""+seconds, 95, 36);
             graphics2D.drawString( "Score niveau : " + scoreFinalLv1, 25, 56);
             graphics2D.drawString( "Niveau " + lv + " terminé !", 25, 80);
@@ -58,7 +58,7 @@ public class EndState extends GameState {
             Level2State lv2 = (Level2State) prev;
             player = lv2.getPlayer();
             int seconds = player.getTime();
-            int scoreFinalLv2 = seconds * 100;
+            int scoreFinalLv2 = seconds * 100 + gameStateManager.getScoreLvl1();
             graphics2D.drawString( ""+seconds, 95, 36);
             graphics2D.drawString( "Score niveau : " + scoreFinalLv2, 25, 56);
             graphics2D.drawString( "Niveau  2 terminé !", 25, 80);

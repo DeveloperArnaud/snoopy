@@ -82,6 +82,7 @@ public class MdpState extends GameState {
         }
         if(l.equals("DEUX")) {
             SoundFX.stop("snoopyTitleScreen");
+            gameStateManager.setScoreLvl1(0);
             gameStateManager.setState(GameStateManager.LEVEL2);
         }
         else {

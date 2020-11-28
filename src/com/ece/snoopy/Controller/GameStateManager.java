@@ -23,6 +23,9 @@ public class GameStateManager {
     public static final int MDP = 5;
     public static final int LEVEL2 = 6;
 
+    private int scoreLvl1;
+    private int scoreLvl2;
+
     private int currentState;
     private int previousState;
 
@@ -30,12 +33,30 @@ public class GameStateManager {
      * Constructeur
      */
     public GameStateManager() {
+        scoreLvl1 = 0;
+        scoreLvl2 = 0;
         // Initialisation du son
         SoundFX.init();
         paused = false;
         pauseState = new PauseState(this);
         gameStates = new GameState[NUM_STATES];
         setState(INTRO);
+    }
+
+    public void setScoreLvl1(int s) {
+        this.scoreLvl1 = s;
+    }
+
+    public int getScoreLvl1() {
+        return scoreLvl1;
+    }
+
+    public void setScoreLvl2(int s) {
+        this.scoreLvl2 = s;
+    }
+
+    public int getScoreLvl2() {
+        return this.scoreLvl2;
     }
 
     /**
