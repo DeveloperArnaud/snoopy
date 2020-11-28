@@ -77,13 +77,22 @@ public class MdpState extends GameState {
 
     private void chooseLevel(String l) {
         if(l.equals("UN")) {
+            gameStateManager.setScoreLvl1(0);
+            gameStateManager.setScoreLvl2(0);
             SoundFX.stop("snoopyTitleScreen");
             gameStateManager.setState(GameStateManager.LEVEL1);
         }
         if(l.equals("DEUX")) {
-            SoundFX.stop("snoopyTitleScreen");
             gameStateManager.setScoreLvl1(0);
+            gameStateManager.setScoreLvl2(0);
+            SoundFX.stop("snoopyTitleScreen");
             gameStateManager.setState(GameStateManager.LEVEL2);
+        }
+        if(l.equals("TROIS")) {
+            gameStateManager.setScoreLvl1(0);
+            gameStateManager.setScoreLvl2(0);
+            SoundFX.stop("snoopyTitleScreen");
+            gameStateManager.setState(GameStateManager.LEVEL3);
         }
         else {
             pwd = "";

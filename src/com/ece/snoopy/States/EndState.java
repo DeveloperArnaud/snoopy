@@ -39,7 +39,6 @@ public class EndState extends GameState {
         graphics2D.fillRect(0,0, GamePanel.WIDTH, GamePanel.HEIGHT2);
         graphics2D.setColor(new Color(0,0,0));
         graphics2D.drawString("Temps final",25, 36);
-        String lv = "1";
         GameState prev = this.gameStateManager.getPreviousState();
         if (prev instanceof Level1State) {
             Level1State lv1 = (Level1State)prev;
@@ -49,7 +48,7 @@ public class EndState extends GameState {
             gameStateManager.setScoreLvl1(scoreFinalLv1);
             graphics2D.drawString( ""+seconds, 95, 36);
             graphics2D.drawString( "Score niveau : " + scoreFinalLv1, 25, 56);
-            graphics2D.drawString( "Niveau " + lv + " terminé !", 25, 80);
+            graphics2D.drawString( "Niveau 1 terminé !", 25, 80);
             Graphics2D g = (Graphics2D) graphics2D;
             g.setColor(Color.RED);
             g.drawString("CODE NIVEAU 1 : UN",25,140);
@@ -59,18 +58,29 @@ public class EndState extends GameState {
             player = lv2.getPlayer();
             int seconds = player.getTime();
             int scoreFinalLv2 = seconds * 100 + gameStateManager.getScoreLvl1();
+            gameStateManager.setScoreLvl1(scoreFinalLv2);
             graphics2D.drawString( ""+seconds, 95, 36);
             graphics2D.drawString( "Score niveau : " + scoreFinalLv2, 25, 56);
             graphics2D.drawString( "Niveau  2 terminé !", 25, 80);
             Graphics2D g = (Graphics2D) graphics2D;
             g.setColor(Color.RED);
             g.drawString("CODE NIVEAU 2 : DEUX",25,140);
+        } else if(prev instanceof Level3State) {
+            Level3State lv3 = (Level3State) prev;
+            player = lv3.getPlayer();
+            int seconds = player.getTime();
+            int scoreFinalLv3 = seconds * 100 + gameStateManager.getScoreLvl1() +gameStateManager.getScoreLvl2();
+            graphics2D.drawString( ""+seconds, 95, 36);
+            graphics2D.drawString( "Score niveau : " + scoreFinalLv3, 25, 56);
+            graphics2D.drawString( "Niveau  3 terminé !", 25, 80);
+            Graphics2D g = (Graphics2D) graphics2D;
+            g.setColor(Color.RED);
+            g.drawString("CODE NIVEAU 3 : TROIS",25,140);
         }
+
         graphics2D.setColor(Color.BLACK);
         graphics2D.drawString( "ENTRER: CONTINUER", 25, 100);
         graphics2D.drawString( "ECHAP: MENU PRINCIPAL", 25, 120);
-
-
     }
 
     @Override
@@ -81,7 +91,10 @@ public class EndState extends GameState {
             SoundFX.stop("snoopyStage2");
         }
         if(Inputs.isPressed(Inputs.ENTER)) {
-            gameStateManager.setState(GameStateManager.LEVEL2);
+            if (gameStateManager.getPreviousState() instanceof Level1State)
+                gameStateManager.setState(GameStateManager.LEVEL2);
+            else
+                gameStateManager.setState(GameStateManager.LEVEL3);
             SoundFX.stop("snoopyStage1");
         }
     }
