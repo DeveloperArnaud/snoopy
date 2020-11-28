@@ -21,11 +21,10 @@ public class UI {
 
     public void draw(Graphics2D graphics2D) {
 
-        int seconds = 60 - (int) ((player.getTicks() / 30) % 60);
+        int seconds = player.getTime();
 
-        graphics2D.drawString( ""+seconds, 64, 10);
-        graphics2D.drawString("Score : " + player.getNbBirds(), 80, 10);
-        graphics2D.drawString("Vie : " + player.getLife(), 10, 10);
+        graphics2D.drawString( ""+seconds, 80, 10);
+        graphics2D.drawString("Vie : " + player.getLife(), 5, 10);
 
     }
 

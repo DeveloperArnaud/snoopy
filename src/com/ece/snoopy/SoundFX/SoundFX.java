@@ -1,9 +1,6 @@
 package com.ece.snoopy.SoundFX;
 
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
+import javax.sound.sampled.*;
 import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -62,5 +59,12 @@ public class SoundFX {
         Clip c = sounds.get(s);
         if(c == null) return;
         c.loop(Clip.LOOP_CONTINUOUSLY);
+    }
+
+    public static void setVolume(String s, float f) {
+        Clip c = sounds.get(s);
+        if(c == null) return;
+        FloatControl vol = (FloatControl) c.getControl(FloatControl.Type.MASTER_GAIN);
+        vol.setValue(f);
     }
 }

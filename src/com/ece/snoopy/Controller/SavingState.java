@@ -20,15 +20,11 @@ public class SavingState {
             try {
                 FileWriter fw = new FileWriter(chooser.getSelectedFile()+".txt");
                 BufferedWriter out = new BufferedWriter(fw);
-                for(Bird bird : birds) {
-                    out.write("Position oiseau :" + bird.getSetTiles().toString()+ "\n" );
-                }
-                out.write("Score :" + player.getNbBirds() + "\n" +
-                "Temps restant : " + player.getTime() + "\n" + "Vie : " + player.getLife() + "\n");
+                out.write(player.getNbBirds()+","+ player.getTime() +","+ player.getLife()+",");
                 for (int i = 0; i < tileMap.getNumRows(); i++) {
                     for (int j = 0; j < tileMap.getNumCols(); j ++) {
                         //out.write(getTileID(tileMap, i, j));
-                        out.write(tileMap.getIndex(i, j));
+                        out.write(String.valueOf(tileMap.getIndex(i, j)));
                     }
                 }
                 out.close();

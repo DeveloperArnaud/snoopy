@@ -10,8 +10,14 @@ import com.ece.snoopy.Model.Player;
 import com.ece.snoopy.SoundFX.SoundFX;
 import com.ece.snoopy.UI.UI;
 
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static com.ece.snoopy.Controller.SavingState.loadMap;
 import static com.ece.snoopy.Controller.SavingState.saveState;
@@ -46,6 +52,22 @@ public class SavedGameState extends GameState{
 
     @Override
     public void init() {
+        String line = null;
+        String [] object = null;
+        try(BufferedReader br = new BufferedReader(new FileReader("C:/Users/arnau/testBirds.txt"))) {
+
+            while((line = br.readLine()) != null) {
+                object = line.split(",");
+                System.out.println(object[0]);
+            }
+            br.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        /*
         birds = new ArrayList<>();
         tileMap.loadTiles("/Tilesets/testtileset.gif");
         tileMap = loadMap("C:/Users/arnau/testBirds.txt");
@@ -72,6 +94,8 @@ public class SavedGameState extends GameState{
         boxes = new ArrayList<Rectangle>();
         eventGo = true;
         eventGo();
+        */
+
     }
 
     /**

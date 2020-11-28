@@ -46,9 +46,13 @@ public class EndState extends GameState {
             player = lv1.getPlayer();
             int seconds = player.getTime();
             int scoreFinalLv1 = seconds * 100;
+
             graphics2D.drawString( ""+seconds, 95, 36);
             graphics2D.drawString( "Score niveau : " + scoreFinalLv1, 25, 56);
             graphics2D.drawString( "Niveau " + lv + " terminé !", 25, 80);
+            Graphics2D g = (Graphics2D) graphics2D;
+            g.setColor(Color.RED);
+            g.drawString("CODE NIVEAU 1 : UN",25,140);
 
         } else if(prev instanceof Level2State) {
             Level2State lv2 = (Level2State) prev;
@@ -58,10 +62,13 @@ public class EndState extends GameState {
             graphics2D.drawString( ""+seconds, 95, 36);
             graphics2D.drawString( "Score niveau : " + scoreFinalLv2, 25, 56);
             graphics2D.drawString( "Niveau  2 terminé !", 25, 80);
+            Graphics2D g = (Graphics2D) graphics2D;
+            g.setColor(Color.RED);
+            g.drawString("CODE NIVEAU 2 : DEUX",25,140);
         }
-
-        graphics2D.drawString( "ENTRER: CONTINUER", 5, 100);
-        graphics2D.drawString( "ECHAP: MENU PRINCIPAL", 5, 110);
+        graphics2D.setColor(Color.BLACK);
+        graphics2D.drawString( "ENTRER: CONTINUER", 25, 100);
+        graphics2D.drawString( "ECHAP: MENU PRINCIPAL", 25, 120);
 
 
     }
@@ -71,9 +78,11 @@ public class EndState extends GameState {
         if(Inputs.isPressed(Inputs.ESCAPE)) {
             gameStateManager.setState(GameStateManager.MENU);
             SoundFX.stop("snoopyStage1");
+            SoundFX.stop("snoopyStage2");
         }
         if(Inputs.isPressed(Inputs.ENTER)) {
             gameStateManager.setState(GameStateManager.LEVEL2);
+            SoundFX.stop("snoopyStage1");
         }
     }
 }

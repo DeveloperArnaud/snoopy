@@ -1,5 +1,7 @@
 package com.ece.snoopy.Controller;
 
+import com.ece.snoopy.Main.GamePanel;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
@@ -7,7 +9,7 @@ public class Content {
     /**
      *
      */
-    public static BufferedImage[][] BACKGROUNDMENU = load("/Intro/snoopybg.png",128,128 );
+    public static BufferedImage[][] BACKGROUNDMENU = load("/Intro/meadow.jpg", GamePanel.WIDTH * GamePanel.SCALE,GamePanel.HEIGHT2 * GamePanel.SCALE );
     /**
      *
      */

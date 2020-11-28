@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Objet extends Model{
     public static int ROCK = 0;
-    public static int SPEED = 2;
+    public static int TRAP = 2;
 
     private int type;
 
@@ -29,7 +29,7 @@ public class Objet extends Model{
         moveSpeed = 16;
         if (type == ROCK)
             bufferedImages = Content.ROCK[0];
-        if (type == SPEED)
+        if (type == TRAP)
             bufferedImages = Content.SPEED[0];
         animation.setFrames(bufferedImages);
         animation.setDelay(10);

@@ -2,6 +2,7 @@ package com.ece.snoopy.Model;
 
 import com.ece.snoopy.Controller.Content;
 import com.ece.snoopy.Map.TileMap;
+import com.ece.snoopy.SoundFX.SoundFX;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -40,6 +41,8 @@ public class Player extends Model {
 
         animation.setFrames(downSprites);
         animation.setDelay(10);
+        SoundFX.loadSound("/SFX/destroyed.wav", "destroyed");
+        SoundFX.setVolume("destroyed", -15);
 
     }
 
@@ -89,9 +92,9 @@ public class Player extends Model {
         for (Objet obj : objets) {
             rowTile = obj.getY() / tileSize;
             colTile = obj.getX() / tileSize;
-            if (obj.getType() == Objet.SPEED) {
+            if (obj.getType() == Objet.TRAP) {
                 if (colTile == x / tileSize - 1 && y / tileSize == rowTile) {
-                    moveSpeed += 2;
+                    this.life = 0;
                     super.setLeft();
                     objets.remove(obj);
                     return;
@@ -115,9 +118,9 @@ public class Player extends Model {
         for (Objet obj : objets) {
             rowTile = obj.getY() / tileSize;
             colTile = obj.getX() / tileSize;
-            if (obj.getType() == Objet.SPEED) {
+            if (obj.getType() == Objet.TRAP) {
                 if (colTile == x / tileSize + 1 && y / tileSize == rowTile) {
-                    moveSpeed += 2;
+                    this.life = 0;
                     super.setRight();
                     objets.remove(obj);
                     return;
@@ -141,9 +144,9 @@ public class Player extends Model {
         for (Objet obj : objets) {
             rowTile = obj.getY() / tileSize;
             colTile = obj.getX() / tileSize;
-            if (obj.getType() == Objet.SPEED) {
+            if (obj.getType() == Objet.TRAP) {
                 if (colTile == x / tileSize && y / tileSize - 1 == rowTile) {
-                    moveSpeed += 2;
+                    this.life = 0;
                     super.setUp();
                     objets.remove(obj);
                     return;
@@ -167,9 +170,9 @@ public class Player extends Model {
         for (Objet obj : objets) {
             rowTile = obj.getY() / tileSize;
             colTile = obj.getX() / tileSize;
-            if (obj.getType() == Objet.SPEED) {
+            if (obj.getType() == Objet.TRAP) {
                 if (colTile == x / tileSize && y / tileSize + 1 == rowTile) {
-                    moveSpeed += 2;
+                    this.life = 0;
                     super.setDown();
                     objets.remove(obj);
                     return;
@@ -183,6 +186,31 @@ public class Player extends Model {
             }
         }
         super.setDown();
+    }
+
+    public void setAction() {
+        if(currentAnimation == UP && tileMap.getIndex(rowTile - 1, colTile) == 21) {
+            SoundFX.play("destroyed");
+            tileMap.setTile(rowTile - 1, colTile, 1);
+        }
+
+        if(currentAnimation == DOWN && tileMap.getIndex(rowTile + 1, colTile) == 21) {
+            SoundFX.play("destroyed");
+            tileMap.setTile(rowTile + 1, colTile, 1);
+
+        }
+
+        if(currentAnimation == LEFT && tileMap.getIndex(rowTile, colTile - 1) == 21) {
+            SoundFX.play("destroyed");
+            tileMap.setTile(rowTile , colTile - 1, 1);
+
+        }
+
+        if(currentAnimation == RIGHT && tileMap.getIndex(rowTile, colTile + 1) == 21) {
+            SoundFX.play("destroyed");
+            tileMap.setTile(rowTile, colTile  + 1, 1);
+
+        }
     }
 
 
@@ -199,7 +227,7 @@ public class Player extends Model {
     }
 
     public void losingLife() {
-        life --;
+        this.life = this.life - 1;
     }
     public int getLife(){
         return life;

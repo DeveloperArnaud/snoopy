@@ -27,11 +27,20 @@ public abstract class Model {
     protected int y;
     protected int xdest;
     protected int ydest;
+
     protected int rowTile;
     protected int colTile;
 
+
+
+
     //animation
     protected int moveSpeed;
+
+    public int getCurrentAnimation() {
+        return currentAnimation;
+    }
+
     protected int currentAnimation;
     protected int xmap;
     protected int ymap;
@@ -54,6 +63,15 @@ public abstract class Model {
                 y + ymap - height / 2,
                 null);
     }
+
+    public int getRowTile() {
+        return rowTile;
+    }
+
+    public int getColTile() {
+        return colTile;
+    }
+
 
     public void setMapPosition() {
         xmap = tileMap.getX();
