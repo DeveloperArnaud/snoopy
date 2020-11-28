@@ -28,10 +28,6 @@ public class Level1State extends GameState{
 
     private ArrayList<Bird> birds;
 
-    private int xsector;
-    private int ysector;
-    private int sectorSize;
-
     private boolean blockInput;
     private int eventTick;
     private ArrayList<Rectangle> boxes;
@@ -60,15 +56,13 @@ public class Level1State extends GameState{
         generateBirds();
 
         player.setTilePosition(20, 20);
-
-        sectorSize = GamePanel.WIDTH;
-        xsector = player.getX() / sectorSize;
-        ysector = player.getY() / sectorSize;
         tileMap.setInitPosition(-256, -256);
 
         SoundFX.loadSound("/SFX/snoopy-stage1.wav", "snoopyStage1");
         SoundFX.loadSound("/SFX/collect.wav", "collect");
-        //SoundFX.play("snoopyStage1");
+        SoundFX.setVolume("snoopyStage1", -25);
+        SoundFX.setVolume("collect", -25);
+        SoundFX.play("snoopyStage1");
 
 
         boxes = new ArrayList<Rectangle>();
@@ -91,11 +85,20 @@ public class Level1State extends GameState{
             eventFinish = blockInput = true;
         }
 
-        int seconds = 60 - (int) ((player.getTicks() / 30) % 60);
 
-        if(seconds == 1) {
-            eventFinish = blockInput = true;
-            gameStateManager.setState(GameStateManager.LEVEL1);
+        if(player.getTicks() == 1800) {
+            player.losingLife();
+        }
+        if(player.getTicks() == (1800 * 2)) {
+            player.losingLife();
+        }
+
+        if(player.getTicks() == (1800 * 3)) {
+            player.losingLife();
+        }
+        if(player.getLife() == 0 ) {
+            SoundFX.stop("snoopyStage1");
+            gameStateManager.setState(GameStateManager.MENU);
         }
 
         if(player.getLife() == -100) {
@@ -103,10 +106,6 @@ public class Level1State extends GameState{
             gameStateManager.setState(GameStateManager.MENU);
         }
 
-        int ox = xsector;
-        int oy = ysector;
-        xsector = player.getX() / sectorSize;
-        ysector = player.getY() / sectorSize;
 
         tileMap.setPosition(-256, -256);
         tileMap.update();
@@ -225,8 +224,10 @@ public class Level1State extends GameState{
         player.draw(graphics2D);
         //ball.draw(graphics2D);
 
-        if(player.getTime() == 59) {
-            graphics2D.drawString("Niveau 1", 54, 54);
+        System.out.println(player.getTicks());
+
+        if(player.getTicks() < 90) {
+            graphics2D.drawString("Niveau 1", 60, 40);
         }
 
         for(Bird bird : birds) {
@@ -246,6 +247,9 @@ public class Level1State extends GameState{
         if(Inputs.isPressed(Inputs.ESCAPE)){
             SoundFX.stop("snoopyStage1");
             gameStateManager.setPaused(true);
+        }
+        if(!gameStateManager.getPaused()) {
+            SoundFX.resumeLoop("snoopyStage1");
         }
         if(Inputs.isPressed(Inputs.S)) {
             SoundFX.stop("snoopyStage1");

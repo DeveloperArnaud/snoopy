@@ -101,6 +101,9 @@ public class GameStateManager {
         paused = b;
     }
 
+    public boolean getPaused() {
+        return paused;
+    }
     /**
      * Affichage des états
      * @param g

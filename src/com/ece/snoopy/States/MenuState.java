@@ -7,6 +7,9 @@ import com.ece.snoopy.SoundFX.SoundFX;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.nio.file.Path;
+import java.util.ArrayList;
 
 public class MenuState extends GameState {
 
@@ -17,10 +20,12 @@ public class MenuState extends GameState {
     private String[] options = {
             "Commencer",
             "Mot de passe",
-            "Continuer",
+            "Charger une partie",
             "Quitter",
 
     };
+
+    private ArrayList<String> optionList = new ArrayList<>();
 
     /**
      *
@@ -34,9 +39,21 @@ public class MenuState extends GameState {
     public void init() {
         bg = Content.BACKGROUNDMENU[0][0];
         cursor = Content.CURSOR[0][0];
+        optionList.add("Commencer");
+        optionList.add("Charger une partie");
+        optionList.add("Mot de passe");
+        optionList.add("Quitter");
+        File f = new File("C:/Users/arnau/testBirds.txt");
+        if(!f.exists()) {
+            optionList.remove(optionList.get(1));
+        }
+        SoundFX.loadSound("/SFX/snoopyTitleScreen3.wav", "snoopyTitleScreen");
         SoundFX.loadSound("/SFX/menuoption.wav", "menuoption");
         SoundFX.loadSound("/SFX/collect.wav", "collect");
-
+        SoundFX.setVolume("snoopyTitleScreen", -20);
+        SoundFX.setVolume("menuoption", -25);
+        SoundFX.play("snoopyTitleScreen");
+;
     }
 
     @Override
@@ -53,30 +70,45 @@ public class MenuState extends GameState {
         graphics2D.drawImage(bg, 0, 0, null);
         Font font = new Font("Century Gothic", Font.PLAIN, 11);
         graphics2D.setFont(font);
-        graphics2D.drawString("La Revanche de Snoopy", 5 , 40);
-        graphics2D.drawString(options[0], 40 , 74);
-        graphics2D.drawString(options[1], 40 , 90);
-        graphics2D.drawString(options[2], 40 , 106);
-        graphics2D.drawString(options[3], 40 , 122);
+        graphics2D.drawString("La Revanche de Snoopy", 25 , 40);
 
-        if(currentOption == 0) {
+        if(optionList.size() < 4 ) {
+            graphics2D.drawString(optionList.get(0), 50, 74);
+            graphics2D.drawString(optionList.get(1), 50, 90);
+            graphics2D.drawString(optionList.get(2), 50, 106);
 
-            graphics2D.drawImage(cursor, 25, 62, null);
+            if (currentOption == 0) {
 
-        }
+                graphics2D.drawImage(cursor, 25, 62, null);
 
-        else if(currentOption == 1){
+            } else if (currentOption == 1) {
 
-            graphics2D.drawImage(cursor, 25, 78, null);
-        }
+                graphics2D.drawImage(cursor, 25, 78, null);
+            } else if (currentOption == 2) {
 
-        else if(currentOption == 2){
+                graphics2D.drawImage(cursor, 25, 94, null);
+            }
+        } else {
+            graphics2D.drawString(optionList.get(0), 50, 74);
+            graphics2D.drawString(optionList.get(1), 50, 90);
+            graphics2D.drawString(optionList.get(2), 50, 106);
+            graphics2D.drawString(optionList.get(3), 50, 122);
 
-            graphics2D.drawImage(cursor, 25, 94, null);
-        }
-        else if(currentOption == 3){
 
-            graphics2D.drawImage(cursor, 25, 110, null);
+            if (currentOption == 0) {
+
+                graphics2D.drawImage(cursor, 25, 62, null);
+
+            } else if (currentOption == 1) {
+
+                graphics2D.drawImage(cursor, 25, 78, null);
+            } else if (currentOption == 2) {
+
+                graphics2D.drawImage(cursor, 25, 94, null);
+            } else if (currentOption == 3) {
+
+                graphics2D.drawImage(cursor, 25, 110, null);
+            }
         }
     }
 
@@ -85,7 +117,7 @@ public class MenuState extends GameState {
      */
     @Override
     public void handleInput() {
-        if(Inputs.isPressed(Inputs.DOWN) && currentOption < options.length - 1) {
+        if(Inputs.isPressed(Inputs.DOWN) && currentOption < optionList.size() - 1) {
             SoundFX.play("menuoption");
             currentOption ++;
         }
@@ -96,21 +128,41 @@ public class MenuState extends GameState {
         }
         if(Inputs.isPressed(Inputs.ENTER)) {
             chooseOptions();
+
         }
 
     }
 
     private void chooseOptions() {
         if(currentOption == 0) {
+            SoundFX.stop("snoopyTitleScreen");
             gameStateManager.setState(GameStateManager.LEVEL1);
         }
 
         if(currentOption == 1 ) {
             gameStateManager.setState(GameStateManager.MDP);
         }
+        if(optionList.size() < 4 ) {
+            if (currentOption == 2) {
+                SoundFX.play("collect");
+                System.exit(0);
 
-        if(currentOption == 2 ) {
-            gameStateManager.setState(GameStateManager.SAVEDGAME);
+            }
+        } else {
+            if (currentOption == 1) {
+                SoundFX.stop("snoopyTitleScreen");
+                gameStateManager.setState(GameStateManager.SAVEDGAME);
+            }
+
+            if(currentOption == 2 ) {
+                gameStateManager.setState(GameStateManager.MDP);
+            }
+
+            if(currentOption == 3) {
+                SoundFX.play("collect");
+                System.exit(0);
+
+            }
         }
 
         if(currentOption == 3) {

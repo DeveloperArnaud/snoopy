@@ -38,6 +38,8 @@ public class Inputs {
                     break;
                 case KeyEvent.VK_ENTER: keyState[ENTER] = b;
                     break;
+                case KeyEvent.VK_SPACE: keyState[SPACE] = b;
+                    break;
                 case KeyEvent.VK_ESCAPE: keyState[ESCAPE] = b;
                     break;
                 case KeyEvent.VK_F1: keyState[F1] = b;
