@@ -56,39 +56,95 @@ public class Objet extends Model{
         return type;
     }
 
-    public boolean goLeft() {
+    public boolean goLeft(ArrayList<Objet> objets, ArrayList<Bird> birds) {
         int col = x / tileSize;
         int row = y / tileSize;
         if (col == 0 || tileMap.getType(row, col - 1) == Tile.BLOCKED)
             return false;
         x = x - tileSize;
+        for (Objet o : objets) {
+            if (!o.equals(this)) {
+                if (this.intersects(o)) {
+                    x = x + tileSize;
+                    return false;
+                }
+            }
+        }
+        for (Bird b : birds) {
+            if (this.intersects(b)) {
+                x = x + tileSize;
+                return false;
+            }
+        }
         return true;
     }
 
-    public boolean goRight() {
+    public boolean goRight(ArrayList<Objet> objets, ArrayList<Bird> birds) {
         int col = x / tileSize;
         int row = y / tileSize;
         if (col == tileMap.getNumCols() || tileMap.getType(row, col + 1) == Tile.BLOCKED )
             return false;
         x = x + tileSize;
+        for (Objet o : objets) {
+            if (!o.equals(this)) {
+                if (this.intersects(o)) {
+                    x = x - tileSize;
+                    return false;
+                }
+            }
+        }
+        for (Bird b : birds) {
+            if (this.intersects(b)) {
+                x = x - tileSize;
+                return false;
+            }
+        }
         return true;
     }
 
-    public boolean goUp() {
+    public boolean goUp(ArrayList<Objet> objets, ArrayList<Bird> birds) {
         int col = x / tileSize;
         int row = y / tileSize;
         if (row == 0 || tileMap.getType(row - 1, col) == Tile.BLOCKED)
             return false;
         y = y - tileSize;
+        for (Objet o : objets) {
+            if (!o.equals(this)) {
+                if (this.intersects(o)) {
+                    y = y + tileSize;
+                    return false;
+                }
+            }
+        }
+        for (Bird b : birds) {
+            if (this.intersects(b)) {
+                y = y + tileSize;
+                return false;
+            }
+        }
         return true;
     }
 
-    public boolean goDown() {
+    public boolean goDown(ArrayList<Objet> objets, ArrayList<Bird> birds) {
         int col = x / tileSize;
         int row = y / tileSize;
         if (row == tileMap.getNumRows() || tileMap.getType(row + 1, col) == Tile.BLOCKED)
             return false;
         y = y + tileSize;
+        for (Objet o : objets) {
+            if (!o.equals(this)) {
+                if (this.intersects(o)) {
+                    y = y - tileSize;
+                    return false;
+                }
+            }
+        }
+        for (Bird b : birds) {
+            if (this.intersects(b)) {
+                y = y - tileSize;
+                return false;
+            }
+        }
         return true;
     }
 }

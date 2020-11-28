@@ -293,15 +293,14 @@ public class Level2State extends GameState{
         }
 
         if(blockInput) return;
-        if(Inputs.isDown(Inputs.LEFT)) player.setLEFT(objets);
-        if(Inputs.isDown(Inputs.RIGHT)) player.setRIGHT(objets);
-        if(Inputs.isDown(Inputs.UP)) player.setUP(objets);
-        if(Inputs.isDown(Inputs.DOWN)) player.setDOWN(objets);
+        if(Inputs.isDown(Inputs.LEFT)) player.setLEFT(objets, birds);
+        if(Inputs.isDown(Inputs.RIGHT)) player.setRIGHT(objets, birds);
+        if(Inputs.isDown(Inputs.UP)) player.setUP(objets, birds);
+        if(Inputs.isDown(Inputs.DOWN)) player.setDOWN(objets, birds);
         if(Inputs.isPressed(Inputs.SPACE)) player.setAction();
     }
 
     public Player getPlayer() {
         return player;
     }
-
 }

@@ -86,7 +86,7 @@ public class Player extends Model {
     public void setLEFT() {
         super.setLeft();
     }
-    public void setLEFT(ArrayList<Objet> objets) {
+    public void setLEFT(ArrayList<Objet> objets, ArrayList<Bird> birds) {
         if (moving)
             return;
         for (Objet obj : objets) {
@@ -102,7 +102,7 @@ public class Player extends Model {
             }
             if (y / tileSize == rowTile) {
                 if (x / tileSize - 1 == colTile) {
-                    if (obj.getType() == Objet.ROCK && !obj.goLeft())
+                    if (obj.getType() == Objet.ROCK && !obj.goLeft(objets, birds))
                         return;
                 }
             }
@@ -112,7 +112,7 @@ public class Player extends Model {
     public void setRIGHT() {
         super.setRight();
     }
-    public void setRIGHT(ArrayList<Objet> objets) {
+    public void setRIGHT(ArrayList<Objet> objets, ArrayList<Bird> birds) {
         if (moving)
             return;
         for (Objet obj : objets) {
@@ -128,7 +128,7 @@ public class Player extends Model {
             }
             if (y / tileSize == rowTile) {
                 if (x / tileSize + 1 == colTile) {
-                    if (obj.getType() == Objet.ROCK && !obj.goRight())
+                    if (obj.getType() == Objet.ROCK && !obj.goRight(objets, birds))
                         return;
                 }
             }
@@ -138,7 +138,7 @@ public class Player extends Model {
     public void setUP() {
         super.setUp();
     }
-    public void setUP(ArrayList<Objet> objets) {
+    public void setUP(ArrayList<Objet> objets, ArrayList<Bird> birds) {
         if (moving)
             return;
         for (Objet obj : objets) {
@@ -154,7 +154,8 @@ public class Player extends Model {
             }
             if (x / tileSize == colTile) {
                 if (y / tileSize - 1 == rowTile) {
-                    if (obj.getType() == Objet.ROCK && !obj.goUp())
+
+                    if (obj.getType() == Objet.ROCK && !obj.goUp(objets, birds))
                         return;
                 }
             }
@@ -164,7 +165,7 @@ public class Player extends Model {
     public void setDOWN() {
         super.setDown();
     }
-    public void setDOWN(ArrayList<Objet> objets) {
+    public void setDOWN(ArrayList<Objet> objets, ArrayList<Bird> birds) {
         if (moving)
             return;
         for (Objet obj : objets) {
@@ -180,7 +181,7 @@ public class Player extends Model {
             }
             if (x / tileSize == colTile) {
                 if (y / tileSize + 1 == rowTile) {
-                    if (obj.getType() == Objet.ROCK && !obj.goDown())
+                    if (obj.getType() == Objet.ROCK && !obj.goDown(objets, birds))
                         return;
                 }
             }
