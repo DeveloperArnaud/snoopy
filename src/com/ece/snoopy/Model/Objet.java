@@ -60,8 +60,8 @@ public class Objet extends Model{
 
     /**
      * Pousser un objet par la gauche (direction du personnage)
-     * @param objets
-     * @param birds
+     * @param objets Les objets
+     * @param birds Les oiseaux
      * @return
      */
     public boolean goLeft(ArrayList<Objet> objets, ArrayList<Bird> birds) {
@@ -118,8 +118,8 @@ public class Objet extends Model{
 
     /**
      * Pousser un objet par le haut (direction du personnage)
-     * @param objets
-     * @param birds
+     * @param objets Les objets
+     * @param birds Les oiseaux
      * @return
      */
     public boolean goUp(ArrayList<Objet> objets, ArrayList<Bird> birds) {
@@ -147,8 +147,8 @@ public class Objet extends Model{
 
     /**
      * Pousser un objet par le bas (direction du personnage)
-     * @param objets
-     * @param birds
+     * @param objets Les objets
+     * @param birds Les oiseaux
      * @return
      */
     public boolean goDown(ArrayList<Objet> objets, ArrayList<Bird> birds) {
