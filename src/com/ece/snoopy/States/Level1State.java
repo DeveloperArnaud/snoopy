@@ -13,7 +13,6 @@ import com.ece.snoopy.UI.UI;
 import java.awt.*;
 import java.util.ArrayList;
 
-import static com.ece.snoopy.Controller.SavingState.saveState;
 /*
     NIVEAU 1
 
@@ -98,6 +97,7 @@ public class Level1State extends GameState{
          //1800*3 = 3min
         if(player.getTicks() == (1800 * 3)) {
             player.losingLife();
+            gameStateManager.setState(GameStateManager.GAMEOVER);
         }
         /* FIN BLOC GESTION DU TEMPS */
 
@@ -265,13 +265,6 @@ public class Level1State extends GameState{
             SoundFX.resumeLoop("snoopyStage1");
         }
 
-        //Sauvegarder (Pas encore fonctionnel)
-        if(Inputs.isPressed(Inputs.S)) {
-            SoundFX.stop("snoopyStage1");
-            gameStateManager.setPaused(true);
-            saveState(player, tileMap, birds);
-
-        }
         //Bloquer les entrées et figer le jeu
         if(blockInput) return;
         // Déplacements du personnage
@@ -286,6 +279,14 @@ public class Level1State extends GameState{
      */
     public Player getPlayer() {
         return player;
+    }
+
+    public TileMap getTileMap() {
+        return tileMap;
+    }
+
+    public ArrayList<Bird> getBirds(){
+        return birds;
     }
 
 }

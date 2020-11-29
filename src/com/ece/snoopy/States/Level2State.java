@@ -14,7 +14,6 @@ import com.ece.snoopy.UI.UI;
 import java.awt.*;
 import java.util.ArrayList;
 
-import static com.ece.snoopy.Controller.SavingState.saveState;
 /*
     NIVEAU 2
 
@@ -103,11 +102,12 @@ public class Level2State extends GameState{
 
         if(player.getTicks() == (1800 * 3)) {
             player.losingLife();
+            gameStateManager.setState(GameStateManager.GAMEOVER);
         }
 
         if(player.getLife() == 0 ) {
             SoundFX.stop("snoopyStage2");
-            gameStateManager.setState(GameStateManager.MENU);
+            gameStateManager.setState(GameStateManager.GAMEOVER);
         }
 
         for(int i = 0; i < birds.size(); i++) {
@@ -272,12 +272,6 @@ public class Level2State extends GameState{
         if(!gameStateManager.getPaused()) {
             SoundFX.resumeLoop("snoopyStage2");
         }
-        if(Inputs.isPressed(Inputs.S)) {
-            SoundFX.stop("snoopyStage2");
-            gameStateManager.setPaused(true);
-            saveState(player, tileMap, birds);
-
-        }
 
         if(blockInput) return;
         if(Inputs.isDown(Inputs.LEFT)) player.setLEFT(objets, birds);
@@ -289,5 +283,13 @@ public class Level2State extends GameState{
 
     public Player getPlayer() {
         return player;
+    }
+
+    public TileMap getTileMap() {
+        return tileMap;
+    }
+
+    public ArrayList<Bird> getBirds(){
+        return birds;
     }
 }

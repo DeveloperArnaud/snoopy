@@ -5,8 +5,6 @@ import com.ece.snoopy.Map.TileMap;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.util.ArrayList;
 
 public class Bird extends Model {
 

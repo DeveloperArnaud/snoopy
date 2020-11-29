@@ -1,13 +1,10 @@
 package com.ece.snoopy.Model;
 
 import com.ece.snoopy.Controller.Content;
-import com.ece.snoopy.Main.GamePanel;
 import com.ece.snoopy.Map.TileMap;
-
 import java.awt.*;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+
 /*
     EN COURS DE DEVELOPPEMENT
  */

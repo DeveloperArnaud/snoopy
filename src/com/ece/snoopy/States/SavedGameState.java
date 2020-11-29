@@ -254,7 +254,7 @@ public class SavedGameState extends GameState{
         if(Inputs.isPressed(Inputs.S)) {
             SoundFX.stop("snoopyStage1");
             gameStateManager.setPaused(true);
-            saveState(player, tileMap, birds);
+            //saveState(player, tileMap, birds);
 
         }
         if(blockInput) return;
