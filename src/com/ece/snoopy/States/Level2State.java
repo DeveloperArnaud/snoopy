@@ -211,11 +211,17 @@ public class Level2State extends GameState{
         Objet rocher4;
         Objet trap;
         Objet trap2;
+        Objet trap3;
+        Objet trap4;
 
         trap = new Objet(tileMap, Objet.TRAP);
         trap.setTilePosition(20,17);
         trap2 = new Objet(tileMap, Objet.TRAP);
         trap2.setTilePosition(20,24);
+        trap3 = new Objet(tileMap, Objet.TRAP);
+        trap3.setTilePosition(21,17);
+        trap4 = new Objet(tileMap, Objet.TRAP);
+        trap4.setTilePosition(21,24);
         rocher1 = new Objet(tileMap, Objet.ROCK);
         rocher1.setTilePosition(18,17);
         rocher2 = new Objet(tileMap, Objet.ROCK);
@@ -230,6 +236,8 @@ public class Level2State extends GameState{
         objets.add(rocher4);
         objets.add(trap);
         objets.add(trap2);
+        objets.add(trap3);
+        objets.add(trap4);
     }
 
     @Override

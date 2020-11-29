@@ -92,7 +92,7 @@ public class EndState extends GameState {
             int scoreFinalLv3 = seconds * 100;
             graphics2D.drawString( ""+seconds, 95, 36);
             graphics2D.drawString( "Score niveau : " + scoreFinalLv3, 25, 56);
-            if(gameStateManager.getScoreLvl1() > 0 && gameStateManager.getScoreLvl2() > 0) {
+            if(gameStateManager.getScoreLvl1() > 0 || gameStateManager.getScoreLvl2() > 0) {
                 scoreFinalLv3 = (gameStateManager.getScoreLvl1() + gameStateManager.getScoreLvl2()) + scoreFinalLv3;
                 graphics2D.drawString( "Score total : " + scoreFinalLv3, 25, 76);
             } else {
