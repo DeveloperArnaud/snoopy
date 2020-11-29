@@ -91,7 +91,7 @@ public class Inputs {
     /**
      * Compare la touche pressée précédente et actuelle afin d'annuler la touche précédente pressée et retourner celle actuelle
      * @param i Valeur de la touche
-     * @return
+     * @return true si une touche est pressée
      */
     public static boolean isPressed(int i) {
         return keyState[i] && !prevKeyState[i];
@@ -100,7 +100,7 @@ public class Inputs {
     /**
      *
      * @param i Valeur de la touche
-     * @return true si la valeur est pressé
+     * @return true si la touche est actuellement pressée
      */
     public static boolean isDown(int i) {
         return keyState[i];
