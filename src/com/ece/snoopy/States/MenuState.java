@@ -8,28 +8,18 @@ import com.ece.snoopy.SoundFX.SoundFX;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class MenuState extends GameState {
 
     private BufferedImage bg;
     private BufferedImage cursor;
-
     private int currentOption = 0;
-    private String[] options = {
-            "Commencer",
-            "Mot de passe",
-            "Charger une partie",
-            "Quitter",
-
-    };
-
     private ArrayList<String> optionList = new ArrayList<>();
 
     /**
-     *
-     * @param gameStateManager
+     * Constucteur
+     * @param gameStateManager GameStateManager
      */
     public MenuState(GameStateManager gameStateManager) {
         super(gameStateManager);
@@ -56,14 +46,17 @@ public class MenuState extends GameState {
 ;
     }
 
+    /**
+     * Mettre à jour l'etat Menu
+     */
     @Override
     public void update() {
         handleInput();
     }
 
     /**
-     *
-     * @param graphics2D
+     * Affichage de l'etat Menu (adapté pour la sauvegarde)
+     * @param graphics2D Graphics2D
      */
     @Override
     public void draw(Graphics2D graphics2D) {
@@ -113,7 +106,7 @@ public class MenuState extends GameState {
     }
 
     /**
-     * Gestion des inputs du state
+     * Gestion des entrées du menu
      */
     @Override
     public void handleInput() {
@@ -133,6 +126,9 @@ public class MenuState extends GameState {
 
     }
 
+    /**
+     * Récuperer l'option choisie
+     */
     private void chooseOptions() {
         if(currentOption == 0) {
             SoundFX.stop("snoopyTitleScreen");

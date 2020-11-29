@@ -2,16 +2,22 @@ package com.ece.snoopy.Controller;
 
 import java.awt.event.KeyEvent;
 
+/*
+    LES TOUCHES
+ */
 public class Inputs {
 
+    // Nombre de touches utilisées
     public static final int NUM_KEYS = 12;
 
+    // Etat des touches
     public static boolean keyState[] = new boolean[NUM_KEYS];
+    // Etat des touches pressés
     public static boolean prevKeyState[] = new boolean[NUM_KEYS];
 
+    //Les touches
     public static String numero;
     public static String lettre;
-
     public static int UP = 0;
     public static int LEFT = 1;
     public static int DOWN = 2;
@@ -25,9 +31,13 @@ public class Inputs {
     public static int NUMBER = 10;
     public static int ERASE  = 11;
 
+    /**
+     * Récupérer la touche pressée
+     * @param i Valeur de l'entrée
+     * @param b Valeur de la touche pressée
+     */
     public static void keySet(int i , boolean b) {
             switch(i) {
-
                 case KeyEvent.VK_UP: keyState[UP] = b;
                     break;
                 case KeyEvent.VK_DOWN: keyState[DOWN] = b;
@@ -48,12 +58,13 @@ public class Inputs {
                     break;
                 case KeyEvent.VK_BACK_SPACE: keyState[ERASE] = b;
                     break;
-
             }
+
         if (i >= KeyEvent.VK_A && i <= KeyEvent.VK_Z) {
             keyState[LETTER] = b;
             lettre = Character.toString((char)i);
         }
+
         if (i >= KeyEvent.VK_0 && i <= KeyEvent.VK_9) {
             keyState[NUMBER] = b;
             numero = Character.toString((char)i);
@@ -61,6 +72,9 @@ public class Inputs {
 
     }
 
+    /**
+     * Mettre à jour la touche pressée pour ne pas bloquer les autres entrées utilisateurs
+     */
     public static void update() {
         for (int i = 0; i < NUM_KEYS; i++) {
             prevKeyState[i] = keyState[i];
@@ -74,10 +88,20 @@ public class Inputs {
         return lettre;
     }
 
+    /**
+     * Compare la touche pressée précédente et actuelle afin d'annuler la touche précédente pressée et retourner celle actuelle
+     * @param i Valeur de la touche
+     * @return
+     */
     public static boolean isPressed(int i) {
         return keyState[i] && !prevKeyState[i];
     }
 
+    /**
+     *
+     * @param i Valeur de la touche
+     * @return true si la valeur est pressé
+     */
     public static boolean isDown(int i) {
         return keyState[i];
     }

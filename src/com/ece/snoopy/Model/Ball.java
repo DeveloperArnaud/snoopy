@@ -8,18 +8,16 @@ import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-
+/*
+    EN COURS DE DEVELOPPEMENT
+ */
 public class Ball extends Model {
 
-    Player player;
     BufferedImage[] ballImage;
-    int x = 12, y = 12,  velX = 2, velY = 2;
-
 
     /**
-     * Constructor
-     *
-     * @param tm
+     * Constructeur
+     * @param tm tileMap
      */
     public Ball(TileMap tm) {
         super(tm);
@@ -34,11 +32,13 @@ public class Ball extends Model {
 
     }
 
+    /**
+     * Affichage de la balle
+     * @param graphics2D
+     */
     public void draw(Graphics2D graphics2D) {
 
-        
        graphics2D.fillOval(12,12,10,10);
-
 
     }
 }

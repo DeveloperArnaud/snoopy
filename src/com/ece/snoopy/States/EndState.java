@@ -4,18 +4,25 @@ import com.ece.snoopy.Controller.GameStateManager;
 import com.ece.snoopy.Controller.Inputs;
 import com.ece.snoopy.Main.GamePanel;
 import com.ece.snoopy.Model.Player;
-import com.ece.snoopy.Model.Timer;
 import com.ece.snoopy.SoundFX.SoundFX;
 
 import java.awt.*;
-
+/*
+    ECRAN DE FIN DE PARTIE
+ */
 public class EndState extends GameState {
 
+    //Graphisme et Joueur
     private Color color;
     private Player player;
 
+    //Gestion des états de jeu
     private GameStateManager gameStateManager;
 
+    /**
+     * Constructeur
+     * @param gameStateManager GameStateManager
+     */
     public EndState(GameStateManager gameStateManager) {
         super(gameStateManager);
         this.gameStateManager = gameStateManager;
@@ -31,6 +38,10 @@ public class EndState extends GameState {
         handleInput();
     }
 
+    /**
+     * Affichage de l'etat de fin de jeu
+     * @param graphics2D Graphics2D
+     */
     @Override
     public void draw(Graphics2D graphics2D) {
         graphics2D.setColor(color);
@@ -57,8 +68,9 @@ public class EndState extends GameState {
             Level2State lv2 = (Level2State) prev;
             player = lv2.getPlayer();
             int seconds = player.getTime();
-            int scoreFinalLv2 = seconds * 100 + gameStateManager.getScoreLvl1();
-            gameStateManager.setScoreLvl1(scoreFinalLv2);
+            int scoreFinalLv2 = seconds * 100;
+            scoreFinalLv2  += gameStateManager.getScoreLvl1();
+            gameStateManager.setScoreLvl2(scoreFinalLv2);
             graphics2D.drawString( ""+seconds, 95, 36);
             graphics2D.drawString( "Score niveau : " + scoreFinalLv2, 25, 56);
             graphics2D.drawString( "Niveau  2 terminé !", 25, 80);
@@ -83,19 +95,27 @@ public class EndState extends GameState {
         graphics2D.drawString( "ECHAP: MENU PRINCIPAL", 25, 120);
     }
 
+    /**
+     * Intercepter les entrées
+     */
     @Override
     public void handleInput() {
         if(Inputs.isPressed(Inputs.ESCAPE)) {
             gameStateManager.setState(GameStateManager.MENU);
             SoundFX.stop("snoopyStage1");
             SoundFX.stop("snoopyStage2");
+            SoundFX.stop("snoopyStage3");
         }
         if(Inputs.isPressed(Inputs.ENTER)) {
-            if (gameStateManager.getPreviousState() instanceof Level1State)
+            if (gameStateManager.getPreviousState() instanceof Level1State) {
                 gameStateManager.setState(GameStateManager.LEVEL2);
-            else
+                SoundFX.stop("snoopyStage1");
+            }
+            else {
                 gameStateManager.setState(GameStateManager.LEVEL3);
-            SoundFX.stop("snoopyStage1");
+                SoundFX.stop("snoopyStage1");
+                SoundFX.stop("snoopyStage2");
+            }
         }
     }
 }

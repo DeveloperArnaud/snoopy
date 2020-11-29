@@ -9,12 +9,14 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class MdpState extends GameState {
-    private BufferedImage bg;
 
+    //Image et mot de passe
+    private BufferedImage bg;
     private String pwd;
 
     /**
-     * @param gameStateManager
+     * Constructeur
+     * @param gameStateManager GameStateManager
      */
     public MdpState(GameStateManager gameStateManager) {
         super(gameStateManager);
@@ -29,11 +31,18 @@ public class MdpState extends GameState {
         pwd = "";
     }
 
+    /**
+     * Mettre à jour l'etat Mdp
+     */
     @Override
     public void update() {
         handleInput();
     }
 
+    /**
+     * Affichage de l'etat Mdp
+     * @param graphics2D Graphics2D
+     */
     @Override
     public void draw(Graphics2D graphics2D) {
         graphics2D.drawImage(bg, 0, 0, null);
@@ -53,6 +62,9 @@ public class MdpState extends GameState {
         graphics2D.drawString("ou ECHAP pour quitter", 28 , 120);
     }
 
+    /**
+     * Intercepter les entrées utilisateurs
+     */
     @Override
     public void handleInput() {
         if(Inputs.isPressed(Inputs.ENTER)) {
@@ -75,6 +87,10 @@ public class MdpState extends GameState {
         }
     }
 
+    /**
+     * Choix d'un niveau selon le code entré
+     * @param l Code saisi par l'utilisateur
+     */
     private void chooseLevel(String l) {
         if(l.equals("UN")) {
             gameStateManager.setScoreLvl1(0);

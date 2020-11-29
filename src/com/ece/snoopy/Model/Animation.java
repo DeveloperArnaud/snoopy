@@ -13,6 +13,9 @@ public class Animation {
 
     private int timesPlayed;
 
+    /**
+     * Constructeur
+     */
     public Animation() {
         timesPlayed = 0;
     }
@@ -30,46 +33,17 @@ public class Animation {
         return frames[currentFrame];
     }
 
-    public int getCurrentFrame() {
-        return currentFrame;
-    }
-
-    public void setCurrentFrame(int currentFrame) {
-        this.currentFrame = currentFrame;
-    }
-
-    public int getNumFrames() {
-        return numFrames;
-    }
-
-    public void setNumFrames(int numFrames) {
-        this.numFrames = numFrames;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-    public int getDelay() {
-        return delay;
-    }
-
+    /**
+     *  Délai d'animation entre chaque frame du sprite
+     * @param delay int
+     */
     public void setDelay(int delay) {
         this.delay = delay;
     }
 
-    public boolean hasPlayedOnce() {
-        return timesPlayed > 0;
-    }
-
-    public boolean hasPlayed(int timesPlayed) {
-        return this.timesPlayed == timesPlayed;
-    }
-
+    /**
+     * Mettre à jour l'animation (Rafraîchir les frames du personnage animé)
+     */
     public void update() {
         if(this.delay == -1 ) return;
 

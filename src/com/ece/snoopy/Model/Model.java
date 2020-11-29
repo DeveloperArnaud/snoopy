@@ -7,26 +7,28 @@ import java.awt.*;
 
 public abstract class Model {
 
+    //Mouvements
     protected TileMap tileMap;
+    protected Animation animation;
     protected int tileSize;
-    protected  Animation animation;
-    protected  boolean moving;
-    protected  boolean left;
-    protected  boolean right;
-    protected  boolean up;
-    protected  boolean down;
+    protected boolean moving;
+    protected boolean left;
+    protected boolean right;
+    protected boolean up;
+    protected boolean down;
 
-
+    //Dimensions des sprites d'animation (16x16, au plus petit 12x12)
     protected int width;
     protected int height;
     protected int cwidth;
     protected int cheight;
 
-    // position
+    //Position
     protected int x;
     protected int y;
     protected int xdest;
     protected int ydest;
+
 
     protected int rowTile;
     protected int colTile;
@@ -36,17 +38,12 @@ public abstract class Model {
 
     //animation
     protected int moveSpeed;
-
-    public int getCurrentAnimation() {
-        return currentAnimation;
-    }
-
     protected int currentAnimation;
     protected int xmap;
     protected int ymap;
 
     /**
-     * Constructor
+     * Constructeur
      * @param tm
      */
     public Model(TileMap tm) {
@@ -55,6 +52,10 @@ public abstract class Model {
         animation = new Animation();
     }
 
+    /**
+     * Affichage
+     * @param g Graphics2D
+     */
     public void draw(Graphics2D g){
         setMapPosition();
         g.drawImage(
@@ -64,21 +65,12 @@ public abstract class Model {
                 null);
     }
 
-    public int getRowTile() {
-        return rowTile;
-    }
-
-    public int getColTile() {
-        return colTile;
-    }
-
-
     public void setMapPosition() {
         xmap = tileMap.getX();
         ymap = tileMap.getY();
     }
-    
 
+    /* GESTION DES DIRECTIONS ( DROITE, GAUCHE, HAUT, BAS) */
     public void setLeft() {
         if(moving) return;
         left = true;
@@ -100,7 +92,12 @@ public abstract class Model {
         down = true;
         moving = validateNextPosition();
     }
+    /*   FIN BLOC GESTION DES DIRECTIONS */
 
+    /**
+     * Permet de d'eviter que le personnage traverse une case de type BLOCKED
+     * @return Retourne true s'il y peut se déplacer sur une case et false s'il ne peut pas
+     */
     private boolean validateNextPosition() {
 
         if(moving) return true;
@@ -139,6 +136,9 @@ public abstract class Model {
         return true;
     }
 
+    /**
+     * Mettre à jour les directions et l'animation
+     */
     public void update() {
 
         if(moving) getNextPosition();
@@ -152,6 +152,11 @@ public abstract class Model {
         animation.update();
     }
 
+    /**
+     *  Permet de placer sur une case spécifique un objet, le personnage etc..
+     * @param i
+     * @param j
+     */
     public void setTilePosition(int i, int j) {
         y = i  * tileSize + tileSize /2;
         x = j  * tileSize + tileSize /2;
@@ -159,8 +164,9 @@ public abstract class Model {
         ydest = y;
     }
 
-
-
+    /**
+     *  Récupérer la prochaine direction en fonction de la direction du personnage afin d'instaurer un déplacement case par case
+     */
     private void getNextPosition() {
 
         if(left && x > xdest) x -= moveSpeed;
@@ -190,9 +196,19 @@ public abstract class Model {
         return y;
     }
 
+    /**
+     * Permet de gérer l'intersection entre le personnage et les objets
+     * @param m Model
+     * @return Retourne true si le personnage est sur la même case que l'oiseau
+     */
     public boolean intersects(Model m){
         return getRectangle().intersects(m.getRectangle());
     }
+
+    /**
+     * Récupérer l'intersection d'un rectangle (oiseau) et le personange
+     * @return Un rectangle correspondant un oiseau (objet récupérable)
+     */
     protected Rectangle getRectangle() {
         return new Rectangle(x,y,cwidth,cheight);
     }

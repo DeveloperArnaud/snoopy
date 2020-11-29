@@ -10,11 +10,13 @@ import java.util.ArrayList;
 
 public class Player extends Model {
 
+    //Sprite de déplacement du personnage
     private BufferedImage[] downSprites;
     private BufferedImage[] leftSprites;
     private BufferedImage[] rightSprites;
     private BufferedImage[] upSprites;
 
+    //Directions
     private final int DOWN = 0;
     private final int UP = 3;
     private final int LEFT = 1;
@@ -23,9 +25,11 @@ public class Player extends Model {
     private int nbBirds;
     private int life = 3;
 
-
+    /**
+     * Constructeur
+     * @param tileMap TileMap
+     */
     public Player(TileMap tileMap) {
-
         super(tileMap);
         width = 16;
         height = 16;
@@ -46,10 +50,11 @@ public class Player extends Model {
 
     }
 
+    /**
+     * Mettre à jour la sprite d'animation de direction en fonction de la direction effectué (ex : DIRECTION DROITE = SPRITE ANIMATION DROITE)
+     */
     public void update() {
-
         ticks++;
-
 
         if(down) {
             if(currentAnimation != DOWN) {
@@ -86,6 +91,7 @@ public class Player extends Model {
     public void setLEFT() {
         super.setLeft();
     }
+
     public void setLEFT(ArrayList<Objet> objets, ArrayList<Bird> birds) {
         if (moving)
             return;
@@ -112,6 +118,7 @@ public class Player extends Model {
     public void setRIGHT() {
         super.setRight();
     }
+
     public void setRIGHT(ArrayList<Objet> objets, ArrayList<Bird> birds) {
         if (moving)
             return;
@@ -138,6 +145,7 @@ public class Player extends Model {
     public void setUP() {
         super.setUp();
     }
+
     public void setUP(ArrayList<Objet> objets, ArrayList<Bird> birds) {
         if (moving)
             return;
@@ -165,6 +173,7 @@ public class Player extends Model {
     public void setDOWN() {
         super.setDown();
     }
+
     public void setDOWN(ArrayList<Objet> objets, ArrayList<Bird> birds) {
         if (moving)
             return;
@@ -189,6 +198,9 @@ public class Player extends Model {
         super.setDown();
     }
 
+    /**
+     * Verifie en fonction de la direction du personnage si une case est cassable ( si index = 21, cassable)
+     */
     public void setAction() {
         if(currentAnimation == UP && tileMap.getIndex(rowTile - 1, colTile) == 21) {
             SoundFX.play("destroyed");
@@ -214,22 +226,36 @@ public class Player extends Model {
         }
     }
 
-
+    /**
+     * Affichage du personnage
+     * @param g Graphics2D
+     */
     public void draw(Graphics2D g) {
         super.draw(g);
     }
 
+    /**
+     * Collecter les oiseaux
+     */
     public void collectedBirds() {
         nbBirds ++;
     }
 
+    /**
+     * Récuperer le nombre d'oiseaux collectés
+     * @return Le nombre d'oiseau
+     */
     public int getNbBirds() {
         return nbBirds;
     }
 
+    /**
+     * Faire perdre une vie au personnage
+     */
     public void losingLife() {
         this.life = this.life - 1;
     }
+
     public int getLife(){
         return life;
     }
@@ -238,6 +264,10 @@ public class Player extends Model {
         return ticks;
     }
 
+    /**
+     * Récuperer le temps de partie du joueur
+     * @return Le temps
+     */
     public int getTime() {
         int seconds = 60 - (int) ((this.getTicks() / 30) % 60);
         return seconds;

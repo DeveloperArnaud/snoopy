@@ -17,15 +17,15 @@ public class TileMap {
     private int xdest;
     private int ydest;
     private int speed;
-    private boolean moving;
 
-    //bounds
+
+    //Collisions
     private int xmin;
     private int ymin;
     private int xmax;
     private int ymax;
 
-    //map
+    //Map
     private int [][] map;
     private int tileSize;
     private int numRows;
@@ -33,19 +33,19 @@ public class TileMap {
     private int width;
     private int height;
 
-    //tiles
+    //Cases du jeu
     private BufferedImage tileset;
     private int numTilesAcross;
     private Tile[][] tiles;
 
-    //drawing
+    //Affichage
     private int rowOffset;
     private int colOffset;
     private int numRowsToDraw;
     private int numsColsToDraw;
 
     /**
-     * Constructor
+     * Constructeur
      * @param tileSize
      */
     public TileMap(int tileSize) {
@@ -56,11 +56,10 @@ public class TileMap {
     }
 
     /**
-     * Updating the map
+     * Mettre à jour le positionnement de la map
      */
     public void update() {
-        //Manage the movement of the map
-        // Need to be changed
+
         if(x < xdest) {
             x += speed;
 
@@ -81,12 +80,10 @@ public class TileMap {
         colOffset = -this.x / tileSize;
         rowOffset = -this.y / tileSize;
 
-        if(x != xdest || y != ydest) moving = true;
-        else moving = false;
     }
 
     /**
-     *
+     *  Gestion des collisions (Empêcher le personnage de sortir de la map)
      */
     public void fixBounds() {
         if(x < xmin) x = xmin;
@@ -96,8 +93,8 @@ public class TileMap {
     }
 
     /**
-     * Loading tiles images for map, each tile will generate a piece of sprite
-     * @param s
+     * Chargement des cases de la map par le chemin du fichier
+     * @param s Chemin du fichier
      */
     public void loadTiles(String s) {
         try {
@@ -106,7 +103,6 @@ public class TileMap {
             tiles = new Tile[2][numTilesAcross];
 
             BufferedImage subImage;
-
             for(int col = 0; col < numTilesAcross; col ++) {
                 subImage = tileset.getSubimage(
                         col * tileSize,
@@ -129,8 +125,8 @@ public class TileMap {
     }
 
     /**
-     * Loading the map by file path and parsing it.
-     * @param s
+     * Chargement de la map par le chemin du fichier
+     * @param s Chemin du fichier
      */
     public void loadMap(String s) {
         try {
@@ -187,6 +183,12 @@ public class TileMap {
         return width;
     }
 
+    /**
+     * Récupérer le type de case (NORMAL/BLOCKED)
+     * @param row valeur de ligne
+     * @param col valeur de la colonne
+     * @return Le type de case
+     */
     public int getType(int row, int col) {
         int rowCol = map[row][col];
         int r = rowCol / numTilesAcross;
@@ -194,14 +196,21 @@ public class TileMap {
         return tiles[r][c].getType();
     }
 
+    /**
+     * Récupérer l'index d'une case
+     * @param row valeur de ligne
+     * @param col valeur de la colonne
+     * @return L'index de la case
+     */
     public int getIndex(int row, int col) {
         return map[row][col];
     }
 
-    public boolean isMoving(){
-        return moving;
-    }
-
+    /**
+     * Positionner la map à une zone précise durant toute la durée de la partie
+     * @param x La valeur du positionnement horizontal x
+     * @param y La valeur de positionnement vertical y
+     */
     public void setPosition(int x, int y) {
         xdest = x;
         ydest = y;
@@ -212,6 +221,10 @@ public class TileMap {
         map[row][col] = index;
     }
 
+    /**
+     * Affichage de la map
+     * @param graphics2D Graphics2D
+     */
     public void draw(Graphics2D graphics2D) {
         for(int row = rowOffset; row < rowOffset + numRowsToDraw; row ++) {
             if(row >= numRows) break;
@@ -231,8 +244,13 @@ public class TileMap {
         }
     }
 
-    public void setInitPosition(int i, int i1) {
+    /**
+     * Initialisation de la position de la map (En vue de la grandeur de la map, il fallait calibrer l'affichage sur la zone de jeu utilisée)
+     * @param i La valeur du positionnement horizontal x
+     * @param j La valeur de positionnement vertical y
+     */
+    public void setInitPosition(int i, int j) {
         this.x = i;
-        this.y = i1;
+        this.y = j;
     }
 }

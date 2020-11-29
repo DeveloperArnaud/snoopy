@@ -10,10 +10,13 @@ import java.util.ArrayList;
 
 public class Bird extends Model {
 
+    //Image
     BufferedImage[] bufferedImages;
 
-    private ArrayList<int[]> setTiles;
-
+    /**
+     * Constructeur
+     * @param tm TileMap
+     */
     public Bird(TileMap tm) {
         super(tm);
 
@@ -25,21 +28,19 @@ public class Bird extends Model {
         bufferedImages = Content.BIRD[0];
         animation.setFrames(bufferedImages);
         animation.setDelay(10);
-        setTiles = new ArrayList<>();
     }
 
-    public void addSet(int [] i ) {
-        setTiles.add(i);
-    }
-
-    public ArrayList<int[]> getSetTiles() {
-        return setTiles;
-    }
-
+    /**
+     * Mettre à jour le sprite d'animation de l'oiseau
+     */
     public void update() {
         animation.update();
     }
 
+    /**
+     * Affichage de l'oiseau
+     * @param graphics2D Graphics2D
+     */
     public void draw(Graphics2D graphics2D) {
         super.draw(graphics2D);
     }

@@ -5,15 +5,20 @@ import com.ece.snoopy.States.*;
 
 import java.awt.*;
 
+/*
+    GESTION DES ETATS DE JEU
+ */
 public class GameStateManager {
 
 
-
+    // Modèle des etats de jeu
     private GameState[] gameStates;
 
+    // Etat de pause
     private boolean paused;
     private PauseState pauseState;
 
+    // Les états de jeu
     public static final int NUM_STATES = 8;
     public static final int INTRO = 0;
     public static final int MENU = 1;
@@ -24,9 +29,11 @@ public class GameStateManager {
     public static final int LEVEL2 = 6;
     public static final int LEVEL3 = 7;
 
+    //Score des niveaux
     private int scoreLvl1;
     private int scoreLvl2;
 
+    // Niveau actuel et précent
     private int currentState;
     private int previousState;
 
@@ -34,20 +41,30 @@ public class GameStateManager {
      * Constructeur
      */
     public GameStateManager() {
+        //Initialise l'etat des niveaux
         scoreLvl1 = 0;
         scoreLvl2 = 0;
-        // Initialisation du son
+        // Initialise le son
         SoundFX.init();
         paused = false;
         pauseState = new PauseState(this);
         gameStates = new GameState[NUM_STATES];
+        // On initialise l'état de départ par l'introduction
         setState(INTRO);
     }
 
+    /**
+     *
+     * @param s Le score du niveau 1
+     */
     public void setScoreLvl1(int s) {
         this.scoreLvl1 = s;
     }
 
+    /**
+     * Récupérer le score du niveau 1
+     * @return int
+     */
     public int getScoreLvl1() {
         return scoreLvl1;
     }
@@ -61,12 +78,11 @@ public class GameStateManager {
     }
 
     /**
-     *
-     * @param i
+     *  Modifier l'etat du jeu
+     * @param i Récuperer le numéro d'etat du jeu
      */
     public void setState(int i) {
         previousState = currentState;
-        //stateToNull(previousState);
         currentState = i;
 
         if(i == INTRO) {
@@ -107,12 +123,8 @@ public class GameStateManager {
         return gameStates[previousState];
     }
 
-    public void stateToNull(int previousState) {
-        gameStates[previousState] = null;
-    }
-
     /**
-     *
+     *  Permettre de mettre à jour l'etat entre chaque niveau
      */
     public void update() {
         if(paused) {
@@ -123,16 +135,25 @@ public class GameStateManager {
         }
     }
 
+    /**
+     * Modifier l'etat de Pause
+     * @param b Valeur de pause (true : en pause)
+     */
     public void setPaused(boolean b) {
         paused = b;
     }
 
+    /**
+     * Récuperer l'etat de pause (permet de gérer le son dans le menu pause)
+     * @return true en pause
+     */
     public boolean getPaused() {
         return paused;
     }
+
     /**
-     * Affichage des états
-     * @param g
+     * Affichage graphique de chaque état
+     * @param g Graphics2D
      */
     public void draw(Graphics2D g) {
         if(paused) {

@@ -9,15 +9,20 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Objet extends Model{
+
+    //Types d'objets
     public static int ROCK = 0;
     public static int TRAP = 2;
-
     private int type;
 
+    //Image
     BufferedImage[] bufferedImages;
 
-    private ArrayList<int[]> setTiles;
-
+    /**
+     * Constructeur
+     * @param tm TileMap
+     * @param type int
+     */
     public Objet(TileMap tm, int type) {
         super(tm);
         this.type = type;
@@ -26,28 +31,25 @@ public class Objet extends Model{
         cwidth = 12;
         cheight = 12;
 
-        moveSpeed = 16;
         if (type == ROCK)
             bufferedImages = Content.ROCK[0];
         if (type == TRAP)
             bufferedImages = Content.SPEED[0];
         animation.setFrames(bufferedImages);
         animation.setDelay(10);
-        setTiles = new ArrayList<>();
     }
 
-    public void addSet(int [] i ) {
-        setTiles.add(i);
-    }
-
-    public ArrayList<int[]> getSetTiles() {
-        return setTiles;
-    }
-
+    /**
+     * Mettre à jour l'animation des objets
+     */
     public void update() {
         animation.update();
     }
 
+    /**
+     * Affichage de l'objet
+     * @param graphics2D Graphics2D
+     */
     public void draw(Graphics2D graphics2D) {
         super.draw(graphics2D);
     }
@@ -56,6 +58,12 @@ public class Objet extends Model{
         return type;
     }
 
+    /**
+     * Pousser un objet par la gauche (direction du personnage)
+     * @param objets
+     * @param birds
+     * @return
+     */
     public boolean goLeft(ArrayList<Objet> objets, ArrayList<Bird> birds) {
         int col = x / tileSize;
         int row = y / tileSize;
@@ -79,6 +87,12 @@ public class Objet extends Model{
         return true;
     }
 
+    /**
+     * Pousser un objet par la droite (direction du personnage)
+     * @param objets Liste d'objets
+     * @param birds Liste d'oiseaux
+     * @return
+     */
     public boolean goRight(ArrayList<Objet> objets, ArrayList<Bird> birds) {
         int col = x / tileSize;
         int row = y / tileSize;
@@ -102,6 +116,12 @@ public class Objet extends Model{
         return true;
     }
 
+    /**
+     * Pousser un objet par le haut (direction du personnage)
+     * @param objets
+     * @param birds
+     * @return
+     */
     public boolean goUp(ArrayList<Objet> objets, ArrayList<Bird> birds) {
         int col = x / tileSize;
         int row = y / tileSize;
@@ -125,6 +145,12 @@ public class Objet extends Model{
         return true;
     }
 
+    /**
+     * Pousser un objet par le bas (direction du personnage)
+     * @param objets
+     * @param birds
+     * @return
+     */
     public boolean goDown(ArrayList<Objet> objets, ArrayList<Bird> birds) {
         int col = x / tileSize;
         int row = y / tileSize;

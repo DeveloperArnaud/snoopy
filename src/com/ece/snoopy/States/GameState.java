@@ -4,44 +4,41 @@ import com.ece.snoopy.Controller.GameStateManager;
 
 import java.awt.*;
 
-/**
- * This abstract class
- * (interface could be used too but it needs an constructor to manage the state of each display) will
- * implements the basics functions
- * that each classes
- * could use without
- * needing to recode them such as init, update, draw and handleInput.
+/*
+ * Cette classe abstraite
+ * (Une interface aurait pu être utilisée aussi mais nous avons optés pour une classe abstraite pour le refactoring)
+ * implementera les fonctions principales qui seront réutilisés pour les différents ecrans/niveaux.
  */
 
 public abstract class GameState {
 
     protected GameStateManager gameStateManager;
     /**
-     *
-     * @param gameStateManager
+     * Constructeur
+     * @param gameStateManager GameStateManager
      */
     public GameState(GameStateManager gameStateManager) {
         this.gameStateManager = gameStateManager;
     }
 
     /**
-     * Function to initialize the state
+     * Initialise l'etat des states
      */
     public abstract void init();
 
     /**
-     * Function to update the state
+     * Mettre à jour l'état des states
      */
     public abstract void update();
 
     /**
-     * Function to draw on the Frame
-     * @param graphics2D
+     * Affichage de l'etat
+     * @param graphics2D Graphics2D
      */
     public abstract void draw(Graphics2D graphics2D);
 
     /**
-     * Function to get user inputs
+     * Intercepter les entrées utilisateurs
      */
     public abstract void handleInput();
 }

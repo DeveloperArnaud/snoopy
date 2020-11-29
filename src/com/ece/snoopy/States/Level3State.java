@@ -16,20 +16,21 @@ import java.util.ArrayList;
 
 import static com.ece.snoopy.Controller.SavingState.saveState;
 
+/*
+    NIVEAU 3
+
+ */
 public class Level3State extends GameState{
-    /**
-     * Player
-     */
+
+    //Composants du niveau 3
     private Player player;
     private TileMap tileMap;
     private UI ui;
     private Ball ball;
-
     private ArrayList<Bird> birds;
-
     private ArrayList<Objet> objets;
 
-
+    //Gestion des évènements et des entrées
     private boolean blockInput;
     private int eventTick;
     private ArrayList<Rectangle> boxes;
@@ -38,7 +39,8 @@ public class Level3State extends GameState{
 
 
     /**
-     * @param gameStateManager
+     * Constructeur
+     * @param gameStateManager GameStateManager
      */
     public Level3State(GameStateManager gameStateManager) {
         super(gameStateManager);
@@ -46,14 +48,13 @@ public class Level3State extends GameState{
 
     @Override
     public void init() {
-
         birds = new ArrayList<>();
         objets = new ArrayList<>();
         tileMap = new TileMap(16);
         tileMap.loadTiles("/Tilesets/testtileset.gif");
         tileMap.loadMap("/Maps/level3.map");
         player = new Player(tileMap);
-        ui = new UI(player, birds);
+        ui = new UI(player);
         ball = new Ball(tileMap);
 
         generateBirds();
@@ -71,15 +72,12 @@ public class Level3State extends GameState{
 
 
 
-        boxes = new ArrayList<Rectangle>();
+        boxes = new ArrayList<>();
         eventGo = true;
         eventGo();
 
     }
 
-    /**
-     * Updating components
-     */
     @Override
     public void update() {
         handleInput();
@@ -95,17 +93,15 @@ public class Level3State extends GameState{
         if(player.getNbBirds() == 4) {
             eventFinish = blockInput = true;
         }
-        // getting tick player when 1min game
+
         if(player.getTicks() == 1800) {
             player.losingLife();
         }
 
-        // getting tick player when 2min game
         if(player.getTicks() == (1800 * 2)) {
             player.losingLife();
         }
 
-        // getting tick player when 3min game
         if(player.getTicks() == (1800 * 3)) {
             player.losingLife();
         }
@@ -133,9 +129,6 @@ public class Level3State extends GameState{
 
     }
 
-    /**
-     * Start screen effect (black rectangles)
-     */
     private void eventGo() {
         eventTick++;
         if(eventTick == 1) {
@@ -162,10 +155,6 @@ public class Level3State extends GameState{
         }
     }
 
-
-    /**
-     * End screen effect (black rectangles)
-     */
     private void eventFinish() {
         eventTick++;
         if(eventTick == 1) {
@@ -193,9 +182,6 @@ public class Level3State extends GameState{
         }
     }
 
-    /**
-     * Generating birds on the map (need to be modified)
-     */
     private void generateBirds() {
         Bird bird;
         Bird bird1;

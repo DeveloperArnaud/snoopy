@@ -3,25 +3,34 @@ package com.ece.snoopy.States;
 import com.ece.snoopy.Controller.Inputs;
 import com.ece.snoopy.Main.GamePanel;
 import com.ece.snoopy.Controller.GameStateManager;
-import com.ece.snoopy.SoundFX.SoundFX;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/*
+    INTRODUCTION DU JEU (Effet graphique)
+ */
 public class IntroState extends GameState{
 
+    //Image et gestion d'effets
     private BufferedImage background;
     private int alpha;
     private int ticks;
 
     //Durée du fondu entrant
     private final int FADE_IN = 60;
-    // Durée de l'intro
+
+    //Durée de l'intro
     private final int LENGTH = 60;
-    // Durée du fondu sortant
+
+    //Durée du fondu sortant
     private final int FADE_OUT = 60;
 
+    /**
+     * Constructeur
+     * @param gameStateManager GameStateManager
+     */
     public IntroState(GameStateManager gameStateManager) {
         super(gameStateManager);
     }
@@ -30,13 +39,16 @@ public class IntroState extends GameState{
     public void init() {
         ticks = 0;
         try {
-            background = ImageIO.read(getClass().getResourceAsStream("/Intro/nintendo.jpg"));
+            background = ImageIO.read(getClass().getResourceAsStream("/Intro/intro.jpg"));
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Mettre à jour les effets
+     */
     @Override
     public void update() {
         handleInput();
@@ -57,7 +69,10 @@ public class IntroState extends GameState{
     }
 
 
-
+    /**
+     * Affichage de l'introduction
+     * @param graphics2D Graphics2D
+     */
     @Override
     public void draw(Graphics2D graphics2D) {
         graphics2D.setColor(Color.WHITE);
@@ -67,6 +82,9 @@ public class IntroState extends GameState{
         graphics2D.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT2);
     }
 
+    /**
+     * Intercepter les entrées
+     */
     @Override
     public void handleInput() {
         if(Inputs.isPressed(Inputs.ENTER)) {

@@ -71,7 +71,7 @@ public class SavedGameState extends GameState{
         birds = new ArrayList<>();
         tileMap.loadTiles("/Tilesets/testtileset.gif");
         tileMap = loadMap("C:/Users/arnau/testBirds.txt");
-        //tileMap.loadMap("/Maps/testmap.map");
+        //tileMap.loadMap("/Maps/templateMap.map");
         player = new Player(tileMap);
         ui = new UI(player, birds);
         ball = new Ball(tileMap);
@@ -98,9 +98,6 @@ public class SavedGameState extends GameState{
 
     }
 
-    /**
-     * Updating components
-     */
     @Override
     public void update() {
         handleInput();
@@ -116,12 +113,6 @@ public class SavedGameState extends GameState{
             eventFinish = blockInput = true;
             gameStateManager.setState(GameStateManager.LEVEL1);
         }
-        /**
-        if(player.getLife() == -100) {
-            eventFinish = blockInput = true;
-            gameStateManager.setState(GameStateManager.MENU);
-        }
-         */
 
         int ox = xsector;
         int oy = ysector;
@@ -130,9 +121,6 @@ public class SavedGameState extends GameState{
 
         tileMap.setPosition(-xsector * sectorSize, -ysector * sectorSize);
         tileMap.update();
-
-
-        if(tileMap.isMoving()) return;
 
         player.update();
 
@@ -155,9 +143,7 @@ public class SavedGameState extends GameState{
 
     }
 
-    /**
-     * Managing the end of the party, rectangle effect will make appear the start game screen
-     */
+
     private void eventGo() {
         eventTick++;
         if(eventTick == 1) {
@@ -185,9 +171,7 @@ public class SavedGameState extends GameState{
     }
 
 
-    /**
-     * Managing the end of the party, rectangle effect will make appear the end screen
-     */
+
     private void eventFinish() {
         eventTick++;
         if(eventTick == 1) {
@@ -216,9 +200,7 @@ public class SavedGameState extends GameState{
         }
     }
 
-    /**
-     * Generating birds on the map (need to be modified)
-     */
+
     private void generateBirds() {
         Bird bird;
         Bird bird1;

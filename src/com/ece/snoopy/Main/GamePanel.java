@@ -1,13 +1,6 @@
 package com.ece.snoopy.Main;
-
-// The GamePanel is the drawing canvas.
-// It contains the game loop which
-// keeps the game moving forward.
-// This class is also the one that grabs key events.
-
 import com.ece.snoopy.Controller.GameStateManager;
 import com.ece.snoopy.Controller.Inputs;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -16,27 +9,27 @@ import java.awt.image.BufferedImage;
 
 public class GamePanel extends JPanel implements Runnable, KeyListener {
 
-    //Dimensions of the game
+    //Dimension de la fênetre de jeu
     public static final int WIDTH = 160;
     public static final int HEIGHT = 144;
     public static final int HEIGHT2 = HEIGHT + 16;
     public static final int SCALE = 3;
 
-    //Game loop
+    //Gestion des perfomances du Thread (visionnage des ressources consommées par l'ordinateur)
     private Thread thread;
     private boolean isRunning;
     private final int fps = 30;
     private final int TARGET_TIME = 1000 / fps;
 
-    //Drawing
+    //Palette graphique
     private BufferedImage image;
     private Graphics2D graphics2D;
 
-    //Game State Manager
+    //Gestion des états de jeu
     private GameStateManager gameStateManager;
 
     /**
-     * Constructor
+     * Constructeur
      */
     public GamePanel() {
         setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT2 * SCALE));
@@ -44,14 +37,28 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         requestFocus();
     }
 
+    /**
+     * Initialisation de la fênetre de jeu
+     */
+    private void init() {
+        isRunning = true;
+        image = new BufferedImage(WIDTH, HEIGHT2,  1 );
+        graphics2D = (Graphics2D) image.getGraphics();
+        gameStateManager = new GameStateManager();
+    }
+
+    /**
+     * Not used function
+     * @param e KeyEvent
+     */
     @Override
     public void keyTyped(KeyEvent e) {
 
     }
 
     /**
-     * Getting the key pressed through the states
-     * @param e
+     * Récuperer la touche appuyée par l'utilisateur
+     * @param e KeyEvent
      */
     @Override
     public void keyPressed(KeyEvent e) {
@@ -59,8 +66,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     }
 
     /**
-     *  Avoiding the propagation key through the states
-     * @param e
+     *  Empêcher la progagation d'une touche à travers le jeu
+     * @param e KeyEvent
      */
     @Override
     public void keyReleased(KeyEvent e) {
@@ -68,7 +75,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     }
 
     /**
-     *  Managing the game loop (perfomances)
+     * Notification du système de gestion des perfomances
      */
     public void addNotify() {
         super.addNotify();
@@ -80,18 +87,16 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     }
 
     /**
-     * Game loop
+     * Lancement du système de gestion des perfomances
      */
     @Override
     public void run() {
-
         init();
 
         long start;
         long elapsed;
         long wait;
 
-        // game loop
         while(isRunning) {
 
             start = System.nanoTime();
@@ -116,27 +121,25 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
     }
 
+    /**
+     * Mettre à jour les états de jeu et les entrées utilisateurs afin de pas faire bugger le jeu
+     */
     public void update() {
         gameStateManager.update();
         Inputs.update();
     }
 
-    private void init() {
-        isRunning = true;
-        image = new BufferedImage(WIDTH, HEIGHT2,  1 );
-        graphics2D = (Graphics2D) image.getGraphics();
-        gameStateManager = new GameStateManager();
-    }
+
 
     /**
-     * Draw the states
+     * Affichage des états
      */
     private void draw() {
         gameStateManager.draw(graphics2D);
     }
 
     /**
-     *  Display the game
+     *  Affichage du jeu sur l'ecran
      */
     private void drawToScreen() {
         Graphics g2 = getGraphics();
