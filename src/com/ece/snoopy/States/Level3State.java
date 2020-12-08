@@ -59,7 +59,7 @@ public class Level3State extends GameState{
         generateObjets();
 
         player.setTilePosition(20, 20);
-        //ball.setTilePosition(20,20);
+        ball.setTilePosition(20,23);
         tileMap.setInitPosition(-256, -256);
 
         SoundFX.loadSound("/SFX/snoopyStage3.wav", "snoopyStage3");
@@ -87,6 +87,7 @@ public class Level3State extends GameState{
         tileMap.update();
 
         player.update();
+        ball.update();
 
         if(player.getNbBirds() == 4) {
             eventFinish = blockInput = true;
@@ -256,9 +257,6 @@ public class Level3State extends GameState{
 
     @Override
     public void draw(Graphics2D graphics2D) {
-
-
-
         tileMap.draw(graphics2D);
 
         if(player.getTicks() < 90) {
@@ -266,7 +264,7 @@ public class Level3State extends GameState{
         }
 
         player.draw(graphics2D);
-        //ball.draw(graphics2D);
+        ball.draw(graphics2D);
 
 
 
