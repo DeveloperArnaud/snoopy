@@ -19,7 +19,7 @@ public class GameStateManager {
     private PauseState pauseState;
 
     // Les états de jeu
-    public static final int NUM_STATES = 9;
+    public static final int NUM_STATES = 10;
     public static final int INTRO = 0;
     public static final int MENU = 1;
     public static final int LEVEL1 = 2;
@@ -28,6 +28,7 @@ public class GameStateManager {
     public static final int MDP = 5;
     public static final int LEVEL2 = 6;
     public static final int LEVEL3 = 7;
+    public static final int LEVEL4 = 9;
     public static final int GAMEOVER = 8;
 
     //Score des niveaux
@@ -121,6 +122,10 @@ public class GameStateManager {
         }
         else if(i == LEVEL3) {
             gameStates[i] = new Level3State(this);
+            gameStates[i].init();
+        }
+        else if(i == LEVEL4) {
+            gameStates[i] = new Level4State(this);
             gameStates[i].init();
         }
     }

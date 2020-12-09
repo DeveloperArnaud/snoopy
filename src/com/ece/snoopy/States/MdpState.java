@@ -110,6 +110,12 @@ public class MdpState extends GameState {
             SoundFX.stop("snoopyTitleScreen");
             gameStateManager.setState(GameStateManager.LEVEL3);
         }
+        if(l.equals("QUATRE")) {
+            gameStateManager.setScoreLvl1(0);
+            gameStateManager.setScoreLvl2(0);
+            SoundFX.stop("snoopyTitleScreen");
+            gameStateManager.setState(GameStateManager.LEVEL4);
+        }
         else {
             pwd = "";
         }

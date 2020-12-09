@@ -18,13 +18,14 @@ import java.util.ArrayList;
     NIVEAU 3
 
  */
-public class Level3State extends GameState{
+public class Level4State extends GameState{
 
-    //Composants du niveau 3
+    //Composants du niveau 4
     private Player player;
     private TileMap tileMap;
     private UI ui;
     private Ball ball;
+    private Ball ball2;
     private ArrayList<Bird> birds;
     private ArrayList<Objet> objets;
 
@@ -40,7 +41,7 @@ public class Level3State extends GameState{
      * Constructeur
      * @param gameStateManager GameStateManager
      */
-    public Level3State(GameStateManager gameStateManager) {
+    public Level4State(GameStateManager gameStateManager) {
         super(gameStateManager);
     }
 
@@ -54,12 +55,14 @@ public class Level3State extends GameState{
         player = new Player(tileMap);
         ui = new UI(player);
         ball = new Ball(tileMap);
+        ball2 = new Ball(tileMap);
 
         generateBirds();
         generateObjets();
 
         player.setTilePosition(20, 20);
         ball.setTilePosition(20,23);
+        ball2.setTilePosition(23,20);
         tileMap.setInitPosition(-256, -256);
 
         SoundFX.loadSound("/SFX/snoopyStage3.wav", "snoopyStage3");
@@ -85,6 +88,7 @@ public class Level3State extends GameState{
 
         player.update();
         ball.update();
+        ball2.update();
 
         if(player.getNbBirds() == 4) {
             eventFinish = blockInput = true;
@@ -273,6 +277,7 @@ public class Level3State extends GameState{
             graphics2D.fill(boxes.get(i));
         }
         ball.draw(graphics2D);
+        ball2.draw(graphics2D);
     }
 
     @Override
