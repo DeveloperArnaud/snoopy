@@ -4,7 +4,6 @@ import com.ece.snoopy.Controller.GameStateManager;
 import com.ece.snoopy.Controller.Inputs;
 import com.ece.snoopy.SoundFX.SoundFX;
 import java.awt.*;
-
 import static com.ece.snoopy.Controller.SavingState.saveState;
 
 
@@ -56,7 +55,7 @@ public class PauseState extends GameState {
         if(Inputs.isPressed(Inputs.S)) {
             SoundFX.stop("snoopyStage2");
             gameStateManager.setPaused(true);
-            GameState gameState = this.gameStateManager.getPreviousState();
+            GameState gameState = this.gameStateManager.getCurrentState();
             saveState(gameState);
         }
 
@@ -65,6 +64,16 @@ public class PauseState extends GameState {
             gameStateManager.setState(GameStateManager.MENU);
             SoundFX.stop("snoopyStage1");
         }
+    }
+
+    @Override
+    public String getPathMap() {
+        return null;
+    }
+
+    @Override
+    public String[] getPathSound() {
+        return null;
     }
 
 

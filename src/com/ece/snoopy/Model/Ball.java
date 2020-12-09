@@ -4,13 +4,14 @@ import com.ece.snoopy.Controller.Content;
 import com.ece.snoopy.Map.TileMap;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
 /*
     EN COURS DE DEVELOPPEMENT
  */
-public class Ball extends Model {
+public class Ball extends Model implements Serializable {
 
-    BufferedImage[] ballImage;
+    transient BufferedImage[] ballImage;
 
     /**
      * Constructeur

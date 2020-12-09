@@ -6,15 +6,16 @@ import com.ece.snoopy.SoundFX.SoundFX;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Player extends Model {
+public class Player extends Model implements Serializable {
 
     //Sprite de déplacement du personnage
-    private BufferedImage[] downSprites;
-    private BufferedImage[] leftSprites;
-    private BufferedImage[] rightSprites;
-    private BufferedImage[] upSprites;
+    private transient BufferedImage[] downSprites;
+    private transient BufferedImage[] leftSprites;
+    private transient BufferedImage[] rightSprites;
+    private transient BufferedImage[] upSprites;
 
     //Directions
     private final int DOWN = 0;
@@ -24,6 +25,8 @@ public class Player extends Model {
     private long ticks;
     private int nbBirds;
     private int life = 3;
+    private int time;
+    private int timeSaved;
 
     /**
      * Constructeur
@@ -35,7 +38,6 @@ public class Player extends Model {
         height = 16;
         cwidth = 12;
         cheight = 12;
-
         moveSpeed = 2;
 
         downSprites = Content.PLAYER[0];
@@ -86,6 +88,17 @@ public class Player extends Model {
         animation.setFrames(frame);
         animation.setDelay(delay);
 
+    }
+
+    public void setTimeSaved(int time) {
+        this.timeSaved = time;
+    }
+    public void setLife(int life) {
+        this.life = life;
+    }
+
+    public void setNbBirds(int nbBirds) {
+        this.nbBirds = nbBirds;
     }
 
     public void setLEFT() {
@@ -269,7 +282,14 @@ public class Player extends Model {
      * @return Le temps
      */
     public int getTime() {
-        int seconds = 60 - (int) ((this.getTicks() / 30) % 60);
-        return seconds;
+        time = 60 - (int) ((this.getTicks() / 30) % 60);
+        return time;
     }
+
+    public int getTimeSaved() {
+        time = timeSaved - (int) ((this.getTicks() / 30) % 60);
+        return time;
+    }
+
+
 }

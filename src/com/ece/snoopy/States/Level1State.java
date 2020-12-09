@@ -17,7 +17,7 @@ import java.util.ArrayList;
     NIVEAU 1
 
  */
-public class Level1State extends GameState{
+public class Level1State extends GameState {
 
     //Composants du niveau 1
     private Player player;
@@ -32,6 +32,10 @@ public class Level1State extends GameState{
     private ArrayList<Rectangle> boxes;
     private boolean eventGo;
     private boolean eventFinish;
+
+    //Position
+    private int positionXPlayer;
+    private int positionYPlayer;
 
 
     /**
@@ -49,7 +53,7 @@ public class Level1State extends GameState{
         tileMap.loadMap("/Maps/level1.map");
         player = new Player(tileMap);
         ui = new UI(player);
-        ball = new Ball(tileMap);
+        //ball = new Ball(tileMap);
 
         generateBirds();
 
@@ -118,7 +122,7 @@ public class Level1State extends GameState{
         tileMap.update();
 
         player.update();
-
+        System.out.println("X : " + this.getPositionXPlayer(player) + " Y : " + this.getPositionYPlayer(player));
         //Récupération des oiseaux
         for(int i = 0; i < birds.size(); i++) {
             Bird bird = birds.get(i);
@@ -134,9 +138,12 @@ public class Level1State extends GameState{
         }
 
         // Pas encore implémentée
+        /*
         if(player.intersects(ball)){
             player.losingLife();
         }
+        */
+
 
     }
 
@@ -202,7 +209,7 @@ public class Level1State extends GameState{
     /**
      * Générer les oiseaux (ici losange) sur la map
      */
-    private void generateBirds() {
+    public void generateBirds() {
         Bird bird;
         Bird bird1;
         Bird bird2;
@@ -233,8 +240,6 @@ public class Level1State extends GameState{
         tileMap.draw(graphics2D);
         player.draw(graphics2D);
         //ball.draw(graphics2D);
-
-        System.out.println(player.getTicks());
 
         if(player.getTicks() < 90) {
             graphics2D.drawString("Niveau 1", 60, 40);
@@ -274,6 +279,20 @@ public class Level1State extends GameState{
         if(Inputs.isDown(Inputs.DOWN)) player.setDOWN();
     }
 
+    @Override
+    public String getPathMap() {
+        return "/Maps/level1.map";
+    }
+
+    @Override
+    public String[] getPathSound() {
+        String[] sounds = {
+                "/SFX/snoopy-stage1.wav",
+                "/SFX/collect.wav"
+        };
+        return sounds;
+    }
+
     /**
      * @return player
      */
@@ -288,5 +307,7 @@ public class Level1State extends GameState{
     public ArrayList<Bird> getBirds(){
         return birds;
     }
+
+
 
 }

@@ -134,4 +134,14 @@ public class EndState extends GameState {
             }
         }
     }
+
+    @Override
+    public String getPathMap() {
+        return null;
+    }
+
+    @Override
+    public String[] getPathSound() {
+        return null;
+    }
 }

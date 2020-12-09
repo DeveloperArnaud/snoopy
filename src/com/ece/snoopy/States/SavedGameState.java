@@ -13,9 +13,7 @@ import com.ece.snoopy.UI.UI;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -30,10 +28,6 @@ public class SavedGameState extends GameState{
     private Ball ball;
 
     private ArrayList<Bird> birds;
-
-    private int xsector;
-    private int ysector;
-    private int sectorSize;
 
     private boolean blockInput;
     private int eventTick;
@@ -52,20 +46,51 @@ public class SavedGameState extends GameState{
 
     @Override
     public void init() {
-        String line = null;
-        String [] object = null;
+
+
+
         try(BufferedReader br = new BufferedReader(new FileReader("C:/Users/arnau/testBirds.txt"))) {
-
+            String line;
             while((line = br.readLine()) != null) {
-                object = line.split(",");
-                System.out.println(object[0]);
-            }
-            br.close();
+                birds = new ArrayList<>();
+                String [] vals = line.split(",");
+                String soundName;
 
+                tileMap = new TileMap(16);
+                tileMap.loadTiles("/Tilesets/testtileset.gif");
+                tileMap.loadMap(vals[5]);
+
+                player = new Player(tileMap);
+                player.setTimeSaved(Integer.parseInt(vals[1]));
+                player.setLife(Integer.parseInt(vals[2]));
+
+                ui = new UI(player);
+
+                generateBirds();
+
+                int positionX = Integer.parseInt(vals[3]) ;
+                int positionY = Integer.parseInt(vals[4]);
+                player.setTilePosition(positionY, positionX);
+                tileMap.setInitPosition(-256, -256);
+                soundName = vals[6].replace('[', ' ').replaceAll("\\s+","");
+                System.out.println(soundName);
+                SoundFX.loadSound(soundName, "snoopyStage1");
+                SoundFX.loadSound("/SFX/collect.wav", "collect");
+                SoundFX.setVolume("snoopyStage1", -25);
+                SoundFX.setVolume("collect", -25);
+                SoundFX.play("snoopyStage1");
+
+                boxes = new ArrayList<>();
+                eventGo = true;
+                eventGo();
+            }
+
+
+        } catch (NotSerializableException e) {
+            System.err.println(e.getLocalizedMessage());
         } catch (IOException e) {
             e.printStackTrace();
         }
-
 
         /*
         birds = new ArrayList<>();
@@ -114,12 +139,8 @@ public class SavedGameState extends GameState{
             gameStateManager.setState(GameStateManager.LEVEL1);
         }
 
-        int ox = xsector;
-        int oy = ysector;
-        xsector = player.getX() / sectorSize;
-        ysector = player.getY() / sectorSize;
 
-        tileMap.setPosition(-xsector * sectorSize, -ysector * sectorSize);
+        tileMap.setPosition(-256,-256);
         tileMap.update();
 
         player.update();
@@ -137,9 +158,26 @@ public class SavedGameState extends GameState{
             }
         }
 
+
+        /*
+        for(int i = 0; i < birds.size(); i++) {
+            Bird bird = birds.get(i);
+            bird.update();
+
+            if(player.intersects(bird)) {
+                birds.remove(i);
+                i--;
+
+                player.collectedBirds();
+                SoundFX.play("collect");
+            }
+        }
+
         if(player.intersects(ball)){
             player.losingLife();
         }
+
+         */
 
     }
 
@@ -210,11 +248,11 @@ public class SavedGameState extends GameState{
         bird = new Bird(tileMap);
         bird.setTilePosition(17,17);
         bird1 = new Bird(tileMap);
-        bird1.setTilePosition(22,17);
+        bird1.setTilePosition(24,17);
         bird2 = new Bird(tileMap);
-        bird2.setTilePosition(17,22);
+        bird2.setTilePosition(17,24);
         bird3 = new Bird(tileMap);
-        bird3.setTilePosition(22,22);
+        bird3.setTilePosition(24,24);
         birds.add(bird);
         birds.add(bird1);
         birds.add(bird2);
@@ -228,7 +266,7 @@ public class SavedGameState extends GameState{
     public void draw(Graphics2D graphics2D) {
         tileMap.draw(graphics2D);
         player.draw(graphics2D);
-        ball.draw(graphics2D);
+        //ball.draw(graphics2D);
 
 
 
@@ -237,7 +275,8 @@ public class SavedGameState extends GameState{
             bird.draw(graphics2D);
         }
 
-        ui.draw(graphics2D);
+
+        ui.drawSavedUI(graphics2D);
 
         graphics2D.setColor(Color.BLACK);
         for(int i = 0; i < boxes.size(); i++) {
@@ -262,5 +301,15 @@ public class SavedGameState extends GameState{
         if(Inputs.isDown(Inputs.RIGHT)) player.setRIGHT();
         if(Inputs.isDown(Inputs.UP)) player.setUP();
         if(Inputs.isDown(Inputs.DOWN)) player.setDOWN();
+    }
+
+    @Override
+    public String getPathMap() {
+        return null;
+    }
+
+    @Override
+    public String[] getPathSound() {
+        return new String[0];
     }
 }

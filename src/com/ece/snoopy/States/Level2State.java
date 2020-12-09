@@ -289,6 +289,16 @@ public class Level2State extends GameState{
         if(Inputs.isPressed(Inputs.SPACE)) player.setAction();
     }
 
+    @Override
+    public String getPathMap() {
+        return "Maps/level2.map";
+    }
+
+    @Override
+    public String[] getPathSound() {
+        return new String[0];
+    }
+
     public Player getPlayer() {
         return player;
     }

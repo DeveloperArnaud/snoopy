@@ -14,7 +14,7 @@ import java.awt.image.BufferedImage;
 public class IntroState extends GameState{
 
     //Image et gestion d'effets
-    private BufferedImage background;
+    private transient BufferedImage background;
     private int alpha;
     private int ticks;
 
@@ -90,5 +90,15 @@ public class IntroState extends GameState{
         if(Inputs.isPressed(Inputs.ENTER)) {
             gameStateManager.setState(GameStateManager.MENU);
         }
+    }
+
+    @Override
+    public String getPathMap() {
+        return null;
+    }
+
+    @Override
+    public String[] getPathSound() {
+        return new String[0];
     }
 }

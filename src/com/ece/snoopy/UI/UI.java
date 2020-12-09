@@ -2,9 +2,10 @@ package com.ece.snoopy.UI;
 import com.ece.snoopy.Model.Player;
 
 import java.awt.*;
+import java.io.Serializable;
 
 
-public class UI {
+public class UI implements Serializable {
 
     private Player player;
 
@@ -26,6 +27,12 @@ public class UI {
         graphics2D.drawString( ""+seconds, 80, 10);
         graphics2D.drawString("Vie : " + player.getLife(), 5, 10);
 
+    }
+
+    public void drawSavedUI(Graphics2D graphics2D) {
+        int seconds = player.getTimeSaved();
+        graphics2D.drawString( ""+seconds, 80, 10);
+        graphics2D.drawString("Vie : " + player.getLife(), 5, 10);
     }
 
 }

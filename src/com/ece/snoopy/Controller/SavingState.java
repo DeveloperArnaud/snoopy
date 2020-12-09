@@ -7,7 +7,7 @@ import com.ece.snoopy.States.Level1State;
 
 import javax.swing.*;
 import java.io.*;
-
+import java.util.Arrays;
 
 
 /*
@@ -23,17 +23,19 @@ public class SavingState {
             Level1State level1State = (Level1State) gameState;
         if (retrival == JFileChooser.APPROVE_OPTION) {
             try {
+                ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(chooser.getSelectedFile()+".txt"));
+                os.writeObject(level1State);
+                os.close();
+
+                /*
                 FileWriter fw = new FileWriter(chooser.getSelectedFile() + ".txt");
                 BufferedWriter out = new BufferedWriter(fw);
-                out.write(level1State.getPlayer().getNbBirds() + "," + level1State.getPlayer().getTime() + "," + level1State.getPlayer().getLife() + ",");
-                for (int i = 0; i < level1State.getTileMap().getNumRows(); i++) {
-                    for (int j = 0; j < level1State.getTileMap().getNumCols(); j++) {
-                        //out.write(getTileID(tileMap, i, j));
-                        out.write(String.valueOf(level1State.getTileMap().getIndex(i, j)));
-                    }
-                }
+                out.write(level1State.getPlayer().getNbBirds() + "," + level1State.getPlayer().getTime() + "," + level1State.getPlayer().getLife() + "," + level1State.getPositionXPlayer(level1State.getPlayer()) + "," + level1State.getPositionYPlayer(level1State.getPlayer()) + "," + level1State.getPathMap() + "," + Arrays.toString(level1State.getPathSound()));
                 out.close();
                 fw.close();
+                */
+            } catch (NotSerializableException e) {
+                e.printStackTrace();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

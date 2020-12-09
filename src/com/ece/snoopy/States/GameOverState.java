@@ -67,4 +67,14 @@ public class GameOverState extends GameState {
             }
         }
     }
+
+    @Override
+    public String getPathMap() {
+        return null;
+    }
+
+    @Override
+    public String[] getPathSound() {
+        return new String[0];
+    }
 }

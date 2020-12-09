@@ -4,8 +4,9 @@ import com.ece.snoopy.Map.Tile;
 import com.ece.snoopy.Map.TileMap;
 
 import java.awt.*;
+import java.io.Serializable;
 
-public abstract class Model {
+public abstract class Model{
 
     //Mouvements
     protected TileMap tileMap;
@@ -186,6 +187,14 @@ public abstract class Model {
         if(down && y > ydest) y = ydest;
 
 
+    }
+
+    public int getXdest(){
+        return xdest;
+    }
+
+    public int getYdest(){
+        return ydest;
     }
 
     public int getX() {

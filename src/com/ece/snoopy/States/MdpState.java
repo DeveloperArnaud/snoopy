@@ -87,6 +87,16 @@ public class MdpState extends GameState {
         }
     }
 
+    @Override
+    public String getPathMap() {
+        return null;
+    }
+
+    @Override
+    public String[] getPathSound() {
+        return new String[0];
+    }
+
     /**
      * Choix d'un niveau selon le code entré
      * @param l Code saisi par l'utilisateur
