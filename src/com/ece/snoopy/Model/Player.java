@@ -24,6 +24,7 @@ public class Player extends Model {
     private long ticks;
     private int nbBirds;
     private int life = 3;
+    private int invincibility;
 
     /**
      * Constructeur
@@ -35,7 +36,7 @@ public class Player extends Model {
         height = 16;
         cwidth = 12;
         cheight = 12;
-
+        invincibility = 100;
         moveSpeed = 2;
 
         downSprites = Content.PLAYER[0];
@@ -55,7 +56,8 @@ public class Player extends Model {
      */
     public void update() {
         ticks++;
-
+        if (invincibility > 0)
+            invincibility--;
         if(down) {
             if(currentAnimation != DOWN) {
                 setAnimation(DOWN, downSprites, 10);
@@ -231,7 +233,9 @@ public class Player extends Model {
      * @param g Graphics2D
      */
     public void draw(Graphics2D g) {
-        super.draw(g);
+        if (ticks < 100 || invincibility % 2 == 0) {
+            super.draw(g);
+        }
     }
 
     /**
@@ -253,6 +257,9 @@ public class Player extends Model {
      * Faire perdre une vie au personnage
      */
     public void losingLife() {
+        if (invincibility > 0)
+            return;
+        invincibility = 30;
         this.life = this.life - 1;
     }
 
