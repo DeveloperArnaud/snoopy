@@ -35,6 +35,8 @@ public class GameStateManager {
     //Score des niveaux
     private int scoreLvl1;
     private int scoreLvl2;
+    private int scoreLvl3;
+    private int scoreLvl4;
 
     // Niveau actuel et précent
     private int currentState;
@@ -47,6 +49,8 @@ public class GameStateManager {
         //Initialise l'etat des niveaux
         scoreLvl1 = 0;
         scoreLvl2 = 0;
+        scoreLvl3 = 0;
+        scoreLvl4 = 0;
         // Initialise le son
         SoundFX.init();
         paused = false;
@@ -78,6 +82,22 @@ public class GameStateManager {
 
     public int getScoreLvl2() {
         return this.scoreLvl2;
+    }
+
+    public void setScoreLvl3(int s) {
+        this.scoreLvl3 = s;
+    }
+
+    public int getScoreLvl3() {
+        return this.scoreLvl3;
+    }
+
+    public void setScoreLvl4(int s) {
+        this.scoreLvl4 = s;
+    }
+
+    public int getScoreLvl4() {
+        return this.scoreLvl4;
     }
 
     /**

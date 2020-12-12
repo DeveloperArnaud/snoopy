@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class Level5State extends GameState {
 
-    //Composants du niveau 4
+    //Composants du niveau 5
     private Player player;
     private TileMap tileMap;
     private UI ui;
@@ -61,11 +61,11 @@ public class Level5State extends GameState {
         mechant.setTilePosition(20,21);
         tileMap.setInitPosition(-256, -256);
 
-        SoundFX.loadSound("/SFX/snoopyStage3.wav", "snoopyStage3");
+        SoundFX.loadSound("/SFX/snoopyStage5.wav", "snoopyStage5");
         SoundFX.loadSound("/SFX/collect.wav", "collect");
-        SoundFX.setVolume("snoopyStage3", -25);
+        SoundFX.setVolume("snoopyStage5", -25);
         SoundFX.setVolume("collect", -25);
-        SoundFX.play("snoopyStage3");
+        SoundFX.play("snoopyStage5");
 
         boxes = new ArrayList<>();
         eventGo = true;
@@ -108,7 +108,7 @@ public class Level5State extends GameState {
             gameStateManager.setState(GameStateManager.GAMEOVER);
         }
         if(player.getLife() == 0 ) {
-            SoundFX.stop("snoopyStage3");
+            SoundFX.stop("snoopyStage5");
             gameStateManager.setState(GameStateManager.GAMEOVER);
         }
 
@@ -260,7 +260,7 @@ public class Level5State extends GameState {
         tileMap.draw(graphics2D);
 
         if(player.getTicks() < 90) {
-            graphics2D.drawString("Niveau 3", 60, 40);
+            graphics2D.drawString("Niveau 5", 60, 40);
         }
 
         mechant.draw(graphics2D);
@@ -287,11 +287,11 @@ public class Level5State extends GameState {
     public void handleInput() {
 
         if(Inputs.isPressed(Inputs.ESCAPE)){
-            SoundFX.stop("snoopyStage3");
+            SoundFX.stop("snoopyStage5");
             gameStateManager.setPaused(true);
         }
         if(!gameStateManager.getPaused()) {
-            SoundFX.resumeLoop("snoopyStage3");
+            SoundFX.resumeLoop("snoopyStage5");
         }
 
         if(blockInput) return;

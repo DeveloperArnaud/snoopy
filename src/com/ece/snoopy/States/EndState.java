@@ -92,6 +92,7 @@ public class EndState extends GameState {
             int scoreFinalLv3 = seconds * 100;
             graphics2D.drawString( ""+seconds, 95, 36);
             graphics2D.drawString( "Score niveau : " + scoreFinalLv3, 25, 56);
+            gameStateManager.setScoreLvl3(scoreFinalLv3);
             if(gameStateManager.getScoreLvl1() > 0 || gameStateManager.getScoreLvl2() > 0) {
                 scoreFinalLv3 = (gameStateManager.getScoreLvl1() + gameStateManager.getScoreLvl2()) + scoreFinalLv3;
                 graphics2D.drawString( "Score total : " + scoreFinalLv3, 25, 76);
@@ -104,8 +105,42 @@ public class EndState extends GameState {
             Graphics2D g = (Graphics2D) graphics2D;
             g.setColor(Color.RED);
             g.drawString("CODE NIVEAU 3 : TROIS",25,150);
+        } else if(prev instanceof Level4State) {
+            Level4State lv4 = (Level4State) prev;
+            player = lv4.getPlayer();
+            int seconds = player.getTime();
+            int scoreFinalLv4 = seconds * 100;
+            graphics2D.drawString( ""+seconds, 95, 36);
+            graphics2D.drawString( "Score niveau : " + scoreFinalLv4, 25, 56);
+            gameStateManager.setScoreLvl4(scoreFinalLv4);
+            if(gameStateManager.getScoreLvl1() > 0 || gameStateManager.getScoreLvl2() > 0 ||gameStateManager.getScoreLvl3() > 0) {
+                scoreFinalLv4 = (gameStateManager.getScoreLvl1() + gameStateManager.getScoreLvl2() + gameStateManager.getScoreLvl3()) + scoreFinalLv4;
+                graphics2D.drawString( "Score total : " + scoreFinalLv4, 25, 76);
+            } else {
+                graphics2D.drawString( "Score total : " + scoreFinalLv4, 25, 76);
+            }
+            graphics2D.drawString( "Niveau  4 terminé !", 25, 90);
+            Graphics2D g = (Graphics2D) graphics2D;
+            g.setColor(Color.RED);
+            g.drawString("CODE NIVEAU 4 : QUATRE",25,150);
+        } else if(prev instanceof Level5State) {
+            Level5State lv5 = (Level5State) prev;
+            player = lv5.getPlayer();
+            int seconds = player.getTime();
+            int scoreFinalLv5 = seconds * 100;
+            graphics2D.drawString( ""+seconds, 95, 36);
+            graphics2D.drawString( "Score niveau : " + scoreFinalLv5, 25, 56);
+            if (gameStateManager.getScoreLvl1() > 0 || gameStateManager.getScoreLvl2() > 0 || gameStateManager.getScoreLvl3() > 0 || gameStateManager.getScoreLvl4() > 0) {
+                scoreFinalLv5 = (gameStateManager.getScoreLvl1() + gameStateManager.getScoreLvl2() + gameStateManager.getScoreLvl3() + gameStateManager.getScoreLvl4()) + scoreFinalLv5;
+                graphics2D.drawString( "Score total : " + scoreFinalLv5, 25, 76);
+            } else {
+                graphics2D.drawString( "Score total : " + scoreFinalLv5, 25, 76);
+            }
+            graphics2D.drawString( "Niveau  5 terminé !", 25, 90);
+            Graphics2D g = (Graphics2D) graphics2D;
+            g.setColor(Color.RED);
+            g.drawString("CODE NIVEAU 5 : CINQ",25,150);
         }
-
         graphics2D.setColor(Color.BLACK);
         graphics2D.drawString( "ENTRER: CONTINUER", 25, 110);
         graphics2D.drawString( "ECHAP: MENU PRINCIPAL", 25, 130);
@@ -127,8 +162,18 @@ public class EndState extends GameState {
                 gameStateManager.setState(GameStateManager.LEVEL2);
                 SoundFX.stop("snoopyStage1");
             }
-            else {
+            else if (gameStateManager.getPreviousState() instanceof Level2State) {
                 gameStateManager.setState(GameStateManager.LEVEL3);
+                SoundFX.stop("snoopyStage1");
+                SoundFX.stop("snoopyStage2");
+            }
+            else if (gameStateManager.getPreviousState() instanceof Level3State) {
+                gameStateManager.setState(GameStateManager.LEVEL4);
+                SoundFX.stop("snoopyStage1");
+                SoundFX.stop("snoopyStage2");
+            }
+            else {
+                gameStateManager.setState(GameStateManager.LEVEL5);
                 SoundFX.stop("snoopyStage1");
                 SoundFX.stop("snoopyStage2");
             }

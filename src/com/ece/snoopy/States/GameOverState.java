@@ -10,8 +10,7 @@ import java.awt.*;
 public class GameOverState extends GameState {
 
     private Color color;
-
-
+    
     /**
      * Constructeur
      * @param gameStateManager GameStateManager
@@ -61,8 +60,16 @@ public class GameOverState extends GameState {
                 gameStateManager.setState(GameStateManager.LEVEL2);
                 SoundFX.resumeLoop("snoopyStage2");
             }
-            else {
+            else if(gameStateManager.getPreviousState() instanceof Level3State) {
                 gameStateManager.setState(GameStateManager.LEVEL3);
+                SoundFX.resumeLoop("snoopyStage2");
+            }
+            else if(gameStateManager.getPreviousState() instanceof Level4State) {
+                gameStateManager.setState(GameStateManager.LEVEL4);
+                SoundFX.resumeLoop("snoopyStage2");
+            }
+            else {
+                gameStateManager.setState(GameStateManager.LEVEL5);
                 SoundFX.resumeLoop("snoopyStage3");
             }
         }

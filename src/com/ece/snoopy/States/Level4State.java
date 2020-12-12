@@ -65,11 +65,11 @@ public class Level4State extends GameState{
         ball2.setTilePosition(23,20);
         tileMap.setInitPosition(-256, -256);
 
-        SoundFX.loadSound("/SFX/snoopyStage3.wav", "snoopyStage3");
+        SoundFX.loadSound("/SFX/snoopyStage4.wav", "snoopyStage4");
         SoundFX.loadSound("/SFX/collect.wav", "collect");
-        SoundFX.setVolume("snoopyStage3", -25);
+        SoundFX.setVolume("snoopyStage4", -25);
         SoundFX.setVolume("collect", -25);
-        SoundFX.play("snoopyStage3");
+        SoundFX.play("snoopyStage4");
 
         boxes = new ArrayList<>();
         eventGo = true;
@@ -107,7 +107,7 @@ public class Level4State extends GameState{
             gameStateManager.setState(GameStateManager.GAMEOVER);
         }
         if(player.getLife() == 0 ) {
-            SoundFX.stop("snoopyStage3");
+            SoundFX.stop("snoopyStage4");
             gameStateManager.setState(GameStateManager.GAMEOVER);
         }
 
@@ -259,7 +259,7 @@ public class Level4State extends GameState{
         tileMap.draw(graphics2D);
 
         if(player.getTicks() < 90) {
-            graphics2D.drawString("Niveau 3", 60, 40);
+            graphics2D.drawString("Niveau 4", 60, 40);
         }
 
         player.draw(graphics2D);
@@ -284,11 +284,11 @@ public class Level4State extends GameState{
     public void handleInput() {
 
         if(Inputs.isPressed(Inputs.ESCAPE)){
-            SoundFX.stop("snoopyStage3");
+            SoundFX.stop("snoopyStage4");
             gameStateManager.setPaused(true);
         }
         if(!gameStateManager.getPaused()) {
-            SoundFX.resumeLoop("snoopyStage3");
+            SoundFX.resumeLoop("snoopyStage4");
         }
 
         if(blockInput) return;
