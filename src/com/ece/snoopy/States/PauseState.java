@@ -1,5 +1,6 @@
 package com.ece.snoopy.States;
 
+import com.ece.snoopy.Controller.Content;
 import com.ece.snoopy.Controller.GameStateManager;
 import com.ece.snoopy.Controller.Inputs;
 import com.ece.snoopy.SoundFX.SoundFX;
@@ -37,11 +38,11 @@ public class PauseState extends GameState {
     public void draw(Graphics2D graphics2D) {
         Font font = new Font("Century Gothic", Font.PLAIN, 10);
         graphics2D.setFont(font);
-        graphics2D.drawString("PAUSE", 60, 30);
-        graphics2D.drawString("Flèches: Déplacements", 20, 60);
-        graphics2D.drawString("S : Sauvegarder", 20, 80);
-        graphics2D.drawString( "ESPACE: Action", 20, 100);
-        graphics2D.drawString( "F1: Retourner au menu", 20, 120);
+        Content.drawString(graphics2D,"PAUSE", 60, 30);
+        Content.drawString(graphics2D,"Fleches: Deplacer", 20, 60);
+        Content.drawString(graphics2D,"S: Sauvegarder", 20, 80);
+        Content.drawString(graphics2D, "ESPACE: Action", 20, 100);
+        Content.drawString(graphics2D, "F1: Retour menu", 20, 120);
     }
 
     /**

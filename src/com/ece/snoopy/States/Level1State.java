@@ -1,5 +1,6 @@
 package com.ece.snoopy.States;
 
+import com.ece.snoopy.Controller.Content;
 import com.ece.snoopy.Controller.GameStateManager;
 import com.ece.snoopy.Controller.Inputs;
 import com.ece.snoopy.Main.GamePanel;
@@ -48,7 +49,7 @@ public class Level1State extends GameState{
         tileMap.loadTiles("/Tilesets/testtileset.gif");
         tileMap.loadMap("/Maps/level1.map");
         player = new Player(tileMap);
-        ui = new UI(player);
+        ui = new UI(player, birds);
         ball = new Ball(tileMap, 1);
 
         generateBirds();
@@ -60,7 +61,7 @@ public class Level1State extends GameState{
         SoundFX.loadSound("/SFX/snoopy-stage1.wav", "snoopyStage1");
         SoundFX.loadSound("/SFX/collect.wav", "collect");
         SoundFX.loadSound("/SFX/losinglife.wav", "losingLife");
-        SoundFX.setVolume("snoopyStage1", -15);
+        SoundFX.setVolume("snoopyStage1", -35);
         SoundFX.setVolume("losingLife", -20);
         SoundFX.setVolume("collect", -25);
         SoundFX.play("snoopyStage1");
@@ -244,7 +245,7 @@ public class Level1State extends GameState{
         //System.out.println(player.getTicks());
 
         if(player.getTicks() < 90) {
-            graphics2D.drawString("Niveau 1", 60, 40);
+            Content.drawString(graphics2D, "Niveau 1",50, 70);
         }
 
         for(Bird bird : birds) {

@@ -40,7 +40,7 @@ public class MenuState extends GameState {
         SoundFX.loadSound("/SFX/snoopyTitleScreen3.wav", "snoopyTitleScreen");
         SoundFX.loadSound("/SFX/menuoption.wav", "menuoption");
         SoundFX.loadSound("/SFX/collect.wav", "collect");
-        SoundFX.setVolume("snoopyTitleScreen", -20);
+        SoundFX.setVolume("snoopyTitleScreen", -35);
         SoundFX.setVolume("menuoption", -25);
         SoundFX.play("snoopyTitleScreen");
 ;
