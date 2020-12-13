@@ -59,7 +59,9 @@ public class Level1State extends GameState{
 
         SoundFX.loadSound("/SFX/snoopy-stage1.wav", "snoopyStage1");
         SoundFX.loadSound("/SFX/collect.wav", "collect");
-        SoundFX.setVolume("snoopyStage1", -25);
+        SoundFX.loadSound("/SFX/losinglife.wav", "losingLife");
+        SoundFX.setVolume("snoopyStage1", -15);
+        SoundFX.setVolume("losingLife", -20);
         SoundFX.setVolume("collect", -25);
         SoundFX.play("snoopyStage1");
 
@@ -89,10 +91,12 @@ public class Level1State extends GameState{
         /* GESTION DU TEMPS */
         //1800 = 1min
         if(player.getTicks() == 1800) {
+            SoundFX.play("losingLife");
             player.losingLife();
         }
         //1800*2 = 2min
         if(player.getTicks() == (1800 * 2)) {
+            SoundFX.play("losingLife");
             player.losingLife();
         }
          //1800*3 = 3min
@@ -138,6 +142,7 @@ public class Level1State extends GameState{
         // Pas encore implémentée
         if(player.intersects(ball)){
             player.losingLife();
+            SoundFX.play("losingLife");
         }
 
     }

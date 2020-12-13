@@ -62,13 +62,15 @@ public class GameOverState extends GameState {
             }
             else if(gameStateManager.getPreviousState() instanceof Level3State) {
                 gameStateManager.setState(GameStateManager.LEVEL3);
-                SoundFX.resumeLoop("snoopyStage2");
+                SoundFX.stop("snoopyStage3");
+                SoundFX.play("snoopyStage3");
             }
             else if(gameStateManager.getPreviousState() instanceof Level4State) {
                 gameStateManager.setState(GameStateManager.LEVEL4);
-                SoundFX.resumeLoop("snoopyStage2");
+                SoundFX.stop("snoopyStage2");
+                SoundFX.play("snoopyStage2");
             }
-            else {
+            else if(gameStateManager.getPreviousState() instanceof Level5State) {
                 gameStateManager.setState(GameStateManager.LEVEL5);
                 SoundFX.resumeLoop("snoopyStage3");
             }

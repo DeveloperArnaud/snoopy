@@ -2,6 +2,8 @@ package com.ece.snoopy.Model;
 
 import com.ece.snoopy.Controller.Content;
 import com.ece.snoopy.Map.TileMap;
+import com.ece.snoopy.SoundFX.SoundFX;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
@@ -38,7 +40,8 @@ public class Ball extends Model {
         dir = r.nextInt(4);
         System.out.println(dir);
         ballImage = Content.BALL[0];
-
+        SoundFX.loadSound("/SFX/menuoption.wav", "collision");
+        SoundFX.setVolume("collision", -10);
         animation.setFrames(ballImage);
         animation.setDelay(0);
 
@@ -49,34 +52,50 @@ public class Ball extends Model {
         if (dir == NO) {
             int rowTile = (y - 3) / tileSize;
             int colTile = (x - 3) / tileSize;
-            if (rowTile == 16)
+            if (rowTile == 16) {
+                SoundFX.play("collision");
                 dir = SO;
-            else if (colTile == 16)
+            }
+            else if (colTile == 16) {
+                SoundFX.play("collision");
                 dir = NE;
+            }
         }
         else if (dir == SO) {
             int rowTile = (y + 4) / tileSize;
             int colTile = (x - 3) / tileSize;
-            if (rowTile == 25)
+            if (rowTile == 25) {
+                SoundFX.play("collision");
                 dir = NO;
-            else if (colTile == 16)
+            }
+            else if (colTile == 16) {
+                SoundFX.play("collision");
                 dir = SE;
+            }
         }
         else if (dir == SE) {
             int rowTile = (y + 4) / tileSize;
             int colTile = (x + 4) / tileSize;
-            if (rowTile == 25)
+            if (rowTile == 25) {
+                SoundFX.play("collision");
                 dir = NE;
-            else if (colTile == 25)
+            }
+            else if (colTile == 25) {
+                SoundFX.play("collision");
                 dir = SO;
+            }
         }
         else if (dir == NE) {
             int rowTile = (y - 3) / tileSize;
             int colTile = (x + 4) / tileSize;
-            if (rowTile == 16)
+            if (rowTile == 16) {
+                SoundFX.play("collision");
                 dir = SE;
-            else if (colTile == 25)
+            }
+            else if (colTile == 25) {
+                SoundFX.play("collision");
                 dir = NO;
+            }
         }
 
         if (dir == NO) {

@@ -125,7 +125,7 @@ public class Level5State extends GameState {
             }
         }
 
-        if(player.intersects(ball)){
+        if(player.intersects(ball) || player.intersects(ball2)){
             player.losingLife();
         }
     }

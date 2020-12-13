@@ -168,16 +168,31 @@ public class EndState extends GameState {
                 gameStateManager.setState(GameStateManager.LEVEL3);
                 SoundFX.stop("snoopyStage1");
                 SoundFX.stop("snoopyStage2");
+                SoundFX.stop("snoopyStage3");
             }
             else if (gameStateManager.getPreviousState() instanceof Level3State) {
                 gameStateManager.setState(GameStateManager.LEVEL4);
                 SoundFX.stop("snoopyStage1");
                 SoundFX.stop("snoopyStage2");
+                SoundFX.stop("snoopyStage3");
+                SoundFX.stop("snoopyStage4");
+
             }
-            else {
+            else if (gameStateManager.getPreviousState() instanceof Level4State)  {
                 gameStateManager.setState(GameStateManager.LEVEL5);
                 SoundFX.stop("snoopyStage1");
                 SoundFX.stop("snoopyStage2");
+                SoundFX.stop("snoopyStage3");
+                SoundFX.stop("snoopyStage4");
+            }
+            else if (gameStateManager.getPreviousState() instanceof Level5State)  {
+                SoundFX.stop("snoopyStage1");
+                SoundFX.stop("snoopyStage2");
+                SoundFX.stop("snoopyStage3");
+                SoundFX.stop("snoopyStage4");
+                SoundFX.stop("snoopyStage5");
+                gameStateManager.setState(GameStateManager.MENU);
+
             }
         }
     }
