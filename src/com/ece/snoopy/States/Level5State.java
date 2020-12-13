@@ -48,8 +48,8 @@ public class Level5State extends GameState {
         tileMap.loadMap("/Maps/level3.map");
         player = new Player(tileMap);
         ui = new UI(player);
-        ball = new Ball(tileMap);
-        ball2 = new Ball(tileMap);
+        ball = new Ball(tileMap, 2);
+        ball2 = new Ball(tileMap, 2);
         mechant = new Mechant(tileMap);
 
         generateBirds();
@@ -58,7 +58,7 @@ public class Level5State extends GameState {
         player.setTilePosition(20, 20);
         ball.setTilePosition(20,23);
         ball2.setTilePosition(23,20);
-        mechant.setTilePosition(20,21);
+        mechant.setTilePosition(20,23);
         tileMap.setInitPosition(-256, -256);
 
         SoundFX.loadSound("/SFX/snoopyStage5.wav", "snoopyStage5");

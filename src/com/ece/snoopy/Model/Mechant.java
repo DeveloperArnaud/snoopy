@@ -79,7 +79,6 @@ public class Mechant extends Model {
         if (yDiff < 0)
             yDiff *= -1;
         if (xDiff > yDiff) {
-            System.out.println("Player x:" + playerColTile + " Mob x: " + colTile);
             if (colTile < playerColTile) {
                 dir = RIGHT;
                 setAnimation(RIGHT, rightSprites, 10);
@@ -93,7 +92,6 @@ public class Mechant extends Model {
             }
         }
         else {
-            System.out.println("Player y:" + playerRowTile + " Mob y: " + rowTile);
             if (rowTile < playerRowTile) {
                 dir = DOWN;
                 setAnimation(DOWN, downSprites, 10);
@@ -109,19 +107,15 @@ public class Mechant extends Model {
         switch (dir) {
             case LEFT:
                 x -= tileSize;
-                System.out.println("LEFT");
                 break;
             case RIGHT:
                 x += tileSize;
-                System.out.println("RIGHT");
                 break;
             case DOWN:
                 y += tileSize;
-                System.out.println("DOWN");
                 break;
             case UP:
                 y -= 16;
-                System.out.println("UP");
                 break;
             default:
                 break;
