@@ -69,7 +69,7 @@ public class Level4State extends GameState{
         SoundFX.loadSound("/SFX/snoopyStage4.wav", "snoopyStage4");
         SoundFX.loadSound("/SFX/collect.wav", "collect");
         SoundFX.loadSound("/SFX/losinglife.wav", "losingLife");
-        SoundFX.setVolume("losingLife", -20);
+        SoundFX.setVolume("losingLife", -30);
         SoundFX.setVolume("snoopyStage4", -35);
         SoundFX.setVolume("collect", -25);
         SoundFX.play("snoopyStage4");
