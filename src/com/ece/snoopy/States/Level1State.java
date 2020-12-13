@@ -49,7 +49,7 @@ public class Level1State extends GameState{
         tileMap.loadMap("/Maps/level1.map");
         player = new Player(tileMap);
         ui = new UI(player);
-        ball = new Ball(tileMap);
+        ball = new Ball(tileMap, 1);
 
         generateBirds();
 
@@ -241,7 +241,7 @@ public class Level1State extends GameState{
         player.draw(graphics2D);
         ball.draw(graphics2D);
 
-        System.out.println(player.getTicks());
+        //System.out.println(player.getTicks());
 
         if(player.getTicks() < 90) {
             graphics2D.drawString("Niveau 1", 60, 40);

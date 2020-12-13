@@ -54,8 +54,8 @@ public class Level4State extends GameState{
         tileMap.loadMap("/Maps/level3.map");
         player = new Player(tileMap);
         ui = new UI(player);
-        ball = new Ball(tileMap);
-        ball2 = new Ball(tileMap);
+        ball = new Ball(tileMap, 1);
+        ball2 = new Ball(tileMap, 2);
 
         generateBirds();
         generateObjets();

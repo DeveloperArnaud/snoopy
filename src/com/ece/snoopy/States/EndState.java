@@ -56,6 +56,7 @@ public class EndState extends GameState {
             player = lv1.getPlayer();
             int seconds = player.getTime();
             int scoreFinalLv1 = seconds * 100;
+            scoreFinalLv1 = scoreFinalLv1 * player.getLife() / 3;
             graphics2D.drawString( ""+seconds, 95, 36);
             graphics2D.drawString( "Score niveau : " + scoreFinalLv1, 25, 56);
             graphics2D.drawString( "Score total : " + scoreFinalLv1, 25, 76);
@@ -71,6 +72,7 @@ public class EndState extends GameState {
             int seconds = player.getTime();
             int scoreLv2 = seconds * 100;
             int scoreFinalLv2;
+            scoreLv2 = scoreLv2 * player.getLife() / 3;
             graphics2D.drawString( ""+seconds, 95, 36);
             graphics2D.drawString( "Score niveau : " + scoreLv2, 25, 56);
             if(gameStateManager.getScoreLvl1() > 0) {
@@ -90,6 +92,7 @@ public class EndState extends GameState {
             player = lv3.getPlayer();
             int seconds = player.getTime();
             int scoreFinalLv3 = seconds * 100;
+            scoreFinalLv3 = scoreFinalLv3 * player.getLife() / 3;
             graphics2D.drawString( ""+seconds, 95, 36);
             graphics2D.drawString( "Score niveau : " + scoreFinalLv3, 25, 56);
             gameStateManager.setScoreLvl3(scoreFinalLv3);
@@ -110,6 +113,7 @@ public class EndState extends GameState {
             player = lv4.getPlayer();
             int seconds = player.getTime();
             int scoreFinalLv4 = seconds * 100;
+            scoreFinalLv4 = scoreFinalLv4 * player.getLife() / 3;
             graphics2D.drawString( ""+seconds, 95, 36);
             graphics2D.drawString( "Score niveau : " + scoreFinalLv4, 25, 56);
             gameStateManager.setScoreLvl4(scoreFinalLv4);
@@ -128,6 +132,7 @@ public class EndState extends GameState {
             player = lv5.getPlayer();
             int seconds = player.getTime();
             int scoreFinalLv5 = seconds * 100;
+            scoreFinalLv5 = scoreFinalLv5 * player.getLife() / 3;
             graphics2D.drawString( ""+seconds, 95, 36);
             graphics2D.drawString( "Score niveau : " + scoreFinalLv5, 25, 56);
             if (gameStateManager.getScoreLvl1() > 0 || gameStateManager.getScoreLvl2() > 0 || gameStateManager.getScoreLvl3() > 0 || gameStateManager.getScoreLvl4() > 0) {

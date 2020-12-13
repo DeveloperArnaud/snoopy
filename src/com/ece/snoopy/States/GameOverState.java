@@ -10,7 +10,7 @@ import java.awt.*;
 public class GameOverState extends GameState {
 
     private Color color;
-    
+
     /**
      * Constructeur
      * @param gameStateManager GameStateManager
