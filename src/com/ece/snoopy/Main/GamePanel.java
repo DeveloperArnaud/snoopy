@@ -11,7 +11,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
     //Dimension de la fênetre de jeu
     public static final int WIDTH = 160;
-    public static final int HEIGHT = 144;
+    public static final int HEIGHT = 160;
     public static final int HEIGHT2 = HEIGHT + 16;
     public static final int SCALE = 3;
 
@@ -33,6 +33,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
      */
     public GamePanel() {
         setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT2 * SCALE));
+        System.out.println("Largeur : " + WIDTH * SCALE +  " Hauteur : " + HEIGHT2 * SCALE );
         setFocusable(true);
         requestFocus();
     }

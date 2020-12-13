@@ -54,11 +54,13 @@ public class GameOverState extends GameState {
         if(Inputs.isPressed(Inputs.ENTER)) {
             if (gameStateManager.getPreviousState() instanceof Level1State) {
                 gameStateManager.setState(GameStateManager.LEVEL1);
-                SoundFX.resumeLoop("snoopyStage1");
+                SoundFX.stop("snoopyStage1");
+                SoundFX.play("snoopyStage1");
             }
             else if(gameStateManager.getPreviousState() instanceof Level2State) {
                 gameStateManager.setState(GameStateManager.LEVEL2);
-                SoundFX.resumeLoop("snoopyStage2");
+                SoundFX.stop("snoopyStage2");
+                SoundFX.play("snoopyStage2");
             }
             else if(gameStateManager.getPreviousState() instanceof Level3State) {
                 gameStateManager.setState(GameStateManager.LEVEL3);
@@ -67,12 +69,13 @@ public class GameOverState extends GameState {
             }
             else if(gameStateManager.getPreviousState() instanceof Level4State) {
                 gameStateManager.setState(GameStateManager.LEVEL4);
-                SoundFX.stop("snoopyStage2");
-                SoundFX.play("snoopyStage2");
+                SoundFX.stop("snoopyStage4");
+                SoundFX.play("snoopyStage4");
             }
             else if(gameStateManager.getPreviousState() instanceof Level5State) {
                 gameStateManager.setState(GameStateManager.LEVEL5);
-                SoundFX.resumeLoop("snoopyStage3");
+                SoundFX.stop("snoopyStage5");
+                SoundFX.play("snoopyStage5");
             }
         }
     }

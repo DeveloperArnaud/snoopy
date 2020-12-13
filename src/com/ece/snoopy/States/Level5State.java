@@ -1,5 +1,6 @@
 package com.ece.snoopy.States;
 
+import com.ece.snoopy.Controller.Content;
 import com.ece.snoopy.Controller.GameStateManager;
 import com.ece.snoopy.Controller.Inputs;
 import com.ece.snoopy.Main.GamePanel;
@@ -47,7 +48,7 @@ public class Level5State extends GameState {
         tileMap.loadTiles("/Tilesets/testtileset.gif");
         tileMap.loadMap("/Maps/level3.map");
         player = new Player(tileMap);
-        ui = new UI(player);
+        ui = new UI(player, birds);
         ball = new Ball(tileMap, 2);
         ball2 = new Ball(tileMap, 2);
         mechant = new Mechant(tileMap);
@@ -63,7 +64,9 @@ public class Level5State extends GameState {
 
         SoundFX.loadSound("/SFX/snoopyStage5.wav", "snoopyStage5");
         SoundFX.loadSound("/SFX/collect.wav", "collect");
-        SoundFX.setVolume("snoopyStage5", -25);
+        SoundFX.loadSound("/SFX/losinglife.wav", "losingLife");
+        SoundFX.setVolume("losingLife", -20);
+        SoundFX.setVolume("snoopyStage5", -35);
         SoundFX.setVolume("collect", -25);
         SoundFX.play("snoopyStage5");
 
@@ -87,8 +90,10 @@ public class Level5State extends GameState {
         ball2.update();
         if (player.getTicks() % 40 == 29)
             mechant.computeDirection(player);
-        if (player.intersects(mechant))
+        if (player.intersects(mechant)) {
             player.losingLife();
+            SoundFX.play("losingLife");
+        }
         mechant.update();
 
         if(player.getNbBirds() == 4) {
@@ -127,6 +132,7 @@ public class Level5State extends GameState {
 
         if(player.intersects(ball) || player.intersects(ball2)){
             player.losingLife();
+            SoundFX.play("losingLife");
         }
     }
 
@@ -259,13 +265,14 @@ public class Level5State extends GameState {
     public void draw(Graphics2D graphics2D) {
         tileMap.draw(graphics2D);
 
-        if(player.getTicks() < 90) {
-            graphics2D.drawString("Niveau 5", 60, 40);
-        }
 
         mechant.draw(graphics2D);
 
         player.draw(graphics2D);
+
+        if(player.getTicks() < 90) {
+            Content.drawString(graphics2D, "Niveau 5",50, 70);
+        }
 
         for (Objet rock : objets)
             rock.draw(graphics2D);

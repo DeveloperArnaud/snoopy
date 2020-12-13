@@ -196,7 +196,7 @@ public class EndState extends GameState {
                 SoundFX.stop("snoopyStage3");
                 SoundFX.stop("snoopyStage4");
                 SoundFX.stop("snoopyStage5");
-                gameStateManager.setState(GameStateManager.MENU);
+                gameStateManager.setState(GameStateManager.LEVEL1);
 
             }
         }

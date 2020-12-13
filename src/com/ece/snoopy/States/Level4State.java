@@ -1,5 +1,6 @@
 package com.ece.snoopy.States;
 
+import com.ece.snoopy.Controller.Content;
 import com.ece.snoopy.Controller.GameStateManager;
 import com.ece.snoopy.Controller.Inputs;
 import com.ece.snoopy.Main.GamePanel;
@@ -53,7 +54,7 @@ public class Level4State extends GameState{
         tileMap.loadTiles("/Tilesets/testtileset.gif");
         tileMap.loadMap("/Maps/level3.map");
         player = new Player(tileMap);
-        ui = new UI(player);
+        ui = new UI(player, birds);
         ball = new Ball(tileMap, 1);
         ball2 = new Ball(tileMap, 2);
 
@@ -67,7 +68,9 @@ public class Level4State extends GameState{
 
         SoundFX.loadSound("/SFX/snoopyStage4.wav", "snoopyStage4");
         SoundFX.loadSound("/SFX/collect.wav", "collect");
-        SoundFX.setVolume("snoopyStage4", -25);
+        SoundFX.loadSound("/SFX/losinglife.wav", "losingLife");
+        SoundFX.setVolume("losingLife", -20);
+        SoundFX.setVolume("snoopyStage4", -35);
         SoundFX.setVolume("collect", -25);
         SoundFX.play("snoopyStage4");
 
@@ -124,8 +127,9 @@ public class Level4State extends GameState{
             }
         }
 
-        if(player.intersects(ball)){
+        if(player.intersects(ball) || player.intersects(ball2)){
             player.losingLife();
+            SoundFX.play("losingLife");
         }
     }
 
@@ -258,11 +262,13 @@ public class Level4State extends GameState{
     public void draw(Graphics2D graphics2D) {
         tileMap.draw(graphics2D);
 
-        if(player.getTicks() < 90) {
-            graphics2D.drawString("Niveau 4", 60, 40);
-        }
+
 
         player.draw(graphics2D);
+
+        if(player.getTicks() < 90) {
+            Content.drawString(graphics2D, "Niveau 4",50, 70);
+        }
 
         for (Objet rock : objets)
             rock.draw(graphics2D);
