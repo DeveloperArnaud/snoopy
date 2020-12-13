@@ -41,7 +41,7 @@ public class Ball extends Model {
         ballImage = Content.BALL[0];
 
         SoundFX.loadSound("/SFX/menuoption.wav", "collision");
-        SoundFX.setVolume("collision", -10);
+        SoundFX.setVolume("collision", -20);
 
         this.moveSpeed = moveSpeed;
         animation.setFrames(ballImage);

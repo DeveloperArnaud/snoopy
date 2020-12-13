@@ -25,7 +25,7 @@ public class MdpState extends GameState {
 
     @Override
     public void init() {
-        bg = Content.BACKGROUNDMENU[0][0];
+        bg = Content.BACKGROUNDMDP[0][0];
         SoundFX.loadSound("/SFX/menuoption.wav", "menuoption");
         SoundFX.loadSound("/SFX/collect.wav", "collect");
         pwd = "";
@@ -46,9 +46,9 @@ public class MdpState extends GameState {
     @Override
     public void draw(Graphics2D graphics2D) {
         graphics2D.drawImage(bg, 0, 0, null);
-        Font font = new Font("Century Gothic", Font.PLAIN, 11);
+        Font font = new Font("Century Gothic", Font.BOLD, 11);
         graphics2D.setFont(font);
-        graphics2D.drawString("Entrez le code du niveau", 20 , 20);
+        graphics2D.drawString("Entrez le code du niveau", 15 , 20);
         String s = "";
         for (int i = 0; i < 8; i++) {
             if (i < pwd.length())
@@ -57,9 +57,9 @@ public class MdpState extends GameState {
                 s += '*';
         }
         graphics2D.drawString(s, 60 , 50);
-        graphics2D.drawString("Appuyez sur ENTREE", 30 , 80);
-        graphics2D.drawString("pour le lancer", 50 , 100);
-        graphics2D.drawString("ou ECHAP pour quitter", 28 , 120);
+        graphics2D.drawString("Appuyez sur ENTREE", 30 , 130);
+        graphics2D.drawString("pour le lancer", 48 , 150);
+        graphics2D.drawString("ou ECHAP pour quitter", 28 , 170);
     }
 
     /**

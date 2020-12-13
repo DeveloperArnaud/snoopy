@@ -9,7 +9,8 @@ import java.awt.image.BufferedImage;
 public class Content {
 
     //Sprite des objets
-    public static BufferedImage[][] BACKGROUNDMENU = load("/Intro/backgroundMenu.jpg", GamePanel.WIDTH * GamePanel.SCALE,GamePanel.HEIGHT2 * GamePanel.SCALE );
+    public static BufferedImage[][] BACKGROUNDMENU = load("/Intro/snoopyMenuTitleScreen.png", GamePanel.WIDTH,GamePanel.HEIGHT + 16);
+    public static BufferedImage[][] BACKGROUNDMDP = load("/Intro/snoopyMdpTitleScreen.png", GamePanel.WIDTH,GamePanel.HEIGHT + 16);
     public static BufferedImage[][] CURSOR = load("/Intro/cursor.png", 16, 16);
     public static BufferedImage[][] PLAYER = load("/Sprites/SpriteSnoopy.gif",16,16);
     public static BufferedImage[][] BIRD = load("/Sprites/diamond.gif",16 ,16);
