@@ -64,6 +64,7 @@ public class PauseState extends GameState {
             gameStateManager.setPaused(false);
             gameStateManager.setState(GameStateManager.MENU);
             SoundFX.stop("snoopyStage1");
+            SoundFX.stop("snoopyStage5");
         }
     }
 

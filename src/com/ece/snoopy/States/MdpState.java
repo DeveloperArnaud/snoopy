@@ -95,26 +95,42 @@ public class MdpState extends GameState {
         if(l.equals("UN")) {
             gameStateManager.setScoreLvl1(0);
             gameStateManager.setScoreLvl2(0);
+            gameStateManager.setScoreLvl3(0);
+            gameStateManager.setScoreLvl4(0);
             SoundFX.stop("snoopyTitleScreen");
             gameStateManager.setState(GameStateManager.LEVEL1);
         }
         if(l.equals("DEUX")) {
             gameStateManager.setScoreLvl1(0);
             gameStateManager.setScoreLvl2(0);
+            gameStateManager.setScoreLvl3(0);
+            gameStateManager.setScoreLvl4(0);
             SoundFX.stop("snoopyTitleScreen");
             gameStateManager.setState(GameStateManager.LEVEL2);
         }
         if(l.equals("TROIS")) {
             gameStateManager.setScoreLvl1(0);
             gameStateManager.setScoreLvl2(0);
+            gameStateManager.setScoreLvl3(0);
+            gameStateManager.setScoreLvl4(0);
             SoundFX.stop("snoopyTitleScreen");
             gameStateManager.setState(GameStateManager.LEVEL3);
         }
         if(l.equals("QUATRE")) {
             gameStateManager.setScoreLvl1(0);
             gameStateManager.setScoreLvl2(0);
+            gameStateManager.setScoreLvl3(0);
+            gameStateManager.setScoreLvl4(0);
             SoundFX.stop("snoopyTitleScreen");
             gameStateManager.setState(GameStateManager.LEVEL4);
+        }
+        if(l.equals("CINQ")) {
+            gameStateManager.setScoreLvl1(0);
+            gameStateManager.setScoreLvl2(0);
+            gameStateManager.setScoreLvl3(0);
+            gameStateManager.setScoreLvl4(0);
+            SoundFX.stop("snoopyTitleScreen");
+            gameStateManager.setState(GameStateManager.LEVEL5);
         }
         else {
             pwd = "";

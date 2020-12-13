@@ -49,16 +49,19 @@ public class Level1State extends GameState{
         tileMap.loadMap("/Maps/level1.map");
         player = new Player(tileMap);
         ui = new UI(player);
-        ball = new Ball(tileMap);
+        ball = new Ball(tileMap, 1);
 
         generateBirds();
 
         player.setTilePosition(20, 20);
         tileMap.setInitPosition(-256, -256);
+        ball.setTilePosition(20,23);
 
         SoundFX.loadSound("/SFX/snoopy-stage1.wav", "snoopyStage1");
         SoundFX.loadSound("/SFX/collect.wav", "collect");
-        SoundFX.setVolume("snoopyStage1", -25);
+        SoundFX.loadSound("/SFX/losinglife.wav", "losingLife");
+        SoundFX.setVolume("snoopyStage1", -15);
+        SoundFX.setVolume("losingLife", -20);
         SoundFX.setVolume("collect", -25);
         SoundFX.play("snoopyStage1");
 
@@ -88,10 +91,12 @@ public class Level1State extends GameState{
         /* GESTION DU TEMPS */
         //1800 = 1min
         if(player.getTicks() == 1800) {
+            SoundFX.play("losingLife");
             player.losingLife();
         }
         //1800*2 = 2min
         if(player.getTicks() == (1800 * 2)) {
+            SoundFX.play("losingLife");
             player.losingLife();
         }
          //1800*3 = 3min
@@ -118,6 +123,7 @@ public class Level1State extends GameState{
         tileMap.update();
 
         player.update();
+        ball.update();
 
         //Récupération des oiseaux
         for(int i = 0; i < birds.size(); i++) {
@@ -136,6 +142,7 @@ public class Level1State extends GameState{
         // Pas encore implémentée
         if(player.intersects(ball)){
             player.losingLife();
+            SoundFX.play("losingLife");
         }
 
     }
@@ -232,9 +239,9 @@ public class Level1State extends GameState{
     public void draw(Graphics2D graphics2D) {
         tileMap.draw(graphics2D);
         player.draw(graphics2D);
-        //ball.draw(graphics2D);
+        ball.draw(graphics2D);
 
-        System.out.println(player.getTicks());
+        //System.out.println(player.getTicks());
 
         if(player.getTicks() < 90) {
             graphics2D.drawString("Niveau 1", 60, 40);

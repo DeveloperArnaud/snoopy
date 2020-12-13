@@ -19,7 +19,7 @@ public class GameStateManager {
     private PauseState pauseState;
 
     // Les états de jeu
-    public static final int NUM_STATES = 10;
+    public static final int NUM_STATES = 11;
     public static final int INTRO = 0;
     public static final int MENU = 1;
     public static final int LEVEL1 = 2;
@@ -29,11 +29,14 @@ public class GameStateManager {
     public static final int LEVEL2 = 6;
     public static final int LEVEL3 = 7;
     public static final int LEVEL4 = 9;
+    public static final int LEVEL5 = 10;
     public static final int GAMEOVER = 8;
 
     //Score des niveaux
     private int scoreLvl1;
     private int scoreLvl2;
+    private int scoreLvl3;
+    private int scoreLvl4;
 
     // Niveau actuel et précent
     private int currentState;
@@ -46,6 +49,8 @@ public class GameStateManager {
         //Initialise l'etat des niveaux
         scoreLvl1 = 0;
         scoreLvl2 = 0;
+        scoreLvl3 = 0;
+        scoreLvl4 = 0;
         // Initialise le son
         SoundFX.init();
         paused = false;
@@ -77,6 +82,22 @@ public class GameStateManager {
 
     public int getScoreLvl2() {
         return this.scoreLvl2;
+    }
+
+    public void setScoreLvl3(int s) {
+        this.scoreLvl3 = s;
+    }
+
+    public int getScoreLvl3() {
+        return this.scoreLvl3;
+    }
+
+    public void setScoreLvl4(int s) {
+        this.scoreLvl4 = s;
+    }
+
+    public int getScoreLvl4() {
+        return this.scoreLvl4;
     }
 
     /**
@@ -126,6 +147,10 @@ public class GameStateManager {
         }
         else if(i == LEVEL4) {
             gameStates[i] = new Level4State(this);
+            gameStates[i].init();
+        }
+        else if(i == LEVEL5) {
+            gameStates[i] = new Level5State(this);
             gameStates[i].init();
         }
     }

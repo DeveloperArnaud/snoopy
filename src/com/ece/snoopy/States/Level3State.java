@@ -53,7 +53,7 @@ public class Level3State extends GameState{
         tileMap.loadMap("/Maps/level3.map");
         player = new Player(tileMap);
         ui = new UI(player);
-        ball = new Ball(tileMap);
+        ball = new Ball(tileMap, 1);
 
         generateBirds();
         generateObjets();
@@ -64,7 +64,7 @@ public class Level3State extends GameState{
 
         SoundFX.loadSound("/SFX/snoopyStage3.wav", "snoopyStage3");
         SoundFX.loadSound("/SFX/collect.wav", "collect");
-        SoundFX.setVolume("snoopyStage3", -25);
+        SoundFX.setVolume("snoopyStage3", -15);
         SoundFX.setVolume("collect", -25);
         SoundFX.play("snoopyStage3");
 

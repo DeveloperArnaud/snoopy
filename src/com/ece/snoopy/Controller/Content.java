@@ -15,6 +15,7 @@ public class Content {
     public static BufferedImage[][] BALL = load("/Sprites/ball.png",16,16);
     public static BufferedImage[][] ROCK = load("/Sprites/rock.png",16,16);
     public static BufferedImage[][] SPEED = load("/Sprites/speed.png",16,16);
+    public static BufferedImage[][] MECHANT = load("/Sprites/SpriteSnoopyMechant.gif",16,16);
 
     /**
      * Charger les images

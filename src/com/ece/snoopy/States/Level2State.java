@@ -52,18 +52,18 @@ public class Level2State extends GameState{
         tileMap.loadMap("/Maps/level2.map");
         player = new Player(tileMap);
         ui = new UI(player);
-        ball = new Ball(tileMap);
+        ball = new Ball(tileMap, 1);
 
         generateBirds();
         generateObjets();
 
         player.setTilePosition(20, 20);
-        //ball.setTilePosition(20,20);
+        ball.setTilePosition(20,23);
         tileMap.setInitPosition(-256, -256);
 
         SoundFX.loadSound("/SFX/snoopyStage2.wav", "snoopyStage2");
         SoundFX.loadSound("/SFX/collect.wav", "collect");
-        SoundFX.setVolume("snoopyStage2", -25);
+        SoundFX.setVolume("snoopyStage2", -15);
         SoundFX.setVolume("collect", -25);
         SoundFX.play("snoopyStage2");
 
@@ -86,6 +86,7 @@ public class Level2State extends GameState{
         tileMap.update();
 
         player.update();
+        ball.update();
 
         if(player.getNbBirds() == 4) {
             eventFinish = blockInput = true;
@@ -252,7 +253,7 @@ public class Level2State extends GameState{
         }
 
         player.draw(graphics2D);
-        //ball.draw(graphics2D);
+        ball.draw(graphics2D);
 
 
 
