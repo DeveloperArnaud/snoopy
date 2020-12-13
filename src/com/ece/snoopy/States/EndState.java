@@ -156,6 +156,8 @@ public class EndState extends GameState {
             SoundFX.stop("snoopyStage1");
             SoundFX.stop("snoopyStage2");
             SoundFX.stop("snoopyStage3");
+            SoundFX.stop("snoopyStage4");
+            SoundFX.stop("snoopyStage5");
         }
         if(Inputs.isPressed(Inputs.ENTER)) {
             if (gameStateManager.getPreviousState() instanceof Level1State) {

@@ -16,8 +16,14 @@ public class Mechant extends Model {
     public static final int DOWN = 3;
     public static final int STOP = 4;
 
+
+
     //Sprite de déplacement du personnage
     BufferedImage[] bufferedImages;
+    private BufferedImage[] downSprites;
+    private BufferedImage[] leftSprites;
+    private BufferedImage[] rightSprites;
+    private BufferedImage[] upSprites;
     private int dir;
 
     /**
@@ -31,9 +37,13 @@ public class Mechant extends Model {
         cwidth = 12;
         cheight = 12;
         dir = STOP;
-        bufferedImages = Content.MECHANT[0];
+        downSprites = Content.MECHANT[0];
+        leftSprites = Content.MECHANT[1];
+        rightSprites = Content.MECHANT[2];
+        upSprites = Content.MECHANT[3];
 
-        animation.setFrames(bufferedImages);
+        animation.setFrames(downSprites);
+
         animation.setDelay(10);
         SoundFX.loadSound("/SFX/destroyed.wav", "destroyed");
         SoundFX.setVolume("destroyed", -15);
@@ -48,6 +58,13 @@ public class Mechant extends Model {
 
     public void draw(Graphics2D g) {
         super.draw(g);
+    }
+
+    private void setAnimation(int i, BufferedImage[] frame, int delay) {
+        currentAnimation = i;
+        animation.setFrames(frame);
+        animation.setDelay(delay);
+
     }
 
     public void computeDirection(Player player) {
@@ -65,9 +82,11 @@ public class Mechant extends Model {
             System.out.println("Player x:" + playerColTile + " Mob x: " + colTile);
             if (colTile < playerColTile) {
                 dir = RIGHT;
+                setAnimation(RIGHT, rightSprites, 10);
             }
             else if (colTile > playerColTile) {
                 dir = LEFT;
+                setAnimation(LEFT, leftSprites, 10);
             }
             else {
                 dir = STOP;
@@ -77,9 +96,11 @@ public class Mechant extends Model {
             System.out.println("Player y:" + playerRowTile + " Mob y: " + rowTile);
             if (rowTile < playerRowTile) {
                 dir = DOWN;
+                setAnimation(DOWN, downSprites, 10);
             }
             else if (rowTile > playerRowTile){
                 dir = UP;
+                setAnimation(UP, upSprites, 10);
             }
             else {
                 dir = STOP;

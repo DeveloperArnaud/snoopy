@@ -55,6 +55,7 @@ public class Level1State extends GameState{
 
         player.setTilePosition(20, 20);
         tileMap.setInitPosition(-256, -256);
+        ball.setTilePosition(20,23);
 
         SoundFX.loadSound("/SFX/snoopy-stage1.wav", "snoopyStage1");
         SoundFX.loadSound("/SFX/collect.wav", "collect");
@@ -118,6 +119,7 @@ public class Level1State extends GameState{
         tileMap.update();
 
         player.update();
+        ball.update();
 
         //Récupération des oiseaux
         for(int i = 0; i < birds.size(); i++) {
@@ -232,7 +234,7 @@ public class Level1State extends GameState{
     public void draw(Graphics2D graphics2D) {
         tileMap.draw(graphics2D);
         player.draw(graphics2D);
-        //ball.draw(graphics2D);
+        ball.draw(graphics2D);
 
         System.out.println(player.getTicks());
 
