@@ -256,15 +256,8 @@ public class Level2State extends GameState{
 
     @Override
     public void draw(Graphics2D graphics2D) {
-
-
-
         tileMap.draw(graphics2D);
-
-
-
         player.draw(graphics2D);
-        ball.draw(graphics2D);
 
         if(player.getTicks() < 90) {
             Content.drawString(graphics2D, "Niveau 2",50, 70);
@@ -277,6 +270,7 @@ public class Level2State extends GameState{
             bird.draw(graphics2D);
 
         ui.draw(graphics2D);
+        ball.draw(graphics2D);
 
         graphics2D.setColor(Color.BLACK);
         for(int i = 0; i < boxes.size(); i++) {

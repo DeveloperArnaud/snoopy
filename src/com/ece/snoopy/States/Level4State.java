@@ -282,13 +282,13 @@ public class Level4State extends GameState{
             bird.draw(graphics2D);
 
         ui.draw(graphics2D);
+        ball.draw(graphics2D);
+        ball2.draw(graphics2D);
 
         graphics2D.setColor(Color.BLACK);
         for(int i = 0; i < boxes.size(); i++) {
             graphics2D.fill(boxes.get(i));
         }
-        ball.draw(graphics2D);
-        ball2.draw(graphics2D);
     }
 
     @Override
