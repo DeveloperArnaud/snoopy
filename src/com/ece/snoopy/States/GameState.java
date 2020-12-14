@@ -3,6 +3,7 @@ package com.ece.snoopy.States;
 import com.ece.snoopy.Controller.GameStateManager;
 
 import java.awt.*;
+import java.io.Serializable;
 
 /*
  * Cette classe abstraite
@@ -10,7 +11,7 @@ import java.awt.*;
  * implementera les fonctions principales qui seront réutilisés pour les différents ecrans/niveaux.
  */
 
-public abstract class GameState {
+public abstract class GameState implements Serializable {
 
     protected GameStateManager gameStateManager;
     /**

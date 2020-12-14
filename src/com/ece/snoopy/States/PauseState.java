@@ -56,7 +56,7 @@ public class PauseState extends GameState {
         if(Inputs.isPressed(Inputs.S)) {
             SoundFX.stop("snoopyStage2");
             gameStateManager.setPaused(true);
-            GameState gameState = this.gameStateManager.getPreviousState();
+            GameState gameState = this.gameStateManager.getCurrentState();
             saveState(gameState);
         }
 

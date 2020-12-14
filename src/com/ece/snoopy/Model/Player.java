@@ -11,10 +11,10 @@ import java.util.ArrayList;
 public class Player extends Model {
 
     //Sprite de déplacement du personnage
-    private BufferedImage[] downSprites;
-    private BufferedImage[] leftSprites;
-    private BufferedImage[] rightSprites;
-    private BufferedImage[] upSprites;
+    private transient BufferedImage[] downSprites;
+    private transient BufferedImage[] leftSprites;
+    private transient BufferedImage[] rightSprites;
+    private transient BufferedImage[] upSprites;
 
     //Directions
     private final int DOWN = 0;

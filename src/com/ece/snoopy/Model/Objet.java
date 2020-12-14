@@ -16,7 +16,7 @@ public class Objet extends Model{
     private int type;
 
     //Image
-    BufferedImage[] bufferedImages;
+    transient BufferedImage[] bufferedImages;
 
     /**
      * Constructeur

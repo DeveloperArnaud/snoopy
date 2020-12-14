@@ -13,10 +13,10 @@ import java.util.Map;
 public class AutoPlayer extends Model {
 
     //Sprite de déplacement du personnage
-    private BufferedImage[] downSprites;
-    private BufferedImage[] leftSprites;
-    private BufferedImage[] rightSprites;
-    private BufferedImage[] upSprites;
+    private transient BufferedImage[] downSprites;
+    private transient BufferedImage[] leftSprites;
+    private transient BufferedImage[] rightSprites;
+    private transient BufferedImage[] upSprites;
 
     private int offsetNbTileX = 17;
     private int offsetNbTileY = 17;

@@ -14,7 +14,7 @@ import java.awt.image.BufferedImage;
 public class IntroState extends GameState{
 
     //Image et gestion d'effets
-    private BufferedImage background;
+    private transient BufferedImage background;
     private int alpha;
     private int ticks;
 

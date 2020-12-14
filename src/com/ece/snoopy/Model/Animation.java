@@ -1,10 +1,11 @@
 package com.ece.snoopy.Model;
 
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
-public class Animation {
+public class Animation implements Serializable {
 
-    private BufferedImage[] frames;
+    private transient BufferedImage[] frames;
     private int currentFrame;
     private int numFrames;
 

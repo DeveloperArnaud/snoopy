@@ -5,10 +5,7 @@ import com.ece.snoopy.Controller.GameStateManager;
 import com.ece.snoopy.Controller.Inputs;
 import com.ece.snoopy.Main.GamePanel;
 import com.ece.snoopy.Map.TileMap;
-import com.ece.snoopy.Model.Ball;
-import com.ece.snoopy.Model.Bird;
-import com.ece.snoopy.Model.Objet;
-import com.ece.snoopy.Model.Player;
+import com.ece.snoopy.Model.*;
 import com.ece.snoopy.SoundFX.SoundFX;
 import com.ece.snoopy.UI.UI;
 
@@ -20,6 +17,8 @@ import java.util.ArrayList;
 
  */
 public class Level2State extends GameState{
+
+    private static final long serialVersionUID = -5897991406331669798L;
 
     //Composants du niveau 2
     private Player player;
@@ -219,7 +218,7 @@ public class Level2State extends GameState{
     /**
      * On pose les objets sur la carte
      */
-    private void generateObjets() {
+    public void generateObjets() {
         Objet rocher1;
         Objet rocher2;
         Objet rocher3;
@@ -325,5 +324,9 @@ public class Level2State extends GameState{
      */
     public ArrayList<Bird> getBirds(){
         return birds;
+    }
+
+    public Ball getBall() {
+        return ball;
     }
 }
