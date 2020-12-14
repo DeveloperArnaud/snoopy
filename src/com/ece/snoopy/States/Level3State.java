@@ -53,7 +53,7 @@ public class Level3State extends GameState{
         tileMap.loadTiles("/Tilesets/testtileset.gif");
         tileMap.loadMap("/Maps/level3.map");
         player = new Player(tileMap);
-        ui = new UI(player, birds);
+        ui = new UI(player);
         ball = new Ball(tileMap, 1);
 
         generateBirds();

@@ -61,7 +61,7 @@ public class AdvancedLevel2State extends GameState{
         SoundFX.loadSound("/SFX/snoopy-stage1.wav", "snoopyStage1");
         SoundFX.loadSound("/SFX/collect.wav", "collect");
         SoundFX.loadSound("/SFX/losinglife.wav", "losingLife");
-        SoundFX.setVolume("snoopyStage1", -15);
+        SoundFX.setVolume("snoopyStage1", -35);
         SoundFX.setVolume("losingLife", -20);
         SoundFX.setVolume("collect", -25);
         SoundFX.play("snoopyStage1");
