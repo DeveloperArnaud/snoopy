@@ -30,12 +30,13 @@ public class MenuState extends GameState {
         bg = Content.BACKGROUNDMENU[0][0];
         cursor = Content.CURSOR[0][0];
         optionList.add("Commencer");
+        optionList.add("Jeu avancé");
         optionList.add("Charger une partie");
         optionList.add("Mot de passe");
         optionList.add("Quitter");
         File f = new File("C:/Users/arnau/testBirds.txt");
         if(!f.exists()) {
-            optionList.remove(optionList.get(1));
+            optionList.remove(optionList.get(2));
         }
         SoundFX.loadSound("/SFX/snoopyTitleScreen3.wav", "snoopyTitleScreen");
         SoundFX.loadSound("/SFX/menuoption.wav", "menuoption");
@@ -65,6 +66,7 @@ public class MenuState extends GameState {
         graphics2D.drawImage(bg, 0, 0, null);
         Font font = new Font("Century Gothic", Font.BOLD, 11);
         graphics2D.setFont(font);
+<<<<<<< HEAD
         graphics2D.drawString("La Revanche de Snoopy", 14 , 55);
 
         if(optionList.size() < 4 ) {
@@ -88,21 +90,41 @@ public class MenuState extends GameState {
             graphics2D.drawString(optionList.get(1), 50, 140);
             graphics2D.drawString(optionList.get(2), 50, 156);
             graphics2D.drawString(optionList.get(3), 50, 172);
+=======
+        graphics2D.drawString("La Revanche de Snoopy", 15, 40);
 
+        if (optionList.size() < 5) {
+            graphics2D.drawString(optionList.get(0), 50, 74);
+            graphics2D.drawString(optionList.get(1), 50, 90);
+            graphics2D.drawString(optionList.get(2), 50, 106);
+            graphics2D.drawString(optionList.get(3), 50, 122);
+>>>>>>> feature/advanced
 
             if (currentOption == 0) {
-
                 graphics2D.drawImage(cursor, 25, 62, null);
-
             } else if (currentOption == 1) {
-
                 graphics2D.drawImage(cursor, 25, 78, null);
             } else if (currentOption == 2) {
-
                 graphics2D.drawImage(cursor, 25, 94, null);
             } else if (currentOption == 3) {
-
                 graphics2D.drawImage(cursor, 25, 110, null);
+            } else {
+                graphics2D.drawString(optionList.get(0), 50, 74);
+                graphics2D.drawString(optionList.get(1), 50, 90);
+                graphics2D.drawString(optionList.get(2), 50, 106);
+                graphics2D.drawString(optionList.get(3), 50, 122);
+                graphics2D.drawString(optionList.get(4), 50, 138);
+                if (currentOption == 0) {
+                    graphics2D.drawImage(cursor, 25, 62, null);
+                } else if (currentOption == 1) {
+                    graphics2D.drawImage(cursor, 25, 78, null);
+                } else if (currentOption == 2) {
+                    graphics2D.drawImage(cursor, 25, 94, null);
+                } else if (currentOption == 3) {
+                    graphics2D.drawImage(cursor, 25, 110, null);
+                } else if (currentOption == 4) {
+                    graphics2D.drawImage(cursor, 25, 126, null);
+                }
             }
         }
     }
@@ -123,7 +145,6 @@ public class MenuState extends GameState {
         }
         if(Inputs.isPressed(Inputs.ENTER)) {
             chooseOptions();
-
         }
 
     }
@@ -138,25 +159,28 @@ public class MenuState extends GameState {
         }
 
         if(currentOption == 1 ) {
+            gameStateManager.setState(GameStateManager.LEVEL1AUTO);
+        }
+        if(currentOption == 2 ) {
             gameStateManager.setState(GameStateManager.MDP);
         }
-        if(optionList.size() < 4 ) {
-            if (currentOption == 2) {
+        if(optionList.size() < 5 ) {
+            if (currentOption == 3) {
                 SoundFX.play("collect");
                 System.exit(0);
 
             }
         } else {
-            if (currentOption == 1) {
+            if (currentOption == 2) {
                 SoundFX.stop("snoopyTitleScreen");
                 gameStateManager.setState(GameStateManager.SAVEDGAME);
             }
 
-            if(currentOption == 2 ) {
+            if(currentOption == 3 ) {
                 gameStateManager.setState(GameStateManager.MDP);
             }
 
-            if(currentOption == 3) {
+            if(currentOption == 4) {
                 SoundFX.play("collect");
                 System.exit(0);
 

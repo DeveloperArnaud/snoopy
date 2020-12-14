@@ -1,7 +1,11 @@
 package com.ece.snoopy.UI;
 import com.ece.snoopy.Controller.Content;
 import com.ece.snoopy.Main.GamePanel;
+<<<<<<< HEAD
 import com.ece.snoopy.Model.Bird;
+=======
+import com.ece.snoopy.Model.AutoPlayer;
+>>>>>>> feature/advanced
 import com.ece.snoopy.Model.Player;
 import org.w3c.dom.css.Rect;
 
@@ -14,6 +18,7 @@ public class UI {
 
     private int yoffset;
     private Player player;
+<<<<<<< HEAD
     private BufferedImage bar;
     private BufferedImage bird;
     private BufferedImage heart;
@@ -21,6 +26,9 @@ public class UI {
     private BufferedImage heart3;
     private ArrayList<BufferedImage> hearts = new ArrayList<>();
 
+=======
+    private AutoPlayer autoPlayer;
+>>>>>>> feature/advanced
 
     /**
      * Constructeur
@@ -28,6 +36,7 @@ public class UI {
      */
     public UI(Player p, ArrayList<Bird> birds) {
         this.player = p;
+<<<<<<< HEAD
         yoffset = GamePanel.HEIGHT;
         bar = Content.BAR[0][0];
         bird = Content.BIRD[0][0];
@@ -38,6 +47,13 @@ public class UI {
         hearts.add(heart2);
         hearts.add(heart3);
 
+=======
+        autoPlayer = null;
+    }
+    public UI(AutoPlayer p) {
+        this.autoPlayer = p;
+        player = null;
+>>>>>>> feature/advanced
     }
 
     /**
@@ -45,6 +61,7 @@ public class UI {
      * @param graphics2D graphics2D
      */
     public void draw(Graphics2D graphics2D) {
+<<<<<<< HEAD
         graphics2D.drawImage(bar, 0, yoffset, null);
         graphics2D.fillRect(8, yoffset + 6,  player.getNbBirds() * 16 , 4);
         graphics2D.drawImage(bird, 80, yoffset, null);
@@ -66,6 +83,24 @@ public class UI {
         int seconds = player.getTime();
         graphics2D.setColor(Color.BLACK);
         Content.drawString(graphics2D,""+seconds, 80, 4);
+=======
+        int seconds = 0;
+        if (player != null)
+            seconds = player.getTime();
+        else
+            seconds = autoPlayer.getTime();
+        graphics2D.setColor(Color.WHITE);
+        Rectangle r = new Rectangle(79, 0, 14, 12);
+        graphics2D.fill(r);
+        r = new Rectangle(4, 0, 32, 12);
+        graphics2D.fill(r);
+        graphics2D.setColor(Color.BLACK);
+        graphics2D.drawString( ""+seconds, 80, 10);
+        if (player != null)
+            graphics2D.drawString("Vie : " + player.getLife(), 5, 10);
+        else
+            graphics2D.drawString("Vie : " + autoPlayer.getLife(), 5, 10);
+>>>>>>> feature/advanced
 
     }
 

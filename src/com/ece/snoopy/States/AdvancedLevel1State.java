@@ -1,10 +1,10 @@
 package com.ece.snoopy.States;
 
-import com.ece.snoopy.Controller.Content;
 import com.ece.snoopy.Controller.GameStateManager;
 import com.ece.snoopy.Controller.Inputs;
 import com.ece.snoopy.Main.GamePanel;
 import com.ece.snoopy.Map.TileMap;
+import com.ece.snoopy.Model.AutoPlayer;
 import com.ece.snoopy.Model.Ball;
 import com.ece.snoopy.Model.Bird;
 import com.ece.snoopy.Model.Player;
@@ -14,14 +14,10 @@ import com.ece.snoopy.UI.UI;
 import java.awt.*;
 import java.util.ArrayList;
 
-/*
-    NIVEAU 1
-
- */
-public class Level1State extends GameState{
+public class AdvancedLevel1State extends GameState{
 
     //Composants du niveau 1
-    private Player player;
+    private AutoPlayer player;
     private TileMap tileMap;
     private UI ui;
     private Ball ball;
@@ -34,11 +30,12 @@ public class Level1State extends GameState{
     private boolean eventGo;
     private boolean eventFinish;
 
+    private boolean bird1 = true;
 
     /**
      * @param gameStateManager GameStateManager
      */
-    public Level1State(GameStateManager gameStateManager) {
+    public AdvancedLevel1State(GameStateManager gameStateManager) {
         super(gameStateManager);
     }
 
@@ -48,8 +45,8 @@ public class Level1State extends GameState{
         tileMap = new TileMap(16);
         tileMap.loadTiles("/Tilesets/testtileset.gif");
         tileMap.loadMap("/Maps/level1.map");
-        player = new Player(tileMap);
-        ui = new UI(player, birds);
+        player = new AutoPlayer(tileMap);
+        ui = new UI(player);
         ball = new Ball(tileMap, 1);
 
         generateBirds();
@@ -61,8 +58,8 @@ public class Level1State extends GameState{
         SoundFX.loadSound("/SFX/snoopy-stage1.wav", "snoopyStage1");
         SoundFX.loadSound("/SFX/collect.wav", "collect");
         SoundFX.loadSound("/SFX/losinglife.wav", "losingLife");
-        SoundFX.setVolume("snoopyStage1", -35);
-        SoundFX.setVolume("losingLife", -30);
+        SoundFX.setVolume("snoopyStage1", -15);
+        SoundFX.setVolume("losingLife", -20);
         SoundFX.setVolume("collect", -25);
         SoundFX.play("snoopyStage1");
 
@@ -70,7 +67,6 @@ public class Level1State extends GameState{
         boxes = new ArrayList<>();
         eventGo = true;
         eventGo();
-
     }
 
     /**
@@ -100,7 +96,7 @@ public class Level1State extends GameState{
             SoundFX.play("losingLife");
             player.losingLife();
         }
-         //1800*3 = 3min
+        //1800*3 = 3min
         if(player.getTicks() == (1800 * 3)) {
             player.losingLife();
             gameStateManager.setState(GameStateManager.GAMEOVER);
@@ -113,16 +109,29 @@ public class Level1State extends GameState{
             gameStateManager.setState(GameStateManager.GAMEOVER);
         }
 
-        /*
-        if(player.getLife() == -100) {
-            eventFinish = blockInput = true;
-            gameStateManager.setState(GameStateManager.MENU);
-        }
-        */
-
         tileMap.setPosition(-256, -256);
         tileMap.update();
 
+        if (player.getNbBirds() == 0 && bird1) {
+            Integer b1 = 16 + 16 * 8;
+            player.computePath(b1, null);
+            bird1 = false;
+        }
+        if (player.getNbBirds() == 1 && !bird1) {
+            Integer b1 = 16 + 23 * 8;
+            player.computePath(b1, null);
+            bird1 = true;
+        }
+        if (player.getNbBirds() == 2 && bird1) {
+            Integer b1 = 23 + 23 * 8;
+            player.computePath(b1, null);
+            bird1 = false;
+        }
+        if (player.getNbBirds() == 3 && !bird1) {
+            Integer b1 = 23 + 16 * 8;
+            player.computePath(b1, null);
+            bird1 = true;
+        }
         player.update();
         ball.update();
 
@@ -228,8 +237,6 @@ public class Level1State extends GameState{
         birds.add(bird1);
         birds.add(bird2);
         birds.add(bird3);
-
-
     }
 
     /**
@@ -245,7 +252,7 @@ public class Level1State extends GameState{
         //System.out.println(player.getTicks());
 
         if(player.getTicks() < 90) {
-            Content.drawString(graphics2D, "Niveau 1",50, 70);
+            graphics2D.drawString("Niveau 1", 60, 40);
         }
 
         for(Bird bird : birds) {
@@ -275,17 +282,12 @@ public class Level1State extends GameState{
 
         //Bloquer les entrées et figer le jeu
         if(blockInput) return;
-        // Déplacements du personnage
-        if(Inputs.isDown(Inputs.LEFT)) player.setLEFT();
-        if(Inputs.isDown(Inputs.RIGHT)) player.setRIGHT();
-        if(Inputs.isDown(Inputs.UP)) player.setUP();
-        if(Inputs.isDown(Inputs.DOWN)) player.setDOWN();
     }
 
     /**
      * @return player
      */
-    public Player getPlayer() {
+    public AutoPlayer getPlayer() {
         return player;
     }
 

@@ -132,6 +132,22 @@ public class MdpState extends GameState {
             SoundFX.stop("snoopyTitleScreen");
             gameStateManager.setState(GameStateManager.LEVEL5);
         }
+        if(l.equals("AUTO1")) {
+            gameStateManager.setScoreLvl1(0);
+            gameStateManager.setScoreLvl2(0);
+            gameStateManager.setScoreLvl3(0);
+            gameStateManager.setScoreLvl4(0);
+            SoundFX.stop("snoopyTitleScreen");
+            gameStateManager.setState(GameStateManager.LEVEL1AUTO);
+        }
+        if(l.equals("AUTO2")) {
+            gameStateManager.setScoreLvl1(0);
+            gameStateManager.setScoreLvl2(0);
+            gameStateManager.setScoreLvl3(0);
+            gameStateManager.setScoreLvl4(0);
+            SoundFX.stop("snoopyTitleScreen");
+            gameStateManager.setState(GameStateManager.LEVEL2AUTO);
+        }
         else {
             pwd = "";
         }
