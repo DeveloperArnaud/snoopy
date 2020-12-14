@@ -13,16 +13,16 @@ import com.ece.snoopy.UI.UI;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import static com.ece.snoopy.Controller.SavingState.loadMap;
 import static com.ece.snoopy.Controller.SavingState.saveState;
 
-public class SavedGameState extends GameState{
+public class SavedGameState extends GameState {
+
+    private static final long serialVersionUID = -4137127613771002199L;
 
     private Player player;
     private TileMap tileMap;
@@ -31,9 +31,7 @@ public class SavedGameState extends GameState{
 
     private ArrayList<Bird> birds;
 
-    private int xsector;
-    private int ysector;
-    private int sectorSize;
+    Level1State level1State;
 
     private boolean blockInput;
     private int eventTick;
@@ -52,79 +50,105 @@ public class SavedGameState extends GameState{
 
     @Override
     public void init() {
-        String line = null;
-        String [] object = null;
-        try(BufferedReader br = new BufferedReader(new FileReader("C:/Users/arnau/testBirds.txt"))) {
 
-            while((line = br.readLine()) != null) {
-                object = line.split(",");
-                System.out.println(object[0]);
-            }
-            br.close();
+        try(FileInputStream fi = new FileInputStream(new File("C:/Users/arnau/testBirds"))) {
+            ObjectInputStream oi = new ObjectInputStream(fi);
 
-        } catch (IOException e) {
+            GameState gameState = (GameState) oi.readObject();
+            level1State = (Level1State) gameState;
+            birds = new ArrayList<>();
+            System.out.println(birds);
+            tileMap = new TileMap(16);
+            tileMap.loadTiles("/Tilesets/testtileset.gif");
+            tileMap.loadMap("/Maps/level1.map");
+            player = new Player(tileMap);
+            ui = new UI(player, birds);
+            ball = new Ball(tileMap, 1);
+
+            this.generateBirds();
+
+            player.setTilePosition(level1State.getPlayer().getTilePositionY(), level1State.getPlayer().getTilePositionX());
+            tileMap.setInitPosition(-256, -256);
+            ball.setTilePosition(level1State.getBall().getTilePositionY(),level1State.getBall().getTilePositionX());
+            System.out.println(level1State.getPlayer().getTime());
+
+            SoundFX.loadSound("/SFX/snoopy-stage1.wav", "snoopyStage1");
+            SoundFX.loadSound("/SFX/collect.wav", "collect");
+            SoundFX.loadSound("/SFX/losinglife.wav", "losingLife");
+            SoundFX.setVolume("snoopyStage1", -35);
+            SoundFX.setVolume("losingLife", -30);
+            SoundFX.setVolume("collect", -25);
+            SoundFX.play("snoopyStage1");
+
+
+
+            boxes = new ArrayList<>();
+            eventGo = true;
+            eventGo();
+
+
+            oi.close();
+
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 
-
-        /*
-        birds = new ArrayList<>();
-        tileMap.loadTiles("/Tilesets/testtileset.gif");
-        tileMap = loadMap("C:/Users/arnau/testBirds.txt");
-        //tileMap.loadMap("/Maps/templateMap.map");
-        player = new Player(tileMap);
-        ui = new UI(player, birds);
-        ball = new Ball(tileMap);
-
-        generateBirds();
-
-        player.setTilePosition(20, 20);
-        ball.setTilePosition(20,20);
-
-        sectorSize = GamePanel.WIDTH;
-        xsector = player.getX() / sectorSize;
-        ysector = player.getY() / sectorSize;
-        tileMap.setInitPosition(-xsector * sectorSize, -ysector * sectorSize);
-
-        SoundFX.loadSound("/SFX/snoopy-stage1.wav", "snoopyStage1");
-        SoundFX.loadSound("/SFX/collect.wav", "collect");
-        SoundFX.play("snoopyStage1");
-
-
-        boxes = new ArrayList<Rectangle>();
-        eventGo = true;
-        eventGo();
-        */
 
     }
 
     @Override
     public void update() {
+
         handleInput();
 
+        //Effet d'affichage
         if(eventGo) eventGo();
         if(eventFinish) eventFinish();
 
+        // Si le personnage a 4 oiseaux, fin de la partie
         if(player.getNbBirds() == 4) {
             eventFinish = blockInput = true;
         }
 
-        if(player.getTime() == 1) {
-            eventFinish = blockInput = true;
-            gameStateManager.setState(GameStateManager.LEVEL1);
+        /* GESTION DU TEMPS */
+        //1800 = 1min
+        if(player.getTicks() == 1800) {
+            SoundFX.play("losingLife");
+            player.losingLife();
+        }
+        //1800*2 = 2min
+        if(player.getTicks() == (1800 * 2)) {
+            SoundFX.play("losingLife");
+            player.losingLife();
+        }
+        //1800*3 = 3min
+        if(player.getTicks() == (1800 * 3)) {
+            player.losingLife();
+            gameStateManager.setState(GameStateManager.GAMEOVER);
+        }
+        /* FIN BLOC GESTION DU TEMPS */
+
+        // Si le personnage a 0 vie, retour au menu
+        if(player.getLife() == 0 ) {
+            SoundFX.stop("snoopyStage1");
+            gameStateManager.setState(GameStateManager.MENU);
         }
 
-        int ox = xsector;
-        int oy = ysector;
-        xsector = player.getX() / sectorSize;
-        ysector = player.getY() / sectorSize;
+        /*
+        if(player.getLife() == -100) {
+            eventFinish = blockInput = true;
+            gameStateManager.setState(GameStateManager.MENU);
+        }
+        */
 
-        tileMap.setPosition(-xsector * sectorSize, -ysector * sectorSize);
+        tileMap.setPosition(-256, -256);
         tileMap.update();
 
         player.update();
+        ball.update();
 
-        for(int i = 0; i < birds.size(); i++) {
+        //Récupération des oiseaux
+        for(int i = 0; i < level1State.getBirds().size(); i++) {
             Bird bird = birds.get(i);
             bird.update();
 
@@ -137,10 +161,32 @@ public class SavedGameState extends GameState{
             }
         }
 
+        // Pas encore implémentée
         if(player.intersects(ball)){
             player.losingLife();
+            SoundFX.play("losingLife");
         }
 
+    }
+
+    public void generateBirds() {
+        Bird bird;
+        Bird bird1;
+        Bird bird2;
+        Bird bird3;
+
+        bird = new Bird(tileMap);
+        bird.setTilePosition(17,17);
+        bird1 = new Bird(tileMap);
+        bird1.setTilePosition(24,17);
+        bird2 = new Bird(tileMap);
+        bird2.setTilePosition(17,24);
+        bird3 = new Bird(tileMap);
+        bird3.setTilePosition(24,24);
+        birds.add(bird);
+        birds.add(bird1);
+        birds.add(bird2);
+        birds.add(bird3);
     }
 
 
@@ -201,29 +247,6 @@ public class SavedGameState extends GameState{
     }
 
 
-    private void generateBirds() {
-        Bird bird;
-        Bird bird1;
-        Bird bird2;
-        Bird bird3;
-
-        bird = new Bird(tileMap);
-        bird.setTilePosition(17,17);
-        bird1 = new Bird(tileMap);
-        bird1.setTilePosition(22,17);
-        bird2 = new Bird(tileMap);
-        bird2.setTilePosition(17,22);
-        bird3 = new Bird(tileMap);
-        bird3.setTilePosition(22,22);
-        birds.add(bird);
-        birds.add(bird1);
-        birds.add(bird2);
-        birds.add(bird3);
-
-
-    }
-
-
     @Override
     public void draw(Graphics2D graphics2D) {
         tileMap.draw(graphics2D);
@@ -237,11 +260,14 @@ public class SavedGameState extends GameState{
             bird.draw(graphics2D);
         }
 
+
+
         ui.draw(graphics2D);
 
         graphics2D.setColor(Color.BLACK);
-        for(int i = 0; i < boxes.size(); i++) {
-            graphics2D.fill(boxes.get(i));
+        for(int i = 0; i < level1State.getBoxes().size(); i++) {
+            graphics2D.fill(level1State.getBoxes()
+                    .get(i));
         }
     }
 
