@@ -23,7 +23,7 @@ public class Ball extends Model {
     private long ticks;
 
 
-    BufferedImage[] ballImage;
+    transient BufferedImage[] ballImage;
 
     /**
      * Constructeur

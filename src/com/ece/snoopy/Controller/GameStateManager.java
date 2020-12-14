@@ -4,11 +4,12 @@ import com.ece.snoopy.SoundFX.SoundFX;
 import com.ece.snoopy.States.*;
 
 import java.awt.*;
+import java.io.Serializable;
 
 /*
     GESTION DES ETATS DE JEU
  */
-public class GameStateManager {
+public class GameStateManager implements Serializable {
 
 
     // Modèle des etats de jeu
@@ -168,6 +169,8 @@ public class GameStateManager {
     public GameState getPreviousState() {
         return gameStates[previousState];
     }
+
+    public GameState getCurrentState() {return gameStates[currentState];}
 
     /**
      *  Permettre de mettre à jour l'etat entre chaque niveau

@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 public class Bird extends Model {
 
     //Image
-    BufferedImage[] bufferedImages;
+    transient BufferedImage[] bufferedImages;
 
     /**
      * Constructeur

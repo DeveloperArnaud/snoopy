@@ -1,11 +1,12 @@
 package com.ece.snoopy.Map;
 
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
-public class Tile {
+public class Tile implements Serializable {
 
     //Image
-    private BufferedImage image;
+    private transient BufferedImage image;
     private int type;
 
     //Type

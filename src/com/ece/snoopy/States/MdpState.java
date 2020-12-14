@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
 public class MdpState extends GameState {
 
     //Image et mot de passe
-    private BufferedImage bg;
+    private transient BufferedImage bg;
     private String pwd;
 
     /**

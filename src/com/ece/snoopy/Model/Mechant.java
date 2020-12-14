@@ -19,11 +19,11 @@ public class Mechant extends Model {
 
 
     //Sprite de déplacement du personnage
-    BufferedImage[] bufferedImages;
-    private BufferedImage[] downSprites;
-    private BufferedImage[] leftSprites;
-    private BufferedImage[] rightSprites;
-    private BufferedImage[] upSprites;
+    transient BufferedImage[] bufferedImages;
+    private transient BufferedImage[] downSprites;
+    private transient BufferedImage[] leftSprites;
+    private transient BufferedImage[] rightSprites;
+    private transient BufferedImage[] upSprites;
     private int dir;
 
     /**

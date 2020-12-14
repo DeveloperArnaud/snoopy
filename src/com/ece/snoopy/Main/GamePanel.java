@@ -22,7 +22,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     private final int TARGET_TIME = 1000 / fps;
 
     //Palette graphique
-    private BufferedImage image;
+    private transient BufferedImage image;
     private Graphics2D graphics2D;
 
     //Gestion des états de jeu

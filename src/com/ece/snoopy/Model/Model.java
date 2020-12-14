@@ -4,8 +4,9 @@ import com.ece.snoopy.Map.Tile;
 import com.ece.snoopy.Map.TileMap;
 
 import java.awt.*;
+import java.io.Serializable;
 
-public abstract class Model {
+public abstract class Model implements Serializable {
 
     //Mouvements
     protected TileMap tileMap;
@@ -169,12 +170,12 @@ public abstract class Model {
     }
 
     public int getTilePositionX() {
-        tilePositionX = (int) (xdest / (tileSize * tileSize) * 2 - 0.5);
+        tilePositionX = (int)(xdest / (tileSize + tileSize) * 2 - 0.5);
         return tilePositionX;
     }
 
     public int getTilePositionY() {
-        tilePositionY = (int) (y / (tileSize * tileSize) * 2 - 0.5);
+        tilePositionY = (int) (y / (tileSize + tileSize) * 2 - 0.5);
         return tilePositionY;
     }
 
