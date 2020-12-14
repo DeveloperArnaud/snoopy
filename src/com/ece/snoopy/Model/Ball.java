@@ -14,7 +14,11 @@ import java.util.Random;
 public class Ball extends Model {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     private static final long serialVersionUID = -2567667016328890415L;
+=======
+    private static final long serialVersionUID =-2567667016328890415L;
+>>>>>>> 62d7449d14b797590edc45f05a6044a3744671c7
 =======
     private static final long serialVersionUID =-2567667016328890415L;
 >>>>>>> 62d7449d14b797590edc45f05a6044a3744671c7
