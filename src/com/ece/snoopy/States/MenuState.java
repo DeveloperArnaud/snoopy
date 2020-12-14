@@ -36,7 +36,7 @@ public class MenuState extends GameState {
         optionList.add("Quitter");
         File f = new File("C:/Users/arnau/testBirds.txt");
         if(!f.exists()) {
-            optionList.remove(optionList.get(2));
+            optionList.remove(optionList.get(3));
         }
         SoundFX.loadSound("/SFX/snoopyTitleScreen3.wav", "snoopyTitleScreen");
         SoundFX.loadSound("/SFX/menuoption.wav", "menuoption");
