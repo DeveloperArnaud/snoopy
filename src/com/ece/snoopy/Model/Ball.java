@@ -13,6 +13,8 @@ import java.util.Random;
  */
 public class Ball extends Model {
 
+    private static final long serialVersionUID = -2567667016328890415L;
+
     public static final int NO = 0;
     public static final int NE = 1;
     public static final int SE = 2;

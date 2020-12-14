@@ -34,7 +34,7 @@ public class MenuState extends GameState {
         optionList.add("Charger une partie");
         optionList.add("Mot de passe");
         optionList.add("Quitter");
-        File f = new File("C:/Users/arnau/testBirds");
+        File f = new File("C:/Users/arnau/save1");
         if(!f.exists()) {
             optionList.remove(optionList.get(2));
         }
@@ -44,6 +44,7 @@ public class MenuState extends GameState {
         SoundFX.setVolume("snoopyTitleScreen", -35);
         SoundFX.setVolume("menuoption", -25);
         SoundFX.play("snoopyTitleScreen");
+        SoundFX.resumeLoop("snoopyTitleScreen");
     }
 
     /**
