@@ -6,6 +6,7 @@ import com.ece.snoopy.Main.GamePanel;
 import com.ece.snoopy.Map.TileMap;
 import com.ece.snoopy.Model.Ball;
 import com.ece.snoopy.Model.Bird;
+import com.ece.snoopy.Model.Objet;
 import com.ece.snoopy.Model.Player;
 import com.ece.snoopy.SoundFX.SoundFX;
 import com.ece.snoopy.UI.UI;
@@ -18,23 +19,33 @@ import java.util.ArrayList;
 
 public class SavedGameState extends GameState {
 
+    //ID de serialisation (BufferedImage)
     private static final long serialVersionUID = -4137127613771002199L;
 
+    //Composants
     private Player player;
     private TileMap tileMap;
     private UI ui;
     private Ball ball;
 
+    //Les objets
     private ArrayList<Bird> birds;
+    private ArrayList<Objet> objets;
 
+    //Les states
     Level1State level1State;
+    Level2State level2State;
+    Level3State level3State;
+    Level4State level4State;
+    Level5State level5State;
 
+    //Les evenements
     private boolean blockInput;
     private int eventTick;
     private ArrayList<Rectangle> boxes;
     private boolean eventGo;
     private boolean eventFinish;
-
+    GameState gameState;
 
 
     /**
@@ -47,43 +58,82 @@ public class SavedGameState extends GameState {
     @Override
     public void init() {
 
-        try(FileInputStream fi = new FileInputStream(new File("C:/Users/arnau/testBirds"))) {
+        try(FileInputStream fi = new FileInputStream(new File("C:/Users/arnau/save1"))) {
             ObjectInputStream oi = new ObjectInputStream(fi);
+            gameState = (GameState) oi.readObject();
 
-            GameState gameState = (GameState) oi.readObject();
-            level1State = (Level1State) gameState;
-            birds = new ArrayList<>();
-            System.out.println(birds);
-            tileMap = new TileMap(16);
-            tileMap.loadTiles("/Tilesets/testtileset.gif");
-            tileMap.loadMap("/Maps/level1.map");
-            player = new Player(tileMap);
-            ui = new UI(player);
-            ball = new Ball(tileMap, 1);
+            if(gameState instanceof Level1State) {
+                SoundFX.stop("snoopyTitleScreen");
+                level1State = (Level1State) gameState;
+                birds = new ArrayList<>();
+                System.out.println(birds);
+                tileMap = new TileMap(16);
+                tileMap.loadTiles("/Tilesets/testtileset.gif");
+                tileMap.loadMap("/Maps/level1.map");
+                player = new Player(tileMap);
+                ui = new UI(player);
+                ball = new Ball(tileMap, 1);
 
-            this.generateBirds();
+                this.generateBirds();
+                System.out.println(level1State.getPlayer().getTilePositionX());
+                player.setTilePosition(level1State.getPlayer().getTilePositionY(), level1State.getPlayer().getTilePositionX());
+                tileMap.setInitPosition(-256, -256);
+                ball.setTilePosition(level1State.getBall().getTilePositionY(), level1State.getBall().getTilePositionX());
+                System.out.println(level1State.getPlayer().getTime());
 
-            player.setTilePosition(level1State.getPlayer().getTilePositionY(), level1State.getPlayer().getTilePositionX());
-            tileMap.setInitPosition(-256, -256);
-            ball.setTilePosition(level1State.getBall().getTilePositionY(),level1State.getBall().getTilePositionX());
-            System.out.println(level1State.getPlayer().getTime());
-
-            SoundFX.loadSound("/SFX/snoopy-stage1.wav", "snoopyStage1");
-            SoundFX.loadSound("/SFX/collect.wav", "collect");
-            SoundFX.loadSound("/SFX/losinglife.wav", "losingLife");
-            SoundFX.setVolume("snoopyStage1", -35);
-            SoundFX.setVolume("losingLife", -30);
-            SoundFX.setVolume("collect", -25);
-            SoundFX.play("snoopyStage1");
-
-
-
-            boxes = new ArrayList<>();
-            eventGo = true;
-            eventGo();
+                SoundFX.loadSound("/SFX/snoopy-stage1.wav", "snoopyStage1");
+                SoundFX.loadSound("/SFX/collect.wav", "collect");
+                SoundFX.loadSound("/SFX/losinglife.wav", "losingLife");
+                SoundFX.setVolume("snoopyStage1", -35);
+                SoundFX.setVolume("losingLife", -30);
+                SoundFX.setVolume("collect", -25);
+                SoundFX.play("snoopyStage1");
 
 
-            oi.close();
+                boxes = new ArrayList<>();
+                eventGo = true;
+                eventGo();
+
+
+                oi.close();
+
+            } else if(gameState instanceof Level2State) {
+                SoundFX.stop("snoopyStage1");
+                SoundFX.stop("snoopyTitleScreen");
+                level2State = (Level2State) gameState;
+                birds = new ArrayList<>();
+                objets = new ArrayList<>();
+                tileMap = new TileMap(16);
+                tileMap.loadTiles("/Tilesets/testtileset.gif");
+                tileMap.loadMap("/Maps/level2.map");
+                player = new Player(tileMap);
+                ui = new UI(player);
+                ball = new Ball(tileMap, 1);
+
+                generateBirds();
+                generateObjets();
+
+                player.setTilePosition(level2State.getPlayer().getTilePositionY(), level2State.getPlayer().getTilePositionX());
+                System.out.println(level2State.getPlayer().getTilePositionY());
+                tileMap.setInitPosition(-256, -256);
+                ball.setTilePosition(level2State.getBall().getTilePositionY(), level2State.getBall().getTilePositionX());
+
+                SoundFX.loadSound("/SFX/snoopyStage2.wav", "snoopyStage2");
+                SoundFX.loadSound("/SFX/collect.wav", "collect");
+                SoundFX.loadSound("/SFX/losinglife.wav", "losingLife");
+                SoundFX.setVolume("snoopyStage2", -35);
+                SoundFX.setVolume("losingLife", -30);
+                SoundFX.setVolume("collect", -25);
+                SoundFX.play("snoopyStage2");
+
+
+
+                boxes = new ArrayList<>();
+                eventGo = true;
+                eventGo();
+
+                oi.close();
+            }
 
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -91,6 +141,8 @@ public class SavedGameState extends GameState {
 
 
     }
+
+
 
     @Override
     public void update() {
@@ -144,7 +196,7 @@ public class SavedGameState extends GameState {
         ball.update();
 
         //Récupération des oiseaux
-        for(int i = 0; i < level1State.getBirds().size(); i++) {
+        for(int i = 0; i < birds.size(); i++) {
             Bird bird = birds.get(i);
             bird.update();
 
@@ -184,6 +236,43 @@ public class SavedGameState extends GameState {
         birds.add(bird2);
         birds.add(bird3);
     }
+
+    public void generateObjets() {
+        Objet rocher1;
+        Objet rocher2;
+        Objet rocher3;
+        Objet rocher4;
+        Objet trap;
+        Objet trap2;
+        Objet trap3;
+        Objet trap4;
+
+        trap = new Objet(tileMap, Objet.TRAP);
+        trap.setTilePosition(20,17);
+        trap2 = new Objet(tileMap, Objet.TRAP);
+        trap2.setTilePosition(20,24);
+        trap3 = new Objet(tileMap, Objet.TRAP);
+        trap3.setTilePosition(21,17);
+        trap4 = new Objet(tileMap, Objet.TRAP);
+        trap4.setTilePosition(21,24);
+        rocher1 = new Objet(tileMap, Objet.ROCK);
+        rocher1.setTilePosition(18,17);
+        rocher2 = new Objet(tileMap, Objet.ROCK);
+        rocher2.setTilePosition(23,17);
+        rocher3 = new Objet(tileMap, Objet.ROCK);
+        rocher3.setTilePosition(17,23);
+        rocher4 = new Objet(tileMap, Objet.ROCK);
+        rocher4.setTilePosition(24,23);
+        objets.add(rocher1);
+        objets.add(rocher2);
+        objets.add(rocher3);
+        objets.add(rocher4);
+        objets.add(trap);
+        objets.add(trap2);
+        objets.add(trap3);
+        objets.add(trap4);
+    }
+
 
 
     private void eventGo() {
@@ -256,33 +345,50 @@ public class SavedGameState extends GameState {
             bird.draw(graphics2D);
         }
 
-
-
         ui.draw(graphics2D);
 
         graphics2D.setColor(Color.BLACK);
-        for(int i = 0; i < level1State.getBoxes().size(); i++) {
-            graphics2D.fill(level1State.getBoxes()
+        for(int i = 0; i < boxes.size(); i++) {
+            graphics2D.fill(boxes
                     .get(i));
         }
     }
 
     @Override
     public void handleInput() {
-        if(Inputs.isPressed(Inputs.ESCAPE)){
-            SoundFX.stop("snoopyStage1");
-            gameStateManager.setPaused(true);
-        }
-        if(Inputs.isPressed(Inputs.S)) {
-            SoundFX.stop("snoopyStage1");
-            gameStateManager.setPaused(true);
-            //saveState(player, tileMap, birds);
 
+        if(gameState instanceof Level1State) {
+            if(Inputs.isPressed(Inputs.ESCAPE)){
+                SoundFX.stop("snoopyStage1");
+                gameStateManager.setPaused(true);
+            }
+
+            if(!gameStateManager.getPaused()) {
+                SoundFX.resumeLoop("snoopyStage1");
+            }
+
+            //Bloquer les entrées et figer le jeu
+            if(blockInput) return;
+            // Déplacements du personnage
+            if(Inputs.isDown(Inputs.LEFT)) player.setLEFT();
+            if(Inputs.isDown(Inputs.RIGHT)) player.setRIGHT();
+            if(Inputs.isDown(Inputs.UP)) player.setUP();
+            if(Inputs.isDown(Inputs.DOWN)) player.setDOWN();
+        } else if(gameState instanceof Level2State) {
+            if(Inputs.isPressed(Inputs.ESCAPE)){
+                SoundFX.stop("snoopyStage2");
+                gameStateManager.setPaused(true);
+            }
+            if(!gameStateManager.getPaused()) {
+                SoundFX.resumeLoop("snoopyStage2");
+            }
+
+            if(blockInput) return;
+            if(Inputs.isDown(Inputs.LEFT)) player.setLEFT(objets, birds);
+            if(Inputs.isDown(Inputs.RIGHT)) player.setRIGHT(objets, birds);
+            if(Inputs.isDown(Inputs.UP)) player.setUP(objets, birds);
+            if(Inputs.isDown(Inputs.DOWN)) player.setDOWN(objets, birds);
+            if(Inputs.isPressed(Inputs.SPACE)) player.setAction();
         }
-        if(blockInput) return;
-        if(Inputs.isDown(Inputs.LEFT)) player.setLEFT();
-        if(Inputs.isDown(Inputs.RIGHT)) player.setRIGHT();
-        if(Inputs.isDown(Inputs.UP)) player.setUP();
-        if(Inputs.isDown(Inputs.DOWN)) player.setDOWN();
     }
 }

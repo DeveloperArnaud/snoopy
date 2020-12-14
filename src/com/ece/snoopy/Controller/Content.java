@@ -9,18 +9,18 @@ import java.awt.image.BufferedImage;
 public class Content {
 
     //Sprite des objets
-    public static BufferedImage[][] BACKGROUNDMENU = load("/Intro/snoopyMenuTitleScreen.png", GamePanel.WIDTH,GamePanel.HEIGHT + 16);
-    public static BufferedImage[][] BACKGROUNDMDP = load("/Intro/snoopyMdpTitleScreen.png", GamePanel.WIDTH,GamePanel.HEIGHT + 16);
-    public static BufferedImage[][] CURSOR = load("/Intro/cursor.png", 16, 16);
-    public static BufferedImage[][] PLAYER = load("/Sprites/SpriteSnoopy.gif",16,16);
-    public static BufferedImage[][] BIRD = load("/Sprites/diamond.gif",16 ,16);
-    public static BufferedImage[][] BALL = load("/Sprites/ball.png",16,16);
-    public static BufferedImage[][] ROCK = load("/Sprites/rock.png",16,16);
-    public static BufferedImage[][] SPEED = load("/Sprites/speed.png",16,16);
-    public static BufferedImage[][] MECHANT = load("/Sprites/SpriteSnoopyMechant.gif",16,16);
-    public static BufferedImage[][] BAR = load("/Sprites/barHUD.gif",160,16);
-    public static BufferedImage[][] HEART = load("/Sprites/heart.gif",12,12);
-    public static BufferedImage[][] font = load("/HUD/font.gif", 8, 8);
+    public transient static BufferedImage[][] BACKGROUNDMENU = load("/Intro/snoopyMenuTitleScreen.png", GamePanel.WIDTH,GamePanel.HEIGHT + 16);
+    public transient static BufferedImage[][] BACKGROUNDMDP = load("/Intro/snoopyMdpTitleScreen.png", GamePanel.WIDTH,GamePanel.HEIGHT + 16);
+    public transient static BufferedImage[][] CURSOR = load("/Intro/cursor.png", 16, 16);
+    public transient static BufferedImage[][] PLAYER = load("/Sprites/SpriteSnoopy.gif",16,16);
+    public transient static BufferedImage[][] BIRD = load("/Sprites/diamond.gif",16 ,16);
+    public transient static BufferedImage[][] BALL = load("/Sprites/ball.png",16,16);
+    public transient static BufferedImage[][] ROCK = load("/Sprites/rock.png",16,16);
+    public transient static BufferedImage[][] SPEED = load("/Sprites/speed.png",16,16);
+    public transient static BufferedImage[][] MECHANT = load("/Sprites/SpriteSnoopyMechant.gif",16,16);
+    public transient static BufferedImage[][] BAR = load("/Sprites/barHUD.gif",160,16);
+    public transient static BufferedImage[][] HEART = load("/Sprites/heart.gif",12,12);
+    public transient static BufferedImage[][] font = load("/HUD/font.gif", 8, 8);
 
     /**
      * Charger les images

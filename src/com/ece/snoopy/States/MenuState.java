@@ -12,8 +12,8 @@ import java.util.ArrayList;
 
 public class MenuState extends GameState {
 
-    private BufferedImage bg;
-    private BufferedImage cursor;
+    private transient BufferedImage bg;
+    private transient BufferedImage cursor;
     private int currentOption = 0;
     private ArrayList<String> optionList = new ArrayList<>();
 

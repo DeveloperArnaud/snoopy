@@ -8,8 +8,9 @@ import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 
-public class TileMap {
+public class TileMap implements Serializable {
 
     //Position
     private int x;
@@ -34,7 +35,7 @@ public class TileMap {
     private int height;
 
     //Cases du jeu
-    private BufferedImage tileset;
+    private transient BufferedImage tileset;
     private int numTilesAcross;
     private Tile[][] tiles;
 

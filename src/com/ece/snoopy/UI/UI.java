@@ -8,19 +8,20 @@ import org.w3c.dom.css.Rect;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class UI {
+public class UI implements Serializable {
 
     private int yoffset;
     private Player player;
-    private BufferedImage bar;
-    private BufferedImage bird;
-    private BufferedImage heart;
-    private BufferedImage heart2;
-    private BufferedImage heart3;
-    private ArrayList<BufferedImage> hearts = new ArrayList<>();
+    private transient BufferedImage bar;
+    private transient BufferedImage bird;
+    private transient BufferedImage heart;
+    private transient BufferedImage heart2;
+    private transient BufferedImage heart3;
+    private transient ArrayList<BufferedImage> hearts = new ArrayList<>();
     private AutoPlayer autoPlayer;
 
     /**

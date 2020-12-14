@@ -22,7 +22,7 @@ public class Ball extends Model {
     private int moveSpeed;
 
 
-    BufferedImage[] ballImage;
+    transient BufferedImage[] ballImage;
 
     /**
      * Constructeur
