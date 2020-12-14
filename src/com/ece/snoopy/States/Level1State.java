@@ -109,7 +109,7 @@ public class Level1State extends GameState{
         // Si le personnage a 0 vie, retour au menu
         if(player.getLife() == 0 ) {
             SoundFX.stop("snoopyStage1");
-            gameStateManager.setState(GameStateManager.MENU);
+            gameStateManager.setState(GameStateManager.GAMEOVER);
         }
 
         /*
