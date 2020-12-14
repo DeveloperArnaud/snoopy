@@ -53,7 +53,6 @@ public class SavedGameState extends GameState {
             GameState gameState = (GameState) oi.readObject();
             level1State = (Level1State) gameState;
             birds = new ArrayList<>();
-            System.out.println(birds);
             tileMap = new TileMap(16);
             tileMap.loadTiles("/Tilesets/testtileset.gif");
             tileMap.loadMap("/Maps/level1.map");
@@ -66,7 +65,6 @@ public class SavedGameState extends GameState {
             player.setTilePosition(level1State.getPlayer().getTilePositionY(), level1State.getPlayer().getTilePositionX());
             tileMap.setInitPosition(-256, -256);
             ball.setTilePosition(level1State.getBall().getTilePositionY(),level1State.getBall().getTilePositionX());
-            System.out.println(level1State.getPlayer().getTime());
 
             SoundFX.loadSound("/SFX/snoopy-stage1.wav", "snoopyStage1");
             SoundFX.loadSound("/SFX/collect.wav", "collect");
@@ -236,30 +234,19 @@ public class SavedGameState extends GameState {
             }
         }
         if(eventTick > 33) {
-            //Data.setTime(player.getTicks());
-            System.out.print(eventTick);
             gameStateManager.setState(GameStateManager.ENDLEVEL);
         }
     }
-
 
     @Override
     public void draw(Graphics2D graphics2D) {
         tileMap.draw(graphics2D);
         player.draw(graphics2D);
         ball.draw(graphics2D);
-
-
-
-
         for(Bird bird : birds) {
             bird.draw(graphics2D);
         }
-
-
-
         ui.draw(graphics2D);
-
         graphics2D.setColor(Color.BLACK);
         for(int i = 0; i < level1State.getBoxes().size(); i++) {
             graphics2D.fill(level1State.getBoxes()

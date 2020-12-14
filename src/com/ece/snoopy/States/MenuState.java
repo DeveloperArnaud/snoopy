@@ -44,7 +44,6 @@ public class MenuState extends GameState {
         SoundFX.setVolume("snoopyTitleScreen", -35);
         SoundFX.setVolume("menuoption", -25);
         SoundFX.play("snoopyTitleScreen");
-        ;
     }
 
     /**
@@ -125,14 +124,11 @@ public class MenuState extends GameState {
      * Récuperer l'option choisie
      */
     private void chooseOptions() {
-
         if(optionList.size() < 5 ) {
-
             if(currentOption == 0) {
                 SoundFX.stop("snoopyTitleScreen");
                 gameStateManager.setState(GameStateManager.LEVEL1);
             }
-
             if(currentOption == 1 ) {
                 SoundFX.stop("snoopyTitleScreen");
                 gameStateManager.setState(GameStateManager.LEVEL1AUTO);
@@ -143,15 +139,12 @@ public class MenuState extends GameState {
             if (currentOption == 3) {
                 SoundFX.play("collect");
                 System.exit(0);
-
             }
         } else {
-
             if(currentOption == 0) {
                 SoundFX.stop("snoopyTitleScreen");
                 gameStateManager.setState(GameStateManager.LEVEL1);
             }
-
             if(currentOption == 1 ) {
                 SoundFX.stop("snoopyTitleScreen");
                 gameStateManager.setState(GameStateManager.LEVEL1AUTO);
@@ -159,18 +152,15 @@ public class MenuState extends GameState {
             if(currentOption == 2 ) {
                 gameStateManager.setState(GameStateManager.SAVEDGAME);
             }
-
             if (currentOption == 3) {
                 SoundFX.stop("snoopyTitleScreen");
                 gameStateManager.setState(GameStateManager.MDP);
             }
-
             if(currentOption == 4) {
                 SoundFX.play("collect");
                 System.exit(0);
 
             }
         }
-
     }
 }
