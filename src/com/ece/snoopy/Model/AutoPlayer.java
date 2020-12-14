@@ -6,6 +6,7 @@ import com.ece.snoopy.SoundFX.SoundFX;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -86,15 +87,29 @@ public class AutoPlayer extends Model {
         return sommet;
     }
 
-    private void majDistance(Integer s1, Integer s2, Map<Integer, Integer> distances, Map<Integer, Integer> prede) {
+    private void majDistance(Integer s1, Integer s2, Map<Integer, Integer> distances, Map<Integer, Integer> prede, ArrayList<Objet> objets) {
         //if (s1 < offsetNbTileX * widthMap || s2 < offsetNbTileX * widthMap || s1 > (offsetNbTileY + heightMap + 1) * widthMap || s2 > (offsetNbTileY + heightMap + 1) * widthMap)
-        if (tileMap.getIndex(s1 % 8 + 17, s1 / 8 - 1) ==  21)
+        int typeS1 = tileMap.getIndex((s1 / 8) - 1, (s1 % 8) + 17);
+        int typeS2 = tileMap.getIndex((s2 / 8) - 1, (s2 % 8) + 17);
+        if (typeS1 == 20)
             return;
-        if (tileMap.getIndex(s2 % 8 + 17, s2 / 8 - 1) ==  21)
+        if (typeS2 == 20)
             return;
         if (!distances.containsKey(s2) || !distances.containsKey(s1)) {
             System.out.println(s2 + " " + s1);
             return;
+        }
+        if (objets != null) {
+            for (Objet e : objets) {
+                int rowT = e.getY() / tileSize;
+                int colT = e.getX() / tileSize;
+                int rowTs2 = s2 / 8 -1;
+                int colTs2 = s2 % 8 + 17;
+                if (rowT == rowTs2 && colT == colTs2) {
+                    System.out.println("On marche sur : " + rowT + " " + colT);
+                    return;
+                }
+            }
         }
         if (distances.get(s2) > distances.get(s1) + 1) {
             distances.put(s2, distances.get(s1) + 1);
@@ -102,7 +117,7 @@ public class AutoPlayer extends Model {
         }
     }
 
-    public void computePath(Integer b1) {
+    public void computePath(Integer b1, ArrayList<Objet> objets) {
         int row = this.y / tileSize - 1;
         int col = this.x / tileSize - 1;
         System.out.println("x : " + col + " y : " + row);
@@ -118,12 +133,12 @@ public class AutoPlayer extends Model {
                 break;
             Q.remove(Q.indexOf(s1));
 
-            majDistance(s1, s1 - widthMap, distances, prede);
-            majDistance(s1, s1 + widthMap, distances, prede);
+            majDistance(s1, s1 - widthMap, distances, prede, objets);
+            majDistance(s1, s1 + widthMap, distances, prede, objets);
             if ((s1 - 1) % widthMap != 7)
-            majDistance(s1, s1 - 1, distances, prede);
+            majDistance(s1, s1 - 1, distances, prede, objets);
             if ((s1 + 1) % widthMap != 0)
-            majDistance(s1, s1 + 1, distances, prede);
+            majDistance(s1, s1 + 1, distances, prede, objets);
         }
         while (b1 != null) {
             bufferDeplacement.add(b1);
@@ -142,6 +157,11 @@ public class AutoPlayer extends Model {
             bufferDeplacement.remove(bufferDeplacement.size() - 1);
             this.x = (xDep + 17) * tileSize + 8;
             this.y = (yDep -  1) * tileSize + 8;
+            int rowT = this.y / tileSize;
+            int colT = this.x / tileSize;
+            int typeTile = tileMap.getIndex(rowT, colT);
+            if (typeTile == 21)
+                tileMap.setTile(this.y / tileSize, this.x / tileSize, 1);
         }
         super.update();
     }

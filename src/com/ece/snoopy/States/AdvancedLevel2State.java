@@ -109,7 +109,7 @@ public class AdvancedLevel2State extends GameState{
         // Si le personnage a 0 vie, retour au menu
         if(player.getLife() == 0 ) {
             SoundFX.stop("snoopyStage1");
-            gameStateManager.setState(GameStateManager.MENU);
+            gameStateManager.setState(GameStateManager.GAMEOVER);
         }
 
         tileMap.setPosition(-256, -256);
@@ -117,22 +117,22 @@ public class AdvancedLevel2State extends GameState{
 
         if (player.getNbBirds() == 0 && bird1) {
             Integer b1 = 16 + 16 * 8;
-            player.computePath(b1);
+            player.computePath(b1, objets);
             bird1 = false;
         }
         if (player.getNbBirds() == 1 && !bird1) {
             Integer b1 = 16 + 23 * 8;
-            player.computePath(b1);
+            player.computePath(b1, objets);
             bird1 = true;
         }
         if (player.getNbBirds() == 2 && bird1) {
             Integer b1 = 23 + 23 * 8;
-            player.computePath(b1);
+            player.computePath(b1, objets);
             bird1 = false;
         }
         if (player.getNbBirds() == 3 && !bird1) {
             Integer b1 = 23 + 16 * 8;
-            player.computePath(b1);
+            player.computePath(b1, objets);
             bird1 = true;
         }
         player.update();
