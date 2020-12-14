@@ -59,17 +59,14 @@ public class Inputs {
                 case KeyEvent.VK_BACK_SPACE: keyState[ERASE] = b;
                     break;
             }
-
         if (i >= KeyEvent.VK_A && i <= KeyEvent.VK_Z) {
             keyState[LETTER] = b;
             lettre = Character.toString((char)i);
         }
-
         if (i >= KeyEvent.VK_0 && i <= KeyEvent.VK_9) {
             keyState[NUMBER] = b;
             numero = Character.toString((char)i);
         }
-
     }
 
     /**
@@ -80,10 +77,19 @@ public class Inputs {
             prevKeyState[i] = keyState[i];
         }
     }
+
+    /**
+     * Permet d'obtenir la touche numérique appuyée
+     * @return String avec le numéro appuyé
+     */
     public static String numberKey() {
         return numero;
     }
 
+    /**
+     * Permet d'obtenir la touche alphabétique appuyée
+     * @return String avec la lettre appuyée
+     */
     public static String letterKey() {
         return lettre;
     }

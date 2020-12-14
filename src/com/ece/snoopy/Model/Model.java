@@ -69,28 +69,46 @@ public abstract class Model {
                 null);
     }
 
+    /**
+     * On met à jour xmap et ymap
+     */
     public void setMapPosition() {
         xmap = tileMap.getX();
         ymap = tileMap.getY();
     }
 
     /* GESTION DES DIRECTIONS ( DROITE, GAUCHE, HAUT, BAS) */
+
+    /**
+     * On part sur la gauche
+     */
     public void setLeft() {
         if(moving) return;
         left = true;
         moving = validateNextPosition();
     }
+
+    /**
+     * On part sur la droite
+     */
     public void setRight() {
         if(moving) return;
         right = true;
         moving = validateNextPosition();
     }
+
+    /**
+     * On part vers le haut
+     */
     public void setUp() {
         if(moving) return;
         up = true;
         moving = validateNextPosition();
     }
 
+    /**
+     * On part vers le bas
+     */
     public void setDown() {
         if(moving) return;
         down = true;
@@ -168,10 +186,19 @@ public abstract class Model {
         ydest = y;
     }
 
+    /**
+     * On recupère la position de la tuile
+     * @return positon de tuile en x
+     */
     public int getTilePositionX() {
         tilePositionX = (int) (xdest / (tileSize * tileSize) * 2 - 0.5);
         return tilePositionX;
     }
+
+    /**
+     * On recupère la position de la tuile
+     * @return positon de tuile en y
+     */
 
     public int getTilePositionY() {
         tilePositionY = (int) (y / (tileSize * tileSize) * 2 - 0.5);
@@ -202,10 +229,18 @@ public abstract class Model {
 
     }
 
+    /**
+     * Obtenir le x
+     * @return x
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     * Obtenir le y
+     * @return y
+     */
     public int getY() {
         return y;
     }

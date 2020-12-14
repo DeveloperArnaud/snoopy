@@ -78,26 +78,50 @@ public class GameStateManager {
         return scoreLvl1;
     }
 
+    /**
+     *
+     * @param s Le score du niveau 2
+     */
     public void setScoreLvl2(int s) {
         this.scoreLvl2 = s;
     }
 
+    /**
+     * Récupérer le score du niveau 2
+     * @return int
+     */
     public int getScoreLvl2() {
         return this.scoreLvl2;
     }
 
+    /**
+     *
+     * @param s Le score du niveau 3
+     */
     public void setScoreLvl3(int s) {
         this.scoreLvl3 = s;
     }
 
+    /**
+     * Récupérer le score du niveau 3
+     * @return int
+     */
     public int getScoreLvl3() {
         return this.scoreLvl3;
     }
 
+    /**
+     *
+     * @param s Le score du niveau 4
+     */
     public void setScoreLvl4(int s) {
         this.scoreLvl4 = s;
     }
 
+    /**
+     * Récupérer le score du niveau 4
+     * @return int
+     */
     public int getScoreLvl4() {
         return this.scoreLvl4;
     }
@@ -109,7 +133,6 @@ public class GameStateManager {
     public void setState(int i) {
         previousState = currentState;
         currentState = i;
-
         if(i == INTRO) {
             gameStates[i] = new IntroState(this);
             gameStates[i].init();
@@ -165,6 +188,10 @@ public class GameStateManager {
         }
     }
 
+    /**
+     * Permet de déterminer quel était l'état dans lequel nous étions avant
+     * @return le GameState précédent
+     */
     public GameState getPreviousState() {
         return gameStates[previousState];
     }

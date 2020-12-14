@@ -59,27 +59,19 @@ public class TileMap {
      * Mettre à jour le positionnement de la map
      */
     public void update() {
-
         if(x < xdest) {
             x += speed;
-
-            if(x > xdest) {
+            if(x > xdest)
                 x = xdest;
-            }
         }
-
         if (y < ydest) {
             y += speed;
-            if(y > ydest) {
+            if(y > ydest)
                 y = ydest;
-            }
         }
-
         fixBounds();
-
         colOffset = -this.x / tileSize;
         rowOffset = -this.y / tileSize;
-
     }
 
     /**
@@ -159,26 +151,50 @@ public class TileMap {
         }
     }
 
+    /**
+     * On récupère le x
+     * @return la variable en x
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     * On récupère le y
+     * @return la variable en y
+     */
     public int getY() {
         return y;
     }
 
+    /**
+     * On retourne la taille d'un tile
+     * @return la taille d'une tile
+     */
     public int getTileSize() {
         return tileSize;
     }
 
+    /**
+     * On retourne le nombre de lignes de notre carte
+     * @return le nombre de lignes de notre carte
+     */
     public int getNumRows() {
         return numRows;
     }
 
+    /**
+     * On retourne le nombre de colonnes de notre carte
+     * @return le nombre de colonnes de notre carte
+     */
     public int getNumCols() {
         return numCols;
     }
 
+    /**
+     * On retourne la largeur de notre carte
+     * @return la largeur de notre carte
+     */
     public int getWidth() {
         return width;
     }
@@ -216,7 +232,12 @@ public class TileMap {
         ydest = y;
     }
 
-
+    /**
+     * On change le type d'une Tile (casser un arbre par exemple)
+     * @param row la ligne de la case à changer
+     * @param col la colonne de la case à changer
+     * @param index la nouvelle valeur du type de case
+     */
     public void setTile(int row, int col, int index){
         map[row][col] = index;
     }

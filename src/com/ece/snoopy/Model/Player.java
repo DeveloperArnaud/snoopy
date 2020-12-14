@@ -83,6 +83,12 @@ public class Player extends Model {
         super.update();
     }
 
+    /**
+     * Change la frame en fonction de la direction
+     * @param i direction
+     * @param frame frame associée à la direction
+     * @param delay temps entre chaque frame
+     */
     private void setAnimation(int i, BufferedImage[] frame, int delay) {
         currentAnimation = i;
         animation.setFrames(frame);
@@ -90,10 +96,18 @@ public class Player extends Model {
 
     }
 
+    /**
+     * On se dirige à gauche
+     */
     public void setLEFT() {
         super.setLeft();
     }
 
+    /**
+     * On se dirige à gauche mais attention aux collisions / récupération d'oiseaux
+     * @param objets liste des objets sur la carte
+     * @param birds liste des oiseaux sur la carte
+     */
     public void setLEFT(ArrayList<Objet> objets, ArrayList<Bird> birds) {
         if (moving)
             return;
@@ -117,10 +131,18 @@ public class Player extends Model {
         }
         super.setLeft();
     }
+    /**
+     * On se dirige à droite
+     */
     public void setRIGHT() {
         super.setRight();
     }
 
+    /**
+     * On se dirige à droite mais attention aux collisions / récupération d'oiseaux
+     * @param objets liste des objets sur la carte
+     * @param birds liste des oiseaux sur la carte
+     */
     public void setRIGHT(ArrayList<Objet> objets, ArrayList<Bird> birds) {
         if (moving)
             return;
@@ -144,10 +166,18 @@ public class Player extends Model {
         }
         super.setRight();
     }
+    /**
+     * On se dirige en haut
+     */
     public void setUP() {
         super.setUp();
     }
 
+    /**
+     * On se dirige en haut gauche mais attention aux collisions / récupération d'oiseaux
+     * @param objets liste des objets sur la carte
+     * @param birds liste des oiseaux sur la carte
+     */
     public void setUP(ArrayList<Objet> objets, ArrayList<Bird> birds) {
         if (moving)
             return;
@@ -172,10 +202,18 @@ public class Player extends Model {
         }
         super.setUp();
     }
+    /**
+     * On se dirige en bas
+     */
     public void setDOWN() {
         super.setDown();
     }
 
+    /**
+     * On se dirige en bas mais attention aux collisions / récupération d'oiseaux
+     * @param objets liste des objets sur la carte
+     * @param birds liste des oiseaux sur la carte
+     */
     public void setDOWN(ArrayList<Objet> objets, ArrayList<Bird> birds) {
         if (moving)
             return;
@@ -263,10 +301,18 @@ public class Player extends Model {
         this.life = this.life - 1;
     }
 
+    /**
+     * On renvoie le nombre de vie du joueur
+     * @return nombre de point de vie
+     */
     public int getLife(){
         return life;
     }
 
+    /**
+     * On renvoit le nombre de ticks écoulés
+     * @return nombre de ticks
+     */
     public long getTicks() {
         return ticks;
     }

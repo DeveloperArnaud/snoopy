@@ -54,6 +54,10 @@ public class Objet extends Model{
         super.draw(graphics2D);
     }
 
+    /**
+     * On donne le type d'objet
+     * @return type de l'objet
+     */
     public int getType() {
         return type;
     }

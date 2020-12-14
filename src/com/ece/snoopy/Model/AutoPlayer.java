@@ -6,7 +6,6 @@ import com.ece.snoopy.SoundFX.SoundFX;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -57,14 +56,17 @@ public class AutoPlayer extends Model {
         animation.setDelay(10);
         SoundFX.loadSound("/SFX/destroyed.wav", "destroyed");
         SoundFX.setVolume("destroyed", -15);
-
     }
 
-    /**
-     * Mettre à jour la sprite d'animation de direction en fonction de la direction effectué (ex : DIRECTION DROITE = SPRITE ANIMATION DROITE)
-     */
+
     //https://fr.wikipedia.org/wiki/Algorithme_de_Dijkstra#:~:text=En%20th%C3%A9orie%20des%20graphes%2C%20l,probl%C3%A8me%20du%20plus%20court%20chemin.
 
+    /**
+     * On créé un carte des distances pour chaque sommet, initialisée à + l'infini sauf pour la case de départ qui sera à 0
+     * @param x la case de départ en x
+     * @param y la case de départ en y
+     * @return La carte des distances
+     */
     private Map<Integer, Integer> initPath(int x, int y) {
         Map<Integer, Integer> distances = new HashMap<>();
         for (int i = offsetNbTileY * 8; i < (offsetNbTileY + heightMap + 1) * 8; i++)
@@ -73,6 +75,12 @@ public class AutoPlayer extends Model {
         return distances;
     }
 
+    /**
+     * On cherche le sommet avec la plus petite distance
+     * @param Q La liste des sommets parmis lesquels on choisi
+     * @param distances tableau des distances
+     * @return Le sommet à choisir
+     */
     private Integer trouverMin(ArrayList<Integer> Q, Map<Integer, Integer> distances) {
         int mini = Integer.MAX_VALUE - 1000;
         int sommet = -1;
@@ -87,8 +95,15 @@ public class AutoPlayer extends Model {
         return sommet;
     }
 
+    /**
+     * On cherche à minimiser le cout entre s1 et s2, on met à jour les distances si c'est le cas
+     * @param s1 sommet de départ
+     * @param s2 sommet d'arrivée
+     * @param distances tableau des distances
+     * @param prede tableau des pères que l'on construit au fur et à mesure
+     * @param objets La liste des objets de la carte pour déterminer les collision
+     */
     private void majDistance(Integer s1, Integer s2, Map<Integer, Integer> distances, Map<Integer, Integer> prede, ArrayList<Objet> objets) {
-        //if (s1 < offsetNbTileX * widthMap || s2 < offsetNbTileX * widthMap || s1 > (offsetNbTileY + heightMap + 1) * widthMap || s2 > (offsetNbTileY + heightMap + 1) * widthMap)
         int typeS1 = tileMap.getIndex((s1 / 8) - 1, (s1 % 8) + 17);
         int typeS2 = tileMap.getIndex((s2 / 8) - 1, (s2 % 8) + 17);
         if (typeS1 == 20)
@@ -117,6 +132,11 @@ public class AutoPlayer extends Model {
         }
     }
 
+    /**
+     * Implémentation de Dijkstra dans laquelle on va chercher à déterminer les distances entre le point de départ et toutes les autres tiles
+     * @param b1 Le point de départ
+     * @param objets La liste des objets de la carte
+     */
     public void computePath(Integer b1, ArrayList<Objet> objets) {
         int row = this.y / tileSize - 1;
         int col = this.x / tileSize - 1;
@@ -166,157 +186,12 @@ public class AutoPlayer extends Model {
         super.update();
     }
 
-    private void setAnimation(int i, BufferedImage[] frame, int delay) {
-        currentAnimation = i;
-        animation.setFrames(frame);
-        animation.setDelay(delay);
-
-    }
-
-    public void setLEFT() {
-        super.setLeft();
-    }
-
-    public void setLEFT(ArrayList<Objet> objets, ArrayList<Bird> birds) {
-        if (moving)
-            return;
-        for (Objet obj : objets) {
-            rowTile = obj.getY() / tileSize;
-            colTile = obj.getX() / tileSize;
-            if (obj.getType() == Objet.TRAP) {
-                if (colTile == x / tileSize - 1 && y / tileSize == rowTile) {
-                    this.life = 0;
-                    super.setLeft();
-                    objets.remove(obj);
-                    return;
-                }
-            }
-            if (y / tileSize == rowTile) {
-                if (x / tileSize - 1 == colTile) {
-                    if (obj.getType() == Objet.ROCK && !obj.goLeft(objets, birds))
-                        return;
-                }
-            }
-        }
-        super.setLeft();
-    }
-    public void setRIGHT() {
-        super.setRight();
-    }
-
-    public void setRIGHT(ArrayList<Objet> objets, ArrayList<Bird> birds) {
-        if (moving)
-            return;
-        for (Objet obj : objets) {
-            rowTile = obj.getY() / tileSize;
-            colTile = obj.getX() / tileSize;
-            if (obj.getType() == Objet.TRAP) {
-                if (colTile == x / tileSize + 1 && y / tileSize == rowTile) {
-                    this.life = 0;
-                    super.setRight();
-                    objets.remove(obj);
-                    return;
-                }
-            }
-            if (y / tileSize == rowTile) {
-                if (x / tileSize + 1 == colTile) {
-                    if (obj.getType() == Objet.ROCK && !obj.goRight(objets, birds))
-                        return;
-                }
-            }
-        }
-        super.setRight();
-    }
-    public void setUP() {
-        super.setUp();
-    }
-
-    public void setUP(ArrayList<Objet> objets, ArrayList<Bird> birds) {
-        if (moving)
-            return;
-        for (Objet obj : objets) {
-            rowTile = obj.getY() / tileSize;
-            colTile = obj.getX() / tileSize;
-            if (obj.getType() == Objet.TRAP) {
-                if (colTile == x / tileSize && y / tileSize - 1 == rowTile) {
-                    this.life = 0;
-                    super.setUp();
-                    objets.remove(obj);
-                    return;
-                }
-            }
-            if (x / tileSize == colTile) {
-                if (y / tileSize - 1 == rowTile) {
-
-                    if (obj.getType() == Objet.ROCK && !obj.goUp(objets, birds))
-                        return;
-                }
-            }
-        }
-        super.setUp();
-    }
-    public void setDOWN() {
-        super.setDown();
-    }
-
-    public void setDOWN(ArrayList<Objet> objets, ArrayList<Bird> birds) {
-        if (moving)
-            return;
-        for (Objet obj : objets) {
-            rowTile = obj.getY() / tileSize;
-            colTile = obj.getX() / tileSize;
-            if (obj.getType() == Objet.TRAP) {
-                if (colTile == x / tileSize && y / tileSize + 1 == rowTile) {
-                    this.life = 0;
-                    super.setDown();
-                    objets.remove(obj);
-                    return;
-                }
-            }
-            if (x / tileSize == colTile) {
-                if (y / tileSize + 1 == rowTile) {
-                    if (obj.getType() == Objet.ROCK && !obj.goDown(objets, birds))
-                        return;
-                }
-            }
-        }
-        super.setDown();
-    }
-
-    /**
-     * Verifie en fonction de la direction du personnage si une case est cassable ( si index = 21, cassable)
-     */
-    public void setAction() {
-        if(currentAnimation == UP && tileMap.getIndex(rowTile - 1, colTile) == 21) {
-            SoundFX.play("destroyed");
-            tileMap.setTile(rowTile - 1, colTile, 1);
-        }
-
-        if(currentAnimation == DOWN && tileMap.getIndex(rowTile + 1, colTile) == 21) {
-            SoundFX.play("destroyed");
-            tileMap.setTile(rowTile + 1, colTile, 1);
-
-        }
-
-        if(currentAnimation == LEFT && tileMap.getIndex(rowTile, colTile - 1) == 21) {
-            SoundFX.play("destroyed");
-            tileMap.setTile(rowTile , colTile - 1, 1);
-
-        }
-
-        if(currentAnimation == RIGHT && tileMap.getIndex(rowTile, colTile + 1) == 21) {
-            SoundFX.play("destroyed");
-            tileMap.setTile(rowTile, colTile  + 1, 1);
-
-        }
-    }
-
     /**
      * Affichage du personnage
      * @param g Graphics2D
      */
     public void draw(Graphics2D g) {
-        if (ticks < 100 || invincibility % 2 == 0) {
+        if (ticks < 50 || invincibility % 2 == 0) {
             super.draw(g);
         }
     }
@@ -346,10 +221,18 @@ public class AutoPlayer extends Model {
         this.life = this.life - 1;
     }
 
+    /**
+     * On renvoie le nombre de vie du joueur
+     * @return nombre de point de vie
+     */
     public int getLife(){
         return life;
     }
 
+    /**
+     * On renvoit le nombre de ticks écoulés
+     * @return nombre de ticks
+     */
     public long getTicks() {
         return ticks;
     }

@@ -20,6 +20,10 @@ public class Animation {
         timesPlayed = 0;
     }
 
+    /**
+     * On donne une animation à un élement
+     * @param frames les images de l'animation
+     */
     public void setFrames(BufferedImage[] frames) {
         this.frames = frames;
         this.currentFrame = 0;
@@ -29,6 +33,10 @@ public class Animation {
         this.numFrames = this.frames.length;
     }
 
+    /**+
+     * On renvoie la frame
+     * @return l'image de la frame
+     */
     public BufferedImage getFrames() {
         return frames[currentFrame];
     }
@@ -46,14 +54,11 @@ public class Animation {
      */
     public void update() {
         if(this.delay == -1 ) return;
-
         count ++;
-
         if(count == delay) {
             currentFrame ++;
             count = 0;
         }
-
         if(currentFrame == numFrames) {
             currentFrame = 0;
             timesPlayed++;

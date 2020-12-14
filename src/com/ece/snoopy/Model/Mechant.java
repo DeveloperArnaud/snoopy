@@ -56,10 +56,17 @@ public class Mechant extends Model {
         super.update();
     }
 
+    @Override
     public void draw(Graphics2D g) {
         super.draw(g);
     }
 
+    /**
+     * Change la frame en fonction de la direction
+     * @param i direction
+     * @param frame frame associée à la direction
+     * @param delay temps entre chaque frame
+     */
     private void setAnimation(int i, BufferedImage[] frame, int delay) {
         currentAnimation = i;
         animation.setFrames(frame);
@@ -67,6 +74,10 @@ public class Mechant extends Model {
 
     }
 
+    /**
+     * Choisi dans quelle direction le méchant va se déplacer
+     * @param player Le joueur qu'il cherche à suivre
+     */
     public void computeDirection(Player player) {
         int playerRowTile = player.getY() / tileSize;
         int playerColTile = player.getX() / tileSize;
@@ -87,9 +98,8 @@ public class Mechant extends Model {
                 dir = LEFT;
                 setAnimation(LEFT, leftSprites, 10);
             }
-            else {
+            else
                 dir = STOP;
-            }
         }
         else {
             if (rowTile < playerRowTile) {
@@ -100,9 +110,8 @@ public class Mechant extends Model {
                 dir = UP;
                 setAnimation(UP, upSprites, 10);
             }
-            else {
+            else
                 dir = STOP;
-            }
         }
         switch (dir) {
             case LEFT:

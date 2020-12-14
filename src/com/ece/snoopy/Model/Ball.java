@@ -19,19 +19,18 @@ public class Ball extends Model {
     public static final int SO = 3;
 
     private int dir;
-    private int moveSpeed = 1;
-    private long ticks;
+    private int moveSpeed;
 
 
     BufferedImage[] ballImage;
 
     /**
      * Constructeur
+     *
      * @param tm tileMap
      */
     public Ball(TileMap tm, int moveSpeed) {
         super(tm);
-        ticks = 0;
         width = 16;
         height = 16;
         cwidth = 12;
@@ -50,79 +49,62 @@ public class Ball extends Model {
     }
 
     public void update() {
-        ticks++;
         if (dir == NO) {
             int rowTile = (y - 3) / tileSize;
             int colTile = (x - 3) / tileSize;
             if (rowTile == 16) {
                 SoundFX.play("collision");
                 dir = SO;
-            }
-            else if (colTile == 16) {
+            } else if (colTile == 16) {
                 SoundFX.play("collision");
-
-            if (rowTile <= 16)
-                dir = SO;
-            else if (colTile <= 16)
-
-                dir = NE;
+                if (rowTile <= 16)
+                    dir = SO;
+                else if (colTile <= 16)
+                    dir = NE;
             }
-        }
-        else if (dir == SO) {
+        } else if (dir == SO) {
             int rowTile = (y + 4) / tileSize;
             int colTile = (x - 3) / tileSize;
 
             if (rowTile == 25) {
                 SoundFX.play("collision");
                 dir = NO;
-            }
-            else if (colTile == 16) {
+            } else if (colTile == 16) {
                 SoundFX.play("collision");
-
-            if (rowTile >= 25)
-                dir = NO;
-            else if (colTile <= 16)
-
-                dir = SE;
+                if (rowTile >= 25)
+                    dir = NO;
+                else if (colTile <= 16)
+                    dir = SE;
             }
-        }
-        else if (dir == SE) {
+        } else if (dir == SE) {
             int rowTile = (y + 4) / tileSize;
             int colTile = (x + 4) / tileSize;
 
             if (rowTile == 25) {
                 SoundFX.play("collision");
                 dir = NE;
-            }
-            else if (colTile == 25) {
+            } else if (colTile == 25) {
                 SoundFX.play("collision");
-
-            if (rowTile >= 25)
-                dir = NE;
-            else if (colTile >= 25)
-
-                dir = SO;
+                if (rowTile >= 25)
+                    dir = NE;
+                else if (colTile >= 25)
+                    dir = SO;
             }
-        }
-        else if (dir == NE) {
+        } else if (dir == NE) {
             int rowTile = (y - 3) / tileSize;
             int colTile = (x + 4) / tileSize;
 
             if (rowTile == 16) {
                 SoundFX.play("collision");
                 dir = SE;
-            }
-            else if (colTile == 25) {
+            } else if (colTile == 25) {
                 SoundFX.play("collision");
-
-            if (rowTile <= 16)
-                dir = SE;
-            else if (colTile >= 25)
-
-                dir = NO;
+                if (rowTile <= 16)
+                    dir = SE;
+                else if (colTile >= 25)
+                    dir = NO;
             }
         }
-
         if (dir == NO) {
             x = x - moveSpeed;
             y = y - moveSpeed;
@@ -144,10 +126,10 @@ public class Ball extends Model {
 
     /**
      * Affichage de la balle
+     *
      * @param graphics2D
      */
     public void draw(Graphics2D graphics2D) {
         super.draw(graphics2D);
-       //graphics2D.fillOval(12,12,10,10);
     }
 }

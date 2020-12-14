@@ -15,6 +15,10 @@ import java.io.*;
  */
 public class SavingState {
 
+    /**
+     * Permet d'effecter une sauvegarde en enregristrant les informations dans un fichier txt
+     * @param gameState le state que l'on souhaite sauvegarder
+     */
     public static void saveState(GameState gameState){
         JFileChooser chooser = new JFileChooser();
         chooser.setCurrentDirectory(new File("C:/Users/arnau"));

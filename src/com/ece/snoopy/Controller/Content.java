@@ -51,6 +51,14 @@ public class Content {
         }
         return null;
     }
+
+    /**
+     * Charger les images
+     * @param g Element sur lequel on va écrire
+     * @param s Chaine à écrire
+     * @param x position en x du coin en haut à gauche
+     * @param y position en y du coin en haut à gauche
+     */
     public static void drawString(Graphics2D g, String s, int x, int y) {
         s = s.toUpperCase();
         for(int i = 0; i < s.length(); i++) {
