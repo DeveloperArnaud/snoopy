@@ -1,5 +1,6 @@
 package com.ece.snoopy.States;
 
+import com.ece.snoopy.Controller.Content;
 import com.ece.snoopy.Controller.GameStateManager;
 import com.ece.snoopy.Controller.Inputs;
 import com.ece.snoopy.Main.GamePanel;
@@ -291,7 +292,7 @@ public class AdvancedLevel2State extends GameState{
         //System.out.println(player.getTicks());
 
         if(player.getTicks() < 90) {
-            graphics2D.drawString("Niveau 1", 60, 40);
+            Content.drawString(graphics2D,"Niveau 2", 50, 70);
         }
 
         for(Bird bird : birds) {
