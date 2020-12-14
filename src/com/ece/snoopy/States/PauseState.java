@@ -53,7 +53,6 @@ public class PauseState extends GameState {
         if(Inputs.isPressed(Inputs.ESCAPE)) {
             gameStateManager.setPaused(false);
         }
-        // Non fonctionnel (en cours de développement)
         if(Inputs.isPressed(Inputs.S)) {
             SoundFX.stop("snoopyStage2");
             gameStateManager.setPaused(true);
@@ -68,6 +67,4 @@ public class PauseState extends GameState {
             SoundFX.stop("snoopyStage5");
         }
     }
-
-
 }

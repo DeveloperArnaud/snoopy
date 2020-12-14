@@ -111,7 +111,6 @@ public class AutoPlayer extends Model {
         if (typeS2 == 20)
             return;
         if (!distances.containsKey(s2) || !distances.containsKey(s1)) {
-            System.out.println(s2 + " " + s1);
             return;
         }
         if (objets != null) {
@@ -120,10 +119,8 @@ public class AutoPlayer extends Model {
                 int colT = e.getX() / tileSize;
                 int rowTs2 = s2 / 8 -1;
                 int colTs2 = s2 % 8 + 17;
-                if (rowT == rowTs2 && colT == colTs2) {
-                    System.out.println("On marche sur : " + rowT + " " + colT);
+                if (rowT == rowTs2 && colT == colTs2)
                     return;
-                }
             }
         }
         if (distances.get(s2) > distances.get(s1) + 1) {
@@ -140,9 +137,7 @@ public class AutoPlayer extends Model {
     public void computePath(Integer b1, ArrayList<Objet> objets) {
         int row = this.y / tileSize - 1;
         int col = this.x / tileSize - 1;
-        System.out.println("x : " + col + " y : " + row);
         Map<Integer, Integer> distances = initPath(col, row);
-        System.out.println();
         Map<Integer, Integer> prede = new HashMap<>();
         ArrayList<Integer> Q = new ArrayList<>();
         for (int i = offsetNbTileY * widthMap; i < (offsetNbTileY + heightMap + 2) * widthMap; i++)
@@ -173,7 +168,6 @@ public class AutoPlayer extends Model {
         if (!bufferDeplacement.isEmpty() && ticks > 100 && ticks  % 10 == 9) {
             Integer xDep = ((Integer) bufferDeplacement.get(bufferDeplacement.size() - 1)) % 8;
             Integer yDep = ((Integer) bufferDeplacement.get(bufferDeplacement.size() - 1)) / 8;
-            System.out.println("Next deplacement x : " + (xDep + 17) + ", y : " + (yDep - 1));
             bufferDeplacement.remove(bufferDeplacement.size() - 1);
             this.x = (xDep + 17) * tileSize + 8;
             this.y = (yDep -  1) * tileSize + 8;

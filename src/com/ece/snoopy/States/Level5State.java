@@ -135,7 +135,9 @@ public class Level5State extends GameState {
             SoundFX.play("losingLife");
         }
     }
-
+    /**
+     * Permet d'afficher un debut de partie avec un effet d'apparition
+     */
     private void eventGo() {
         eventTick++;
         if(eventTick == 1) {
@@ -162,6 +164,9 @@ public class Level5State extends GameState {
         }
     }
 
+    /**
+     * Permet d'afficher un fin de partie avec un effet de disparition
+     */
     private void eventFinish() {
         eventTick++;
         if(eventTick == 1) {
@@ -309,14 +314,26 @@ public class Level5State extends GameState {
         if(Inputs.isPressed(Inputs.SPACE)) player.setAction();
     }
 
+    /**
+     * Renvoie le player
+     * @return player
+     */
     public Player getPlayer() {
         return player;
     }
 
+    /**
+     * On donne la TileMap
+     * @return la TileMap
+     */
     public TileMap getTileMap() {
         return tileMap;
     }
 
+    /**
+     * La liste des oiseaux
+     * @return les oiseaux
+     */
     public ArrayList<Bird> getBirds(){
         return birds;
     }

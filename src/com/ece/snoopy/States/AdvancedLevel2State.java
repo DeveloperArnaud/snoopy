@@ -333,13 +333,19 @@ public class AdvancedLevel2State extends GameState{
     public AutoPlayer getPlayer() {
         return player;
     }
-
+    /**
+     * On donne la TileMap
+     * @return la TileMap
+     */
     public TileMap getTileMap() {
         return tileMap;
     }
 
+    /**
+     * La liste des oiseaux
+     * @return les oiseaux
+     */
     public ArrayList<Bird> getBirds(){
         return birds;
     }
-
 }

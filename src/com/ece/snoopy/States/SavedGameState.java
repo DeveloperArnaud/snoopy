@@ -60,6 +60,7 @@ public class SavedGameState extends GameState {
 
         try(FileInputStream fi = new FileInputStream(new File("C:/Users/arnau/save1"))) {
             ObjectInputStream oi = new ObjectInputStream(fi);
+
             gameState = (GameState) oi.readObject();
 
             if(gameState instanceof Level1State) {
@@ -325,28 +326,19 @@ public class SavedGameState extends GameState {
             }
         }
         if(eventTick > 33) {
-            //Data.setTime(player.getTicks());
-            System.out.print(eventTick);
             gameStateManager.setState(GameStateManager.ENDLEVEL);
         }
     }
-
 
     @Override
     public void draw(Graphics2D graphics2D) {
         tileMap.draw(graphics2D);
         player.draw(graphics2D);
         ball.draw(graphics2D);
-
-
-
-
         for(Bird bird : birds) {
             bird.draw(graphics2D);
         }
-
         ui.draw(graphics2D);
-
         graphics2D.setColor(Color.BLACK);
         for(int i = 0; i < boxes.size(); i++) {
             graphics2D.fill(boxes

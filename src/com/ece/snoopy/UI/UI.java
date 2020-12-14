@@ -41,6 +41,11 @@ public class UI implements Serializable {
         hearts.add(heart2);
         hearts.add(heart3);
     }
+
+    /**
+     * On set up d'interface pour un AutoPlayer
+     * @param p l'auto player
+     */
     public UI(AutoPlayer p) {
         this.autoPlayer = p;
         player = null;
@@ -96,16 +101,11 @@ public class UI implements Serializable {
                 graphics2D.drawImage(hearts.get(0), 119, yoffset + 2, null);
             }
         }
-
         int seconds;
         if (player != null)
             seconds = player.getTime();
         else
             seconds = autoPlayer.getTime();
-
         Content.drawString(graphics2D,""+seconds, 80, 4);
-
-
     }
-
 }

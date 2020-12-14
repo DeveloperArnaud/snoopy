@@ -51,8 +51,10 @@ public class EndState extends GameState {
         graphics2D.setFont(font);
         graphics2D.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT2);
         graphics2D.setColor(new Color(0, 0, 0));
-        graphics2D.drawString("Temps final", 20, 36);
+
         GameState prev = this.gameStateManager.getPreviousState();
+        if (!(prev instanceof AdvancedLevel2State || prev instanceof AdvancedLevel1State))
+            graphics2D.drawString("Temps final", 20, 36);
         if (prev instanceof Level1State) {
             Level1State lv1 = (Level1State) prev;
             player = lv1.getPlayer();

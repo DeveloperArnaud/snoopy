@@ -86,7 +86,6 @@ public class Level1State extends GameState {
     @Override
     public void update() {
         handleInput();
-        System.out.println("X : " + player.getTilePositionX() + " Y :" + player.getTilePositionY());
         //Effet d'affichage
         if(eventGo) eventGo();
         if(eventFinish) eventFinish();
@@ -248,9 +247,6 @@ public class Level1State extends GameState {
         tileMap.draw(graphics2D);
         player.draw(graphics2D);
         ball.draw(graphics2D);
-
-        //System.out.println(player.getTicks());
-
         if(player.getTicks() < 90) {
             Content.drawString(graphics2D, "Niveau 1",50, 70);
         }
@@ -296,18 +292,29 @@ public class Level1State extends GameState {
         return player;
     }
 
+    /**
+     * On récupère la balle
+     * @return la balle
+     */
     public Ball getBall() {
         return ball;
     }
 
+    /**
+     * On donne la TileMap
+     * @return la TileMap
+     */
     public TileMap getTileMap() {
         return tileMap;
     }
 
+    /**
+     * La liste des oiseaux
+     * @return les oiseaux
+     */
     public ArrayList<Bird> getBirds(){
         return birds;
     }
-
 
     public ArrayList<Rectangle> getBoxes() {
         return boxes;
