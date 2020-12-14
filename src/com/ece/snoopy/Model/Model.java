@@ -23,6 +23,10 @@ public abstract class Model {
     protected int cwidth;
     protected int cheight;
 
+    //Tile Position
+    protected int tilePositionX;
+    protected int tilePositionY;
+
     //Position
     protected int x;
     protected int y;
@@ -162,6 +166,16 @@ public abstract class Model {
         x = j  * tileSize + tileSize /2;
         xdest = x;
         ydest = y;
+    }
+
+    public int getTilePositionX() {
+        tilePositionX = (int) (xdest / (tileSize * tileSize) * 2 - 0.5);
+        return tilePositionX;
+    }
+
+    public int getTilePositionY() {
+        tilePositionY = (int) (y / (tileSize * tileSize) * 2 - 0.5);
+        return tilePositionY;
     }
 
     /**

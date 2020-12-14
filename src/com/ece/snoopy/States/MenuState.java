@@ -34,9 +34,9 @@ public class MenuState extends GameState {
         optionList.add("Charger une partie");
         optionList.add("Mot de passe");
         optionList.add("Quitter");
-        File f = new File("C:/Users/arnau/testBirds.txt");
+        File f = new File("C:/Users/arnau/testBirds");
         if(!f.exists()) {
-            optionList.remove(optionList.get(3));
+            optionList.remove(optionList.get(2));
         }
         SoundFX.loadSound("/SFX/snoopyTitleScreen3.wav", "snoopyTitleScreen");
         SoundFX.loadSound("/SFX/menuoption.wav", "menuoption");
@@ -80,25 +80,25 @@ public class MenuState extends GameState {
                 graphics2D.drawImage(cursor, 25, 144, null);
             } else if (currentOption == 3) {
                 graphics2D.drawImage(cursor, 25, 160, null);
+            }
             } else {
-                graphics2D.drawString(optionList.get(0), 50, 124);
-                graphics2D.drawString(optionList.get(1), 50, 140);
-                graphics2D.drawString(optionList.get(2), 50, 156);
-                graphics2D.drawString(optionList.get(3), 50, 172);
-                graphics2D.drawString(optionList.get(4), 50, 188);
+                graphics2D.drawString(optionList.get(0), 50, 112);
+                graphics2D.drawString(optionList.get(1), 50, 127);
+                graphics2D.drawString(optionList.get(2), 50, 143);
+                graphics2D.drawString(optionList.get(3), 50, 159);
+                graphics2D.drawString(optionList.get(4), 50, 175);
                 if (currentOption == 0) {
-                    graphics2D.drawImage(cursor, 25, 62, null);
+                    graphics2D.drawImage(cursor, 25, 102, null);
                 } else if (currentOption == 1) {
-                    graphics2D.drawImage(cursor, 25, 78, null);
+                    graphics2D.drawImage(cursor, 25, 117, null);
                 } else if (currentOption == 2) {
-                    graphics2D.drawImage(cursor, 25, 94, null);
+                    graphics2D.drawImage(cursor, 25, 133, null);
                 } else if (currentOption == 3) {
-                    graphics2D.drawImage(cursor, 25, 110, null);
+                    graphics2D.drawImage(cursor, 25, 149, null);
                 } else if (currentOption == 4) {
-                    graphics2D.drawImage(cursor, 25, 126, null);
+                    graphics2D.drawImage(cursor, 25, 165, null);
                 }
             }
-        }
     }
 
     /**
@@ -125,31 +125,43 @@ public class MenuState extends GameState {
      * Récuperer l'option choisie
      */
     private void chooseOptions() {
-        if(currentOption == 0) {
-            SoundFX.stop("snoopyTitleScreen");
-            gameStateManager.setState(GameStateManager.LEVEL1);
-        }
 
-        if(currentOption == 1 ) {
-            SoundFX.stop("snoopyTitleScreen");
-            gameStateManager.setState(GameStateManager.LEVEL1AUTO);
-        }
-        if(currentOption == 2 ) {
-            gameStateManager.setState(GameStateManager.MDP);
-        }
         if(optionList.size() < 5 ) {
+
+            if(currentOption == 0) {
+                SoundFX.stop("snoopyTitleScreen");
+                gameStateManager.setState(GameStateManager.LEVEL1);
+            }
+
+            if(currentOption == 1 ) {
+                SoundFX.stop("snoopyTitleScreen");
+                gameStateManager.setState(GameStateManager.LEVEL1AUTO);
+            }
+            if(currentOption == 2 ) {
+                gameStateManager.setState(GameStateManager.MDP);
+            }
             if (currentOption == 3) {
                 SoundFX.play("collect");
                 System.exit(0);
 
             }
         } else {
-            if (currentOption == 2) {
+
+            if(currentOption == 0) {
                 SoundFX.stop("snoopyTitleScreen");
+                gameStateManager.setState(GameStateManager.LEVEL1);
+            }
+
+            if(currentOption == 1 ) {
+                SoundFX.stop("snoopyTitleScreen");
+                gameStateManager.setState(GameStateManager.LEVEL1AUTO);
+            }
+            if(currentOption == 2 ) {
                 gameStateManager.setState(GameStateManager.SAVEDGAME);
             }
 
-            if(currentOption == 3 ) {
+            if (currentOption == 3) {
+                SoundFX.stop("snoopyTitleScreen");
                 gameStateManager.setState(GameStateManager.MDP);
             }
 
@@ -160,10 +172,5 @@ public class MenuState extends GameState {
             }
         }
 
-        if(currentOption == 3) {
-            SoundFX.play("collect");
-            System.exit(0);
-
-        }
     }
 }

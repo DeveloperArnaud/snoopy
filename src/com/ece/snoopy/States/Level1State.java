@@ -12,13 +12,19 @@ import com.ece.snoopy.SoundFX.SoundFX;
 import com.ece.snoopy.UI.UI;
 
 import java.awt.*;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.ArrayList;
 
 /*
     NIVEAU 1
 
  */
-public class Level1State extends GameState{
+public class Level1State extends GameState {
+
+    private static final long serialVersionUID = -9156161641876788957L;
 
     //Composants du niveau 1
     private Player player;
@@ -26,6 +32,7 @@ public class Level1State extends GameState{
     private UI ui;
     private Ball ball;
     private ArrayList<Bird> birds;
+
 
     //Gestion des évènements et des entrées
     private boolean blockInput;
@@ -79,7 +86,7 @@ public class Level1State extends GameState{
     @Override
     public void update() {
         handleInput();
-
+        System.out.println("X : " + player.getTilePositionX() + " Y :" + player.getTilePositionY());
         //Effet d'affichage
         if(eventGo) eventGo();
         if(eventFinish) eventFinish();
@@ -100,7 +107,7 @@ public class Level1State extends GameState{
             SoundFX.play("losingLife");
             player.losingLife();
         }
-         //1800*3 = 3min
+        //1800*3 = 3min
         if(player.getTicks() == (1800 * 3)) {
             player.losingLife();
             gameStateManager.setState(GameStateManager.GAMEOVER);
@@ -110,7 +117,7 @@ public class Level1State extends GameState{
         // Si le personnage a 0 vie, retour au menu
         if(player.getLife() == 0 ) {
             SoundFX.stop("snoopyStage1");
-            gameStateManager.setState(GameStateManager.GAMEOVER);
+            gameStateManager.setState(GameStateManager.MENU);
         }
 
         /*
@@ -151,7 +158,7 @@ public class Level1State extends GameState{
     /**
      * Permet d'afficher un debut de partie avec un effet d'apparition
      */
-    private void eventGo() {
+    public void eventGo() {
         eventTick++;
         if(eventTick == 1) {
             boxes.clear();
@@ -181,7 +188,7 @@ public class Level1State extends GameState{
     /**
      * Permet d'afficher un fin de partie avec un effet de disparition
      */
-    private void eventFinish() {
+    public void eventFinish() {
         eventTick++;
         if(eventTick == 1) {
             boxes.clear();
@@ -210,7 +217,7 @@ public class Level1State extends GameState{
     /**
      * Générer les oiseaux (ici losange) sur la map
      */
-    private void generateBirds() {
+    public void generateBirds() {
         Bird bird;
         Bird bird1;
         Bird bird2;
@@ -289,12 +296,21 @@ public class Level1State extends GameState{
         return player;
     }
 
+    public Ball getBall() {
+        return ball;
+    }
+
     public TileMap getTileMap() {
         return tileMap;
     }
 
     public ArrayList<Bird> getBirds(){
         return birds;
+    }
+
+
+    public ArrayList<Rectangle> getBoxes() {
+        return boxes;
     }
 
 }

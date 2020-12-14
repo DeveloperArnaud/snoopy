@@ -10,15 +10,11 @@ import com.ece.snoopy.Model.Player;
 import com.ece.snoopy.SoundFX.SoundFX;
 import com.ece.snoopy.UI.UI;
 
-import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-import static com.ece.snoopy.Controller.SavingState.loadMap;
-import static com.ece.snoopy.Controller.SavingState.saveState;
+
 
 public class SavedGameState extends GameState {
 
@@ -62,7 +58,7 @@ public class SavedGameState extends GameState {
             tileMap.loadTiles("/Tilesets/testtileset.gif");
             tileMap.loadMap("/Maps/level1.map");
             player = new Player(tileMap);
-            ui = new UI(player, birds);
+            ui = new UI(player);
             ball = new Ball(tileMap, 1);
 
             this.generateBirds();
