@@ -197,16 +197,18 @@ public class SavedGameState extends GameState {
         ball.update();
 
         //Récupération des oiseaux
-        for(int i = 0; i < birds.size(); i++) {
-            Bird bird = birds.get(i);
-            bird.update();
+        if(gameState instanceof Level1State) {
+            for (int i = 0; i < birds.size(); i++) {
+                Bird bird = birds.get(i);
+                bird.update();
 
-            if(player.intersects(bird)) {
-                birds.remove(i);
-                i--;
+                if (player.intersects(bird)) {
+                    birds.remove(i);
+                    i--;
 
-                player.collectedBirds();
-                SoundFX.play("collect");
+                    player.collectedBirds();
+                    SoundFX.play("collect");
+                }
             }
         }
 
@@ -232,10 +234,25 @@ public class SavedGameState extends GameState {
         bird2.setTilePosition(17,24);
         bird3 = new Bird(tileMap);
         bird3.setTilePosition(24,24);
-        birds.add(bird);
-        birds.add(bird1);
-        birds.add(bird2);
-        birds.add(bird3);
+
+        if(gameState instanceof Level1State) {
+            if (level1State.getBirds().get(0) != null) {
+                birds.add(bird);
+            } else if (level1State.getBirds().get(1) != null) {
+                birds.add(bird1);
+            } else if (level1State.getBirds().get(2) != null) {
+                birds.add(bird2);
+            } else if (level1State.getBirds().get(3) != null) {
+                birds.add(bird3);
+            } else {
+                birds.remove(bird);
+                birds.remove(bird1);
+                birds.remove(bird2);
+                birds.remove(bird3);
+
+            }
+        }
+
     }
 
     public void generateObjets() {
@@ -335,6 +352,7 @@ public class SavedGameState extends GameState {
         tileMap.draw(graphics2D);
         player.draw(graphics2D);
         ball.draw(graphics2D);
+
         for(Bird bird : birds) {
             bird.draw(graphics2D);
         }
