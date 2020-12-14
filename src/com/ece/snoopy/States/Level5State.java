@@ -269,30 +269,22 @@ public class Level5State extends GameState {
     @Override
     public void draw(Graphics2D graphics2D) {
         tileMap.draw(graphics2D);
-
-
         mechant.draw(graphics2D);
-
         player.draw(graphics2D);
-
         if(player.getTicks() < 90) {
             Content.drawString(graphics2D, "Niveau 5",50, 70);
         }
-
         for (Objet rock : objets)
             rock.draw(graphics2D);
-
         for(Bird bird : birds)
             bird.draw(graphics2D);
-
         ui.draw(graphics2D);
-
+        ball.draw(graphics2D);
+        ball2.draw(graphics2D);
         graphics2D.setColor(Color.BLACK);
         for(int i = 0; i < boxes.size(); i++) {
             graphics2D.fill(boxes.get(i));
         }
-        ball.draw(graphics2D);
-        ball2.draw(graphics2D);
     }
 
     @Override

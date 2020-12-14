@@ -44,7 +44,7 @@ public class AutoPlayer extends Model {
         height = 16;
         cwidth = 12;
         cheight = 12;
-        invincibility = 100;
+        invincibility = 50;
         moveSpeed = 2;
         bufferDeplacement = new ArrayList<Integer>();
         downSprites = Content.PLAYER[0];
